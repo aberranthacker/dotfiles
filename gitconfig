@@ -1,0 +1,7 @@
+[user]
+	name = Oleg Tcymbaliuk
+	email = randomizer@outlook.com
+[color]
+    ui = auto
+[core]
+    editor = /usr/bin/vim
