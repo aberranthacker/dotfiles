@@ -364,7 +364,7 @@ function! HighlightSearch()
 endfunction
 
 set statusline=
-set statusline+=%{fugitive#statusline()}
+set statusline+=(%{fugitive#head()})
 set statusline+=%1*\[%n]                             "buffernr
 set statusline+=%2*\ %<%F\                           "File+path
 set statusline+=%3*\ %y\                             "FileType
