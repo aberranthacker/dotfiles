@@ -114,5 +114,6 @@ if ! shopt -oq posix; then
 fi
 
 alias tmux='TERM=xterm-256color /usr/bin/tmux'
+alias mocp='PULSE_LATENCY_MSEC=30 mocp'
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
