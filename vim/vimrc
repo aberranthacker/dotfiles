@@ -44,9 +44,14 @@ Plugin 'xolox/vim-notes'
 Plugin 'tpope/vim-obsession'
 Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
+" Vim sugar for the UNIX shell commands that need it the most.
+Plugin 'tpope/vim-eunuch'
 
 " seamless switching between VIM windows and Tmux panes
 Plugin 'christoomey/vim-tmux-navigator'
+
+" Arduino support
+Plugin '4Evergreen4/vim-hardy'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
