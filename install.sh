@@ -22,9 +22,9 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 mkdir ~/.vim
 git clone git@github.com:VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-cd ~/.vim/bundle/command-t/ruby/command-t
-make clean
-/usr/bin/ruby extconf.rb
-make
+#cd ~/.vim/bundle/command-t/ruby/command-t
+#make clean
+#/usr/bin/ruby extconf.rb
+#make
 
 cd
