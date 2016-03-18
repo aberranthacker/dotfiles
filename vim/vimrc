@@ -36,6 +36,8 @@ Plugin 'flazz/vim-colorschemes'
 "Plugin 'wincent/command-t'
 Plugin 'ctrlpvim/ctrlp.vim'
 
+Plugin 'mechatroner/rainbow_csv'
+Plugin 'jvirtanen/vim-octave'
 Plugin 'rkennedy/vim-delphi'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
