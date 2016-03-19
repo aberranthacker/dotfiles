@@ -3,13 +3,15 @@
 set "runtimepath=c:\\Users\\Random\\HOME\\vimperator"
 "source! "c:\\Users\\Random\\HOME\\_vimperatorrc.local"
 
+set gui=nonavigation
+set hintmatching=fuzzy
+
 " ============== Search current domain in Google (for selection or input)
 " Use Control-S to search current domain for current selection
 map <silent> <C-s> :exe ":tabopen " + content.getSelection() + " site:" + content.document.domain<CR>
 " Create user command to search current domain for input then map 's'
 command! -nargs=+ searchsite execute ":tabopen <args> site:" + content.document.domain
-map s :searchsite 
-set gui=nonavigation
+map s :searchsite
 
 " vim: set ft=vimperator:
 map пе gt
