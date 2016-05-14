@@ -2,12 +2,14 @@
 set nocompatible " be iMproved
 "------------------------------------------------------------------------------
 lan C
+set shortmess+=I "remove useless splash screen
 
 set encoding=utf-8
 set fileformats=unix,dos,mac
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖЭБЮ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:\"<>,фисвуапршолдьтщзйкыегмцчняхъжэю;abcdefghijklmnopqrstuvwxyz[]\;'.
 
-set autowrite
+
+set autowrite " Autowrite when switching to another file
 let loaded_errormaker = 1
 let mapleader="," "change the mapleader from \ to ,
 
@@ -22,10 +24,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 
 " Bbye allows you to do delete buffers (close files) without closing your
 " windolws or messing up your layout.
@@ -57,6 +55,9 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Arduino support
 Plugin '4Evergreen4/vim-hardy'
 
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -75,17 +76,101 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 " }}}
-
-" Better copy & paste
-set pastetoggle=<F2>  "toggle pasting unmodified text from system clipboard
-set clipboard=unnamed "use system clipboard
-
-set shortmess+=I "remove useless splash screen
-
+"
+" Colors (also ExtraWhiteSpace and 81's column highlight) {{{
+"
 syntax on
+" Show whitespace
+" MUST be inserted BEFORE the colorscheme command
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertLeave * match ExtraWhitespace /\s\+$/
 
-set omnifunc=syntaxcomplete#Complete
+highlight ColorColumn ctermbg=magenta guibg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+" set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
 
+set t_Co=256 " terminal colors
+set t_ZH=[3m
+set t_ZR=[23m
+
+if has("gui_running")
+    colorscheme solarized
+else
+    colorscheme wombat256
+endif
+
+"}}}
+
+" Spaces, TABs and Indentation {{{
+" Real programmers don't use TABs but spaces
+set tabstop=4     " a tab is four spaces
+set shiftwidth=4  " number of spaces to use for autoindenting
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set smarttab      " insert tabs on the start of a line according to
+                  " shiftwidth, not tabstop
+set expandtab     " insert spaces instead of tabs
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
+"}}}
+
+" Search {{{
+set ignorecase    " ignore case when searching
+set smartcase     " ignore case if search pattern is all lowercase,
+                  " case-sensitive otherwise
+set hlsearch      " highlight search terms
+set incsearch     " show search matches as you type
+"}}}
+
+" Custom autocmds {{{
+"
+":help autocmd-events
+augroup vimrcEx
+    " Clear all autocmds in the group
+    autocmd!
+    autocmd FileType text setlocal textwidth=78
+
+    "for ruby, autoindent with two spaces, always expand tabs
+    autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+
+    " Setting global variables for Ruby
+    autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+    autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+    autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+    autocmd FileType ruby compiler ruby
+
+    autocmd FileType python set sw=4 sts=4 et
+
+    autocmd! BufRead,BufNewFile *.sass setfiletype sass
+
+    autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:&gt;
+    autocmd BufRead *.markdown set ai formatoptions=tcroqn2 comments=n:&gt;
+
+    " Indent p tags
+    " autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
+    autocmd FileType html,eruby let g:html_indent_tags = '\|p\|li\|dt\|dd'
+
+    " Don't syntax highlight markdown because it's often wrong
+    autocmd! FileType mkd setlocal syn=off
+
+    " Leave the return key alone when in command line windows, since it's used
+    " to run commands there.
+    autocmd! CmdwinEnter * :unmap <cr>
+    autocmd! CmdwinLeave * :call MapCR()
+
+    " Jump to last cursor position unless it's invalid or in an event handler
+    autocmd BufReadPost *
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \ exe "normal g`\"" |
+                \ endif
+
+    " Automatic reloading of .vimrc after changes
+    autocmd! BufWritePost .vimrc source $MYVIMRC
+    autocmd! BufWritePost _vimrc source $MYVIMRC
+    autocmd! BufWritePost vimrc  source $MYVIMRC
+augroup END " }}}
+
+" Keymaps {{{
+"
 " use Tab key for autocompletion {{{
 function! InsertTabWrapper()
     let col = col(".") - 1
@@ -99,45 +184,140 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
 "}}}
 
-" Show whitespace
-" MUST be inserted BEFORE the colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
+" Open files in directory of current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
 
-highlight ColorColumn ctermbg=magenta guibg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
-" set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
-" Colorscheme
-set t_Co=256 " terminal colors
-set t_ZH=[3m
-set t_ZR=[23m
+"nnoremap ; :
+"nnoremap : ;
 
-if has("gui_running")
-    " GUI is running or is about to start.
-    " Maximize gvim window.
-    colorscheme solarized
-    " set lines=50 columns=90
-else
-    " This is console Vim.
-    "   if exists("+lines")
-    "       set lines=50
-    "   endif
-    "   if exists("+columns")
-    "       set columns=85
-    "   endif
-    colorscheme wombat256
-endif
+" make F1 to act as Esc
+noremap <F1> <Esc>
+vnoremap <F1> <Esc>
+inoremap <F1> <Esc>
 
-let g:notes_directories = ['~/Dropbox/notes']
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
+" Bind nohl
+" Removes highlight of your last search
+noremap <C-n> :nohl<CR>
+" Quicksave commnd
+noremap <C-Z> :update<CR>
+vnoremap <C-Z> <C-C>:update<CR>
+inoremap <C-Z> <C-O>:update<CR>
+" Quick quit command
+" delete current buffer without window closing
+noremap <Leader>q :Bdelete<CR> 
+" Quit all windows
+noremap <Leader>Q :qa!<CR>  
+" bind Ctrl+<movement> keys to move aroud the windows
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
 
-"Auto closing HTML tag
-:iabbrev <// </<C-X><C-O>
+" easier moving between tabs
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" STATUS LINE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{
+" map sort function to a key
+"vnoremap <Leader>s :sort<CR>
+
+" For local replace
+nnoremap gr gd[{V%:s/<C-R>///gc<left><left><left>
+" For global replace
+nnoremap gR gD:%s/<C-R>///gc<left><left><left>
+"nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+"open .vimrc using \v
+map \v :next $MYVIMRC<CR>
+"}}}
+
+" Maps to jump to specific Command-T targets and files {{{
+"
+let g:ctrlp_match_window = 'bottom,order:ttb'
+
+set wildignore+=**/tmp/**,**/log/**,*.un~
+function! ShowRoutes()
+    " Requires 'scratch' plugin
+    :topleft 100 :split __Routes__
+    " Make sure Vim doesn't write __Routes__ as a file
+    :set buftype=nofile
+    " Delete everything
+    :normal 1GdG
+    " Put routes output in buffer
+    :0r! bundle exec rake -s routes
+    " Size window to number of lines (1 plus rake output length)
+    :exec ":normal " . line("$") . "_ "
+    " Move cursor to bottom
+    :normal 1GG
+    " Delete empty trailing line
+    :normal dd
+endfunction
+
+map <leader>gr :topleft :split config/routes.rb<cr>
+map <leader>gR :call ShowRoutes()<cr>
+map <leader>gg :topleft 100 :split Gemfile<cr>
+
+"map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
+"map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
+"map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
+"map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
+"map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
+"map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
+"map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets<cr>
+"map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
+"map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
+"map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
+"map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>>
+map <leader>gv :CtrlP app/views<cr>
+map <leader>gc :CtrlP app/controllers<cr>
+map <leader>gm :CtrlP app/models<cr>
+map <leader>gh :CtrlP app/helpers<cr>
+map <leader>gl :CtrlP lib<cr>
+map <leader>gp :CtrlP public<cr>
+map <leader>gs :CtrlP public/stylesheets<cr>
+map <leader>gf :CtrlP features<cr>
+map <leader>gt :CtrlPTag<cr>
+map <leader>f  :CtrlP<cr>
+map <leader>F  :CtrlP %%<cr>>
+"}}}
+
+" UI {{{
+"
+set number        " always show line numbers
+set tw=79         " width of document (used by gd)
+set nowrap        " don't wrap lines on load
+set fo-=t         " don't wrap text when typing
+set showmatch     " set show matching parenthesis
+set cpoptions+=$  " display $ at end of change motion
+"set visualbell    " don't beep
+set noerrorbells  " don't beep
+
+set title " change the terminal's title
+set go-=T " remove toolbar
+set go-=m " remove menubar
+set go-=r " remove right-hand scroll bar
+set guifont=consolas:h14:cDEFAULT
+"}}}
+
+" Make the current window big, but leave others context {{{
+"
+set winwidth=84
+" We have to have a winheight bigger than we want to set winminheight. But if
+" we set winheight to be huge before winminheight, the winminheight set will
+" fail.
+set winheight=5
+set winminheight=5
+set winheight=40 "999
+" }}}
+
+" Status line {{{
 set laststatus=2 "always show statusline
 
 " functions {{{
@@ -385,208 +565,27 @@ set statusline+=%8*\ %03c\                           "Colnr
 set statusline+=%9*\ \ %m%r%w\ %P\ \                 "Modified? Readonly? Top/bot.
 "}}}
 
-" Real programmers don't use TABs but spaces
-set tabstop=4     " a tab is four spaces
-set shiftwidth=4  " number of spaces to use for autoindenting
-set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
-set smarttab      " insert tabs on the start of a line according to
-" shiftwidth, not tabstop
-set expandtab     " insert spaces instead of tabs
-set autoindent    " always set autoindenting on
-set copyindent    " copy the previous indentation on autoindenting
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-
-" Showing line numbers and length
-set number        " always show line numbers
-set tw=79         " width of document (used by gd)
-set nowrap        " don't wrap lines on load
-set fo-=t         " don't wrap text when typing
-
-set showmatch     " set show matching parenthesis
-set ignorecase    " ignore case when searching
-set smartcase     " ignore case if search pattern is all lowercase,
-" case-sensitive otherwise
-set hlsearch      " highlight search terms
-set incsearch     " show search matches as you type
 set history=1000    " remember more commands and search history
 set undolevels=1000 " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
-set title         " change the terminal's title
-"set visualbell    " don't beep
-set noerrorbells  " don't beep
-set go-=T " remove toolbar
-set go-=m " remove menubar
-set go-=r " remove right-hand scroll bar
-set guifont=consolas:h14:cDEFAULT
-set cpoptions+=$
+
 " Disable backup and swap files
 set nobackup
 set nowritebackup
 set noswapfile
 
 set foldmethod=marker
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CUSTOM AUTOCMDS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"{{{ :help autocmd-events
-augroup vimrcEx
-    " Clear all autocmds in the group
-    autocmd!
-    autocmd FileType text setlocal textwidth=78
-    " Jump to last cursor position unless it's invalid or in an event handler
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \ exe "normal g`\"" |
-                \ endif
 
-    "for ruby, autoindent with two spaces, always expand tabs
-    autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
-    " Setting global variables for Ruby {{{
-    autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-    autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-    autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-    autocmd FileType ruby compiler ruby "}}}
+" Better copy & paste
+set pastetoggle=<F2>  "toggle pasting unmodified text from system clipboard
+set clipboard=unnamed "use system clipboard
 
-    autocmd FileType python set sw=4 sts=4 et
+set omnifunc=syntaxcomplete#Complete
 
-    autocmd! BufRead,BufNewFile *.sass setfiletype sass
+let g:notes_directories = ['~/Dropbox/notes']
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
 
-    autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:&gt;
-    autocmd BufRead *.markdown set ai formatoptions=tcroqn2 comments=n:&gt;
-
-    " Indent p tags
-    " autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
-    autocmd FileType html,eruby let g:html_indent_tags = '\|p\|li\|dt\|dd'
-
-    " Don't syntax highlight markdown because it's often wrong
-    autocmd! FileType mkd setlocal syn=off
-
-    " Leave the return key alone when in command line windows, since it's used
-    " to run commands there.
-    autocmd! CmdwinEnter * :unmap <cr>
-    autocmd! CmdwinLeave * :call MapCR()
-
-    " Automatic reloading of .vimrc after changes
-    autocmd! BufWritePost .vimrc source $MYVIMRC
-    autocmd! BufWritePost _vimrc source $MYVIMRC
-    autocmd! BufWritePost vimrc  source $MYVIMRC
-augroup END " }}}
-
-" make F1 key not annoying
-noremap <F1> <Esc>
-vnoremap <F1> <Esc>
-inoremap <F1> <Esc>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Make the current window big, but leave others context
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set winwidth=84
-" We have to have a winheight bigger than we want to set winminheight. But if
-" we set winheight to be huge before winminheight, the winminheight set will
-" fail.
-set winheight=5
-set winminheight=5
-set winheight=40 "999
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OPEN FILES IN DIRECTORY OF CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MISC KEY MAPS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"nnoremap ; :
-"nnoremap : ;
-
-" Bind nohl
-" Removes highlight of your last search
-noremap <C-n> :nohl<CR>
-" Quicksave commnd
-noremap <C-Z> :update<CR>
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
-" Quick quit command
-noremap <Leader>q :Bdelete<CR> " delete current buffer without window closing
-noremap <Leader>Q :qa!<CR>  " Quit all windows
-" bind Ctrl+<movement> keys to move aroud the windows
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <C-h> <C-w>h
-
-" easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
-
-" map sort function to a key
-"vnoremap <Leader>s :sort<CR>
-
-" For local replace
-nnoremap gr gd[{V%:s/<C-R>///gc<left><left><left>
-" For global replace
-nnoremap gR gD:%s/<C-R>///gc<left><left><left>
-"nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
-
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-"open .vimrc using \v
-map \v :next $MYVIMRC<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" MAPS TO JUMP TO SPECIFIC COMMAND-T TARGETS AND FILES
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" https://www.destroyallsoftware.com/file-navigation-in-vim.html "{{{
-set wildignore+=**/tmp/**,**/log/**,*.un~
-function! ShowRoutes()
-    " Requires 'scratch' plugin
-    :topleft 100 :split __Routes__
-    " Make sure Vim doesn't write __Routes__ as a file
-    :set buftype=nofile
-    " Delete everything
-    :normal 1GdG
-    " Put routes output in buffer
-    :0r! bundle exec rake -s routes
-    " Size window to number of lines (1 plus rake output length)
-    :exec ":normal " . line("$") . "_ "
-    " Move cursor to bottom
-    :normal 1GG
-    " Delete empty trailing line
-    :normal dd
-endfunction
-
-map <leader>gr :topleft :split config/routes.rb<cr>
-map <leader>gR :call ShowRoutes()<cr>
-map <leader>gg :topleft 100 :split Gemfile<cr>
-
-"map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-"map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-"map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-"map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-"map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-"map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-"map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets<cr>
-"map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
-"map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-"map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-"map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>>
-map <leader>gv :CtrlP app/views<cr>
-map <leader>gc :CtrlP app/controllers<cr>
-map <leader>gm :CtrlP app/models<cr>
-map <leader>gh :CtrlP app/helpers<cr>
-map <leader>gl :CtrlP lib<cr>
-map <leader>gp :CtrlP public<cr>
-map <leader>gs :CtrlP public/stylesheets<cr>
-map <leader>gf :CtrlP features<cr>
-map <leader>gt :CtrlPTag<cr>
-map <leader>f  :CtrlP<cr>
-map <leader>F  :CtrlP %%<cr>>
-"}}}
+"Auto closing HTML tag
+:iabbrev <// </<C-X><C-O>
