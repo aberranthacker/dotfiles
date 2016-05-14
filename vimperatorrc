@@ -11,7 +11,7 @@ set hintmatching=fuzzy
 map <silent> <C-s> :exe ":tabopen " + content.getSelection() + " site:" + content.document.domain<CR>
 " Create user command to search current domain for input then map 's'
 command! -nargs=+ searchsite execute ":tabopen <args> site:" + content.document.domain
-map s :searchsite
+map s :searchsite 
 
 " vim: set ft=vimperator:
 map пе gt
