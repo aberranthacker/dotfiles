@@ -2,7 +2,9 @@
 rm ~/.vim
 rm ~/.vimrc
 rm ~/.vimperatorrc
+rm ~/.bash_profile
 rm ~/.bashrc
+rm ~/.bash_aliases
 rm ~/.tmux.conf
 rm ~/.ctags
 rm ~/.gitconfig
@@ -11,8 +13,8 @@ rm ~/.gitignore
 ln -s ~/dotfiles/vim ~/.vim
 ln -s ~/dotfiles/vim/vimrc ~/.vimrc
 ln -s ~/dotfiles/vimperatorrc ~/.vimperatorrc
-ln -s ~/dotfiles/bas_profile ~/.bash_profile
-ln -s ~/dotfiles/bash_aliases ~/.bash_aliales
+ln -s ~/dotfiles/bash_profile ~/.bash_profile
+ln -s ~/dotfiles/bash_aliases ~/.bash_aliases
 ln -s ~/dotfiles/bashrc ~/.bashrc
 ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/ctags ~/.ctags
