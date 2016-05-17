@@ -2,7 +2,9 @@
 rm ~/.vim
 rm ~/.vimrc
 rm ~/.vimperatorrc
+rm ~/.bash_profile
 rm ~/.bashrc
+rm ~/.bash_aliases
 rm ~/.tmux.conf
 rm ~/.ctags
 rm ~/.gitconfig
