@@ -17,6 +17,6 @@ function _guard_command () {
         command guard $@
     fi
 }
-alias guard='_rspec_command'
+alias guard='_guard_command'
 
 
