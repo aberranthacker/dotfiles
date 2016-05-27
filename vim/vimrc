@@ -41,8 +41,6 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-fugitive'
 Plugin 'thoughtbot/vim-rspec'
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-notes'
 Plugin 'tpope/vim-obsession'
 Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
@@ -54,6 +52,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 
 " Arduino support
 Plugin '4Evergreen4/vim-hardy'
+
+Plugin 'vimwiki/vimwiki'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
