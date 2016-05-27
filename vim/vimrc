@@ -184,6 +184,9 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
 "}}}
 
+map <leader>c :w !xclip<CR><CR>
+vmap <leader>c :w !xclip<CR><CR>
+
 " Open files in directory of current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
@@ -305,7 +308,7 @@ set title " change the terminal's title
 set go-=T " remove toolbar
 set go-=m " remove menubar
 set go-=r " remove right-hand scroll bar
-set guifont=consolas:h14:cDEFAULT
+set guifont=consolas:h16:cDEFAULT
 "}}}
 
 " Make the current window big, but leave others context {{{
@@ -565,6 +568,21 @@ set statusline+=%6*\ %{&spelllang}\%{HighlightSearch()}\
 set statusline+=%7*\ %=\ %l/%L\                      "Rownumber/total (%)
 set statusline+=%8*\ %03c\                           "Colnr
 set statusline+=%9*\ \ %m%r%w\ %P\ \                 "Modified? Readonly? Top/bot.
+"}}}
+
+" Rails projections {{{
+"
+let g:rails_projections = {
+            \  "spec/factories/*.rb": {
+            \    "command": "factory",
+            \    "affinity": "collection",
+            \    "alternate": "app/models/%i.rb",
+            \    "related": "db/schema.rb#%s",
+            \    "test": "test/models/%i_test.rb",
+            \    "template": "FactoryGirl.define do\n  factory :%i do\n  end\nend",
+            \    "keywords": "factory sequence"
+            \  }
+            \}
 "}}}
 
 set history=1000    " remember more commands and search history
