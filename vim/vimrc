@@ -612,3 +612,8 @@ let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
 
 "Auto closing HTML tag
 :iabbrev <// </<C-X><C-O>
+
+"vim-ruby
+:let ruby_operators = 1
+:let ruby_space_errors = 1
+:let ruby_spellcheck_strings = 1
