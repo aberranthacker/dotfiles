@@ -47,14 +47,13 @@ Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
 " Vim sugar for the UNIX shell commands that need it the most.
 Plugin 'tpope/vim-eunuch'
-
 " seamless switching between VIM windows and Tmux panes
 Plugin 'christoomey/vim-tmux-navigator'
-
 " Arduino support
 Plugin '4Evergreen4/vim-hardy'
-
 Plugin 'vimwiki/vimwiki'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/syntastic'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -143,8 +142,10 @@ augroup vimrcEx
 
     autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
+    autocmd BufRead *.md set ai formatoptions=tcroqn2 comments=n:&gt;
     autocmd BufRead *.mkd set ai formatoptions=tcroqn2 comments=n:&gt;
     autocmd BufRead *.markdown set ai formatoptions=tcroqn2 comments=n:&gt;
+    autocmd BufRead,BufNewFile *.md setlocal spell
 
     " Indent p tags
     " autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
@@ -244,10 +245,13 @@ map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 "}}}
 
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher {{{
 if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in ack
+  let g:ackprg = 'ag --vimgrep'
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
@@ -255,6 +259,7 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+" }}}
 
 " Maps to jump to specific CtrlP targets and files {{{
 "
@@ -309,12 +314,12 @@ map <leader>F  :CtrlP %%<cr>>
 " UI {{{
 "
 set number        " always show line numbers
-set tw=79         " width of document (used by gd)
+set textwidth=79  " width of document (used by gd)
 set nowrap        " don't wrap lines on load
-set fo-=t         " don't wrap text when typing
+set formatoptions-=t " don't wrap text when typing
 set showmatch     " set show matching parenthesis
 set cpoptions+=$  " display $ at end of change motion
-"set visualbell    " don't beep
+set visualbell    " don't beep
 set noerrorbells  " don't beep
 
 set title " change the terminal's title
@@ -599,6 +604,7 @@ let g:rails_projections = {
 "}}}
 
 "{{{ VimWiki
+autocmd FileType vimwiki setlocal wrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
 let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp'}
@@ -634,3 +640,13 @@ set tags+=gems.tags
 :let ruby_operators = 1
 :let ruby_space_errors = 1
 :let ruby_spellcheck_strings = 1
+
+" configure syntastic syntax checking to check on open as well as save
+let g:syntastic_check_on_open=1
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_eruby_ruby_quiet_messages =
+    \ {"regex": "possibly useless use of a variable in void context"}
+
+" Set spellfile to location that is guaranteed to exist, can be symlinked to
+" Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
+set spellfile=$HOME/.vim-spell-en.utf-8.add
