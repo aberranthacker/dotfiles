@@ -608,8 +608,8 @@ autocmd FileType vimwiki setlocal wrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
 let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp'}
-let wiki.dir_link = 'index'
 let g:vimwiki_list = [wiki]
+let g:vimwiki_dir_link = 'index'
 "}}}
 
 set history=1000    " remember more commands and search history
