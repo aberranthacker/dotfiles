@@ -137,6 +137,7 @@ augroup vimrcEx
     autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
     autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd FileType ruby compiler ruby
+    autocmd FileType html,eruby let g:html_indent_tags = '\|p\|li\|dt\|dd'
 
     autocmd FileType python set sw=4 sts=4 et
 
@@ -147,12 +148,10 @@ augroup vimrcEx
     autocmd BufRead *.markdown set ai formatoptions=tcroqn2 comments=n:&gt;
     autocmd BufRead,BufNewFile *.md setlocal spell
 
-    " Indent p tags
-    " autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
-    autocmd FileType html,eruby let g:html_indent_tags = '\|p\|li\|dt\|dd'
-
     " Don't syntax highlight markdown because it's often wrong
     autocmd! FileType mkd setlocal syn=off
+
+    autocmd BufRead *.vimwiki setlocal set wrap
 
     " Leave the return key alone when in command line windows, since it's used
     " to run commands there.
@@ -316,6 +315,7 @@ map <leader>F  :CtrlP %%<cr>>
 set number        " always show line numbers
 set textwidth=79  " width of document (used by gd)
 set nowrap        " don't wrap lines on load
+set linebreak     " wrap only at a character in the breakat option
 set formatoptions-=t " don't wrap text when typing
 set showmatch     " set show matching parenthesis
 set cpoptions+=$  " display $ at end of change motion
@@ -326,7 +326,7 @@ set title " change the terminal's title
 set go-=T " remove toolbar
 set go-=m " remove menubar
 set go-=r " remove right-hand scroll bar
-set guifont=consolas:h16:cDEFAULT
+set guifont=Inconsolata:h16:cDEFAULT
 "}}}
 
 " Make the current window big, but leave others context {{{
@@ -607,7 +607,7 @@ let g:rails_projections = {
 autocmd FileType vimwiki setlocal wrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
-let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp'}
+let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp', 'json': 'json'}
 let g:vimwiki_list = [wiki]
 let g:vimwiki_dir_link = 'index'
 "}}}
