@@ -391,7 +391,7 @@ set statusline+=%5*\ %{&ff}\                         "FileFormat (dos/unix..)
 " Spellanguage & Highlight on?
 set statusline+=%6*\ %{&spelllang}\%{HighlightSearch()}\ 
 set statusline+=%7*\ %=\ %l/%L\                      "Rownumber/total (%)
-set statusline+=%8*\ %03c\                           "Colnr
+set statusline+=%8*\ %03v\                           "Colnr
 set statusline+=%9*\ \ %m%r%w\ %P\ \                 "Modified? Readonly? Top/bot.
 "}}}
 " Make the current window big, but leave others context {{{
@@ -451,8 +451,6 @@ augroup vimrcEx
 
     " Don't syntax highlight markdown because it's often wrong
     autocmd! FileType mkd setlocal syn=off
-
-    autocmd BufRead *.vimwiki setlocal set nowrap
 
     " Leave the return key alone when in command line windows, since it's used
     " to run commands there.
@@ -626,7 +624,7 @@ let g:rails_projections = {
             \}
 "}}}
 "{{{ VimWiki
-autocmd FileType vimwiki setlocal wrap spell
+autocmd FileType vimwiki setlocal nowrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
 let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp', 'json': 'json'}

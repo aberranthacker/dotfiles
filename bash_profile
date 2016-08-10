@@ -8,7 +8,7 @@ fi
 
 # User specific environment and startup programs
 
-PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/heroku/bin
+PATH=$HOME/.local/bin:$HOME/bin:$PATH:/usr/local/heroku/bin
 
 export PATH
 
