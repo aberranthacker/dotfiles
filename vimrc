@@ -42,9 +42,10 @@ Plugin 'jvirtanen/vim-octave'
 Plugin 'rkennedy/vim-delphi'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
-Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-obsession'
+Plugin 'thoughtbot/vim-rspec'
 Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
 " Vim sugar for the UNIX shell commands that need it the most.
@@ -56,6 +57,7 @@ Plugin '4Evergreen4/vim-hardy'
 Plugin 'vimwiki/vimwiki'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/ZoomWin'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -627,8 +629,9 @@ let g:rails_projections = {
 autocmd FileType vimwiki setlocal nowrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
-let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp', 'json': 'json'}
-let g:vimwiki_list = [wiki]
+let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp', 'json': 'json', 'js': 'javascript', 'yaml': 'yaml'}
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'},
+                    \ {'path': '~/Dropbox/vimwiki/Projects/ArenArt/'}]
 let g:vimwiki_dir_link = 'index'
 "}}}
 " vim-ruby {{{
