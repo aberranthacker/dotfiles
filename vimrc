@@ -58,6 +58,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'vim-scripts/ZoomWin'
+Plugin 'kchmck/vim-coffee-script'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
