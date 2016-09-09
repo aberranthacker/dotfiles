@@ -33,14 +33,9 @@ Plugin 'moll/vim-bbye'
 Plugin 'sickill/vim-monokai'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'qualiabyte/vim-colorstepper'
-
 "Plugin 'wincent/command-t'
 Plugin 'ctrlpvim/ctrlp.vim'
-
 Plugin 'mechatroner/rainbow_csv'
-Plugin 'jvirtanen/vim-octave'
-Plugin 'rkennedy/vim-delphi'
-Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
@@ -58,7 +53,12 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'vim-scripts/ZoomWin'
+
+Plugin 'jvirtanen/vim-octave'
+Plugin 'rkennedy/vim-delphi'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'slim-template/vim-slim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
