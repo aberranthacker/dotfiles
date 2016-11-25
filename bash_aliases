@@ -9,14 +9,22 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 alias tmux='TERM=xterm-256color /usr/bin/tmux'
 alias mocp='PULSE_LATENCY_MSEC=30 mocp'
+alias ts='tmuxinator start'
 
 function _guard_command () {
     if [ -e "bin/guard" ]; then
-        bin/guard $@
+        bin/guard "$@"
     else
-        command guard $@
+        command guard "$@"
     fi
 }
 alias guard='_guard_command'
 
-
+function _rake_command () {
+    if [ -e "bin/guard" ]; then
+        bin/rake "$@"
+    else
+        command rake "$@"
+    fi
+}
+alias guard='_rake_command'

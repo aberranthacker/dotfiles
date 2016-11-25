@@ -12,6 +12,8 @@ ln -sf dotfiles/ctags ~/.ctags
 ln -sf dotfiles/gitconfig ~/.gitconfig
 ln -sf dotfiles/global-gitignore ~/.gitignore
 
+ln -sf dotfiles/bin  ~/.bin
+
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -29,4 +31,3 @@ ln -sf ~/dotfiles/colorschemes/gruvbox-contrib/xresources/gruvbox-dark.xresource
 cp gruvbox/colors/gruvbox.vim ~/.vim/bundle/vim-colorschemes/colors/
 
 cd
-

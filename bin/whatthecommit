@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby -w
+
+require 'optparse'
+require 'open-uri'
+
+class WhatTheCommit
+  VERSION = "1.0.0"
+  URL = "http://whatthecommit.com/index.txt"
+
+  attr_reader :disclaimer, :iterations
+
+  def parser
+    @disclaimer = "(© whatthecommit.com)"
+    @iterations = 1
+
+    @parser ||= OptionParser.new do |opts|
+      opts.banner = "usage: #{opts.program_name} [--no-disclaimer] [--iterations=<number>]"
+
+      opts.separator ""
+      opts.separator "Scrapes random commit messages from whatthecommit.com, very very useful"
+      opts.separator "for the daily: git add -A && git commit -m \"$(#{opts.program_name})\""
+      opts.separator ""
+
+      opts.on '-n', '--no-disclaimer', 'Do not append / print the disclaimer' do
+        @disclaimer = ''
+      end
+
+      opts.on '-i', '--iterations N', Integer, 'Number of random commit messages to print' do |n|
+        raise OptionParser::ParseError.new("iterations must be > 0") if n <= 0
+        @iterations = n
+      end
+
+      opts.on_tail '-h', '--help', 'Show this message' do
+        puts opts
+        exit
+      end
+
+      opts.on_tail '-v', '--version', 'Show version info and exit' do
+        puts "#{opts.program_name} version #{VERSION} - random commit message generator (#{URL})"
+        exit
+      end
+    end
+  end
+
+  def run(*args)
+    begin
+      parser.parse!(args)
+    rescue OptionParser::ParseError => e
+      STDERR.puts e.message.capitalize
+      STDERR.puts parser.banner
+      exit 1
+    end
+
+    iterations.times { puts "#{open(URL).read.strip} #{disclaimer}".strip }
+  end
+end
+
+WhatTheCommit.new.run(*ARGV)

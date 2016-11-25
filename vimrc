@@ -26,40 +26,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Bbye allows you to do delete buffers (close files) without closing your
-" windolws or messing up your layout.
-Plugin 'moll/vim-bbye'
-" one stop shop for vim colorschemes.
-Plugin 'sickill/vim-monokai'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'qualiabyte/vim-colorstepper'
-"Plugin 'wincent/command-t'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'mechatroner/rainbow_csv'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-obsession'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tmhedberg/matchit'
-Plugin 'scrooloose/nerdtree'
-" Vim sugar for the UNIX shell commands that need it the most.
-Plugin 'tpope/vim-eunuch'
-" seamless switching between VIM windows and Tmux panes
-Plugin 'christoomey/vim-tmux-navigator'
-" Arduino support
-Plugin '4Evergreen4/vim-hardy'
-Plugin 'vimwiki/vimwiki'
-Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'vim-scripts/ZoomWin'
-
-Plugin 'jvirtanen/vim-octave'
-Plugin 'rkennedy/vim-delphi'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'slim-template/vim-slim'
-
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -75,6 +41,49 @@ Plugin 'slim-template/vim-slim'
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 
+" Bbye allows you to do delete buffers (close files) without closing your
+" windolws or messing up your layout.
+Plugin 'moll/vim-bbye'
+Plugin 'sickill/vim-monokai'
+" one stop shop for vim colorschemes.
+Plugin 'flazz/vim-colorschemes'
+Plugin 'qualiabyte/vim-colorstepper'
+"Plugin 'wincent/command-t'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'mechatroner/rainbow_csv'
+Plugin 'tpope/vim-rails'
+" A Vim plugin which makes working with Rails i18n locale files a little
+" easier.
+Plugin 'airblade/vim-localorie'
+
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-obsession'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tmhedberg/matchit'
+Plugin 'scrooloose/nerdtree'
+" Vim sugar for the UNIX shell commands that need it the most.
+Plugin 'tpope/vim-eunuch'
+" seamless switching between VIM windows and Tmux panes
+Plugin 'christoomey/vim-tmux-navigator'
+" Arduino support
+Plugin '4Evergreen4/vim-hardy'
+
+Plugin 'vimwiki/vimwiki'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'vim-scripts/ZoomWin'
+" plugin for visually displaying indent levels in Vim.
+Plugin 'Yggdroot/indentLine'
+
+Plugin 'jvirtanen/vim-octave'
+Plugin 'rkennedy/vim-delphi'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'slim-template/vim-slim'
+" Superior Lisp Interaction Mode for Vim ("SLIME for Vim")
+Plugin 'kovisoft/slimv'
+" ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -543,6 +552,7 @@ set noswapfile
 " }}}
 " RSpec {{{
 " RSpec.vim mappings
+let g:rspec_command = "!spring rspec {spec}"
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
@@ -641,12 +651,32 @@ let ruby_space_errors = 1
 let ruby_spellcheck_strings = 1
 "}}}
 " syntastic {{{
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_eruby_ruby_quiet_messages =
             \ {"regex": "possibly useless use of a variable in void context"}
+let g:syntastic_ruby_checkers = ['rubocop']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+" configure syntastic syntax checking to check on open as well as save
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 "}}}
+" slimv {{{
+let g:slimv_impl='sbcl'
+let g:slimv_swank_cmd='!tmux new-window -d -n REPL-SBCL "sbcl --load  ~/.vim/bundle/slimv/slime/start-swank.lisp"'
+let g:lisp_rainbow=1
+" }}}
+" indentLine {{{
+"let g:indentLine_setColors = 0
+let g:indentLine_char = '┊'
+" }}}
+" vim-localorie {{{
+nnoremap <silent> <leader>lt :call localorie#translate()<CR>
+nnoremap <silent> <leader>le :call localorie#expand_key()<CR>
+" }}}
 
 set history=1000    " remember more commands and search history
 set undolevels=1000 " use many muchos levels of undo
