@@ -18,7 +18,7 @@ function _guard_command () {
         command guard "$@"
     fi
 }
-alias guard='_guard_command'
+# alias guard='_guard_command'
 
 function _rake_command () {
     if [ -e "bin/guard" ]; then
@@ -27,4 +27,4 @@ function _rake_command () {
         command rake "$@"
     fi
 }
-alias guard='_rake_command'
+# alias rake='_rake_command'

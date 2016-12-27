@@ -132,12 +132,12 @@ set noerrorbells  " don't beep
 "}}}
 " GUI options {{{
 if has("gui_running")
-    if has("gui_gtk2")
-        set guifont=Inconsolata\ 16
+    if has("gui_gtk2") || has("gui_gtk3") 
+        set guifont=Inconsolata\ 14
     elseif has("gui_photon")
-        set guifont=Inconsolata:s18
+        set guifont=Inconsolata:s16
     elseif has("gui_kde")
-        set guifont=Inconsolata/18/-1/5/50/0/0/0/1/0
+        set guifont=Inconsolata/16/-1/5/50/0/0/0/1/0
         " font family (in this example, 'Inconsolata')
         " point size (default = 18)
         " pixel size (-1 = default)
@@ -149,9 +149,9 @@ if has("gui_running")
         " fixedPitch (1 = yes)
         " raw (0 = no)
     elseif has("x11")
-        set guifont=-*-inconsolata-medium-r-normal-*-*-180-*-*-m-*-*
+        set guifont=-*-inconsolata-medium-r-normal-*-*-160-*-*-m-*-*
     else
-        set guifont=Consolas:h16:cDefault
+        set guifont=Inconsolata:h16:cDefault
     endif
     set title " change the terminal's title
     set go-=T " remove toolbar
@@ -552,7 +552,7 @@ set noswapfile
 " }}}
 " RSpec {{{
 " RSpec.vim mappings
-let g:rspec_command = "!spring rspec {spec}"
+let g:rspec_command = "! rspec {spec}"
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
@@ -637,7 +637,7 @@ let g:rails_projections = {
             \}
 "}}}
 "{{{ VimWiki
-autocmd FileType vimwiki setlocal nowrap spell
+autocmd FileType vimwiki setlocal wrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
 let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp', 'json': 'json', 'js': 'javascript', 'yaml': 'yaml'}
