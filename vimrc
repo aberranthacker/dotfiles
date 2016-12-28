@@ -71,7 +71,7 @@ Plugin '4Evergreen4/vim-hardy'
 
 Plugin 'vimwiki/vimwiki'
 Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'neomake/neomake'
 Plugin 'vim-scripts/ZoomWin'
 " plugin for visually displaying indent levels in Vim.
 Plugin 'Yggdroot/indentLine'
@@ -650,20 +650,43 @@ let ruby_operators = 1
 let ruby_space_errors = 1
 let ruby_spellcheck_strings = 1
 "}}}
-" syntastic {{{
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_eruby_ruby_quiet_messages =
-            \ {"regex": "possibly useless use of a variable in void context"}
-let g:syntastic_ruby_checkers = ['rubocop']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-"}}}
+" neomake {{{
+if split(getcwd(), "/")[-1] == 'brigade'
+  let g:neomake_javascript_eslint_maker = {
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+          \ '%W%f: line %l\, col %c\, Warning - %m',
+        \ 'exe': "./node_modules/.bin/eslint",
+        \ 'args': ['-f', 'compact', '--rule', '{"no-console":[1]}'],
+        \ }
+
+  let g:neomake_ruby_rubocop_maker = {
+        \ 'args': ['BUNDLE_GEMFILE=~/brigade/.overcommit_gems.rb', 'bundle', 'exec', 'rubocop'],
+        \ 'exe': '/usr/bin/env',
+        \ }
+
+  let g:neomake_scss_scsslint_maker = {
+        \ 'args': ['BUNDLE_GEMFILE=~/brigade/.overcommit_gems.rb', 'bundle', 'exec', 'scss-lint'],
+        \ 'exe': '/usr/bin/env',
+        \ 'errorformat': '%A%f:%l:%v [%t] %m,%A%f:%l [%t] %m',
+        \ }
+endif
+
+let g:neomake_list_height = 2 " this doesn't work but hopefully will someday
+let g:neomake_open_list = 2
+let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_jsx_enabled_makers = ['eslint']
+autocmd! BufWritePost * Neomake
+" get out of the the quickfix menu... there must be a discrepancy between
+" vim/neovim in how the location lists are created
+function SwitchBackIfInQuickfix()
+  if &buftype == 'quickfix'
+    wincmd p
+    exe "norm! 6\<C-Y>"
+  endif
+endfunction
+autocmd! User NeomakeFinished :call SwitchBackIfInQuickfix()
+" }}}
 " slimv {{{
 let g:slimv_impl='sbcl'
 let g:slimv_swank_cmd='!tmux new-window -d -n REPL-SBCL "sbcl --load  ~/.vim/bundle/slimv/slime/start-swank.lisp"'
