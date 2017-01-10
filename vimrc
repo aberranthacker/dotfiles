@@ -48,14 +48,13 @@ Plugin 'sickill/vim-monokai'
 " one stop shop for vim colorschemes.
 Plugin 'flazz/vim-colorschemes'
 Plugin 'qualiabyte/vim-colorstepper'
-"Plugin 'wincent/command-t'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mechatroner/rainbow_csv'
-Plugin 'tpope/vim-rails'
 " A Vim plugin which makes working with Rails i18n locale files a little
 " easier.
 Plugin 'airblade/vim-localorie'
 
+Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-obsession'
@@ -70,8 +69,11 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin '4Evergreen4/vim-hardy'
 
 Plugin 'vimwiki/vimwiki'
+" Run your favorite search tool from Vim, with an enhanced results list.
 Plugin 'mileszs/ack.vim'
+" Async :make and linting framework for Neovim/Vim
 Plugin 'neomake/neomake'
+" Zoom in/out of windows (toggle between one window and multi-window)
 Plugin 'vim-scripts/ZoomWin'
 " plugin for visually displaying indent levels in Vim.
 Plugin 'Yggdroot/indentLine'
