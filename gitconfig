@@ -8,4 +8,7 @@
 [alias]
     yolo = !(git add -A && git commit -m \"$(curl -s whatthecommit.com/index.txt)\")
     y = !(git add -A . && git commit -amsaved_at_`date +%Y-%m-%d__%H:%M:%S` && git pull --rebase && git push && echo "" && git log -1 --stat) || git pull --rebase
+	st = status --short --branch
+	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
+	commend = commit --amend --no-edit
 
