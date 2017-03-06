@@ -41,6 +41,9 @@ Plugin 'VundleVim/Vundle.vim'
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 
+" Extended session management for Vim (:mksession on steroids)
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 " Bbye allows you to do delete buffers (close files) without closing your
 " windolws or messing up your layout.
 Plugin 'moll/vim-bbye'
@@ -83,8 +86,12 @@ Plugin 'rkennedy/vim-delphi'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
+" List of JavaScript ES6 snippets and syntax highlighting for vim.
+Plugin 'isRuslan/vim-es6'
 " Superior Lisp Interaction Mode for Vim ("SLIME for Vim")
 Plugin 'kovisoft/slimv'
+
+Plugin 'jceb/vim-orgmode'
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -122,19 +129,19 @@ endif
 "}}}
 " UI {{{
 "
-set number        " always show line numbers
-set textwidth=79  " width of document (used by gd)
-set nowrap        " don't wrap lines on load
-set linebreak     " wrap only at a character in the breakat option
+set relativenumber " always show line numbers
+set textwidth=79   " width of document (used by gd)
+set nowrap         " don't wrap lines on load
+set linebreak      " wrap only at a character in the breakat option
 set formatoptions-=t " don't wrap text when typing
-set showmatch     " set show matching parenthesis
-set cpoptions+=$  " display $ at end of change motion
-set visualbell    " don't beep
-set noerrorbells  " don't beep
+set showmatch      " set show matching parenthesis
+set cpoptions+=$   " display $ at end of change motion
+set visualbell     " don't beep
+set noerrorbells   " don't beep
 "}}}
 " GUI options {{{
 if has("gui_running")
-    if has("gui_gtk2") || has("gui_gtk3") 
+    if has("gui_gtk2") || has("gui_gtk3")
         set guifont=Inconsolata\ 14
     elseif has("gui_photon")
         set guifont=Inconsolata:s16
@@ -401,9 +408,9 @@ set statusline+=%2*\ %<%F\                           "File+path
 set statusline+=%3*\ %y\                             "FileType
 set statusline+=%4*\ %{''.(&fenc!=''?&fenc:&enc).''} "Encoding
 set statusline+=%4*\ %{(&bomb?\",BOM\":\"\")}\       "Encoding2
-set statusline+=%5*\ %{&ff}\                         "FileFormat (dos/unix..) 
+set statusline+=%5*\ %{&ff}\                         "FileFormat (dos/unix..)
 " Spellanguage & Highlight on?
-set statusline+=%6*\ %{&spelllang}\%{HighlightSearch()}\ 
+set statusline+=%6*\ %{&spelllang}\%{HighlightSearch()}\
 set statusline+=%7*\ %=\ %l/%L\                      "Rownumber/total (%)
 set statusline+=%8*\ %03v\                           "Colnr
 set statusline+=%9*\ \ %m%r%w\ %P\ \                 "Modified? Readonly? Top/bot.
@@ -411,12 +418,12 @@ set statusline+=%9*\ \ %m%r%w\ %P\ \                 "Modified? Readonly? Top/bo
 " Make the current window big, but leave others context {{{
 "
 set winwidth=84
-" We have to have a winheight bigger than we want to set winminheight. But if
-" we set winheight to be huge before winminheight, the winminheight set will
-" fail.
-set winheight=5
-set winminheight=5
-set winheight=40 "999
+" " We have to have a winheight bigger than we want to set winminheight. But if
+" " we set winheight to be huge before winminheight, the winminheight set will
+" " fail.
+" set winheight=5
+" set winminheight=5
+" set winheight=60 "999
 " }}}
 " Spaces, TABs and Indentation {{{
 " Real programmers don't use TABs but spaces
@@ -453,6 +460,7 @@ augroup vimrcEx
     autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd FileType ruby compiler ruby
     autocmd FileType html,eruby let g:html_indent_tags = '\|p\|li\|dt\|dd'
+    autocmd BufRead *.axlsx set filetype=ruby
 
     autocmd FileType python set sw=4 sts=4 et
 
@@ -522,9 +530,9 @@ vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
 " Quick quit command
 " delete current buffer without window closing
-noremap <Leader>q :Bdelete<CR> 
+noremap <Leader>q :Bdelete<CR>
 " Quit all windows
-noremap <Leader>Q :qa!<CR>  
+noremap <Leader>Q :qa!<CR>
 " bind Ctrl+<movement> keys to move aroud the windows
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -612,15 +620,17 @@ map <leader>gg :topleft 100 :split Gemfile<cr>
 "map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
 "map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 "map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>>
+map <leader>ga :CtrlP app/assets<cr>
+map <leader>gm :CtrlP app/models<cr>
 map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
-map <leader>gm :CtrlP app/models<cr>
 map <leader>gh :CtrlP app/helpers<cr>
 map <leader>gl :CtrlP lib<cr>
+map <leader>gi :CtrlP config<cr>
 map <leader>gp :CtrlP public<cr>
 map <leader>gs :CtrlP public/stylesheets<cr>
 map <leader>gf :CtrlP features<cr>
-map <leader>gt :CtrlPTag<cr>
+map <leader>gt :CtrlP spec<cr>
 map <leader>f  :CtrlPClearCache<cr>\|:CtrlP<cr>
 map <leader>F  :CtrlP %%<cr>>
 "}}}
@@ -638,6 +648,11 @@ let g:rails_projections = {
             \  }
             \}
 "}}}
+" {{{ vim-session
+let g:session_autosave = 'no'
+let g:session_directory="./"
+let g:session_autosave_periodic=1
+" }}}
 "{{{ VimWiki
 autocmd FileType vimwiki setlocal wrap spell
 let wiki = {}
