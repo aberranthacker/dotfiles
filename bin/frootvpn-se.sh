@@ -1,1 +1,1 @@
-sudo openvpn --config ~/Dropbox/se.openvpn.frootvpn.ovpn --auth-user-pass ~/Dropbox/keepass/frootvpn
+sudo openvpn --config ~/projects/vpn/se.openvpn.frootvpn.ovpn --auth-user-pass ~/projects/vpn/frootvpn
