@@ -577,17 +577,18 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 
     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
+    let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden --ignore .git -g "" %s'
 
     " ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
 endif
 " }}}
 " Maps to jump to specific CtrlP targets and files {{{
-"
+" look in Silver Searcher section for more oprions
 let g:ctrlp_match_window = 'bottom,order:ttb'
 
-set wildignore+=**/tmp/**,**/log/**,*.un~
+set wildignore+=*/.git/*,*/tmp/*,*/log/*,*.so,*.swp,*.zip,*.un~ " MacOSX/Linux
+
 function! ShowRoutes()
     " Requires 'scratch' plugin
     :topleft 100 :split __Routes__
@@ -609,23 +610,12 @@ map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gR :call ShowRoutes()<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 
-"map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-"map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-"map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-"map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-"map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-"map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-"map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets<cr>
-"map <leader>gf :CommandTFlush<cr>\|:CommandT features<cr>
-"map <leader>gt :CommandTFlush<cr>\|:CommandTTag<cr>
-"map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-"map <leader>F :CommandTFlush<cr>\|:CommandT %%<cr>>
 map <leader>ga :CtrlP app/assets<cr>
 map <leader>gm :CtrlP app/models<cr>
 map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gh :CtrlP app/helpers<cr>
-map <leader>gl :CtrlP lib<cr>
+map <leader>gl :CtrlP config/lib<cr>
 map <leader>gi :CtrlP config<cr>
 map <leader>gp :CtrlP public<cr>
 map <leader>gs :CtrlP public/stylesheets<cr>
