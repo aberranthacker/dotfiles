@@ -110,4 +110,5 @@ source ~/bin/tmuxinator.bash
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+eval "$(thefuck --alias)"
 eval "$(direnv hook bash)"

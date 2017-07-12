@@ -1,3 +1,6 @@
+" “When you look at the dark side, careful you must be.
+"  For the dark side looks back.” — Yoda
+
 " This must be first, because it changes other options as side effect
 set nocompatible " be iMproved
 "------------------------------------------------------------------------------
@@ -45,21 +48,29 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 " Bbye allows you to do delete buffers (close files) without closing your
-" windolws or messing up your layout.
+" windows or messing up your layout.
 Plugin 'moll/vim-bbye'
+" Monokai color scheme for Vim converted from Textmate theme
 Plugin 'sickill/vim-monokai'
 " one stop shop for vim colorschemes.
 Plugin 'flazz/vim-colorschemes'
+" Cycle easily through vim color schemes using F6/F7
 Plugin 'qualiabyte/vim-colorstepper'
+" Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'ctrlpvim/ctrlp.vim'
+" highlight columns in csv/tsv/*sv/xsv files in different colors
 Plugin 'mechatroner/rainbow_csv'
 " A Vim plugin which makes working with Rails i18n locale files a little
 " easier.
 Plugin 'airblade/vim-localorie'
 
+" Ruby on Rails power tools
 Plugin 'tpope/vim-rails'
+" quoting/parenthesizing made simple
 Plugin 'tpope/vim-surround'
+" a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
+" continuously updated session files
 Plugin 'tpope/vim-obsession'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tmhedberg/matchit'
@@ -76,6 +87,8 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'mileszs/ack.vim'
 " Async :make and linting framework for Neovim/Vim
 Plugin 'neomake/neomake'
+" Tame the quickfix window
+Plugin 'romainl/vim-qf'
 " Zoom in/out of windows (toggle between one window and multi-window)
 Plugin 'vim-scripts/ZoomWin'
 " plugin for visually displaying indent levels in Vim.
@@ -86,6 +99,10 @@ Plugin 'rkennedy/vim-delphi'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
+
+Plugin 'pangloss/vim-javascript'
+" React JSX syntax highlighting and indenting for vim.
+Plugin 'mxw/vim-jsx'
 " List of JavaScript ES6 snippets and syntax highlighting for vim.
 Plugin 'isRuslan/vim-es6'
 " Superior Lisp Interaction Mode for Vim ("SLIME for Vim")
@@ -130,6 +147,7 @@ endif
 " UI {{{
 "
 set relativenumber " always show line numbers
+set number         " show absolute line number for current line
 set textwidth=79   " width of document (used by gd)
 set nowrap         " don't wrap lines on load
 set linebreak      " wrap only at a character in the breakat option
@@ -460,6 +478,7 @@ augroup vimrcEx
     autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
     autocmd FileType ruby compiler ruby
     autocmd FileType html,eruby let g:html_indent_tags = '\|p\|li\|dt\|dd'
+    autocmd FileType slim IndentLinesToggle
     autocmd BufRead *.axlsx set filetype=ruby
 
     autocmd FileType python set sw=4 sts=4 et
@@ -504,6 +523,8 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
 "}}}
+
+map <leader>w :%s/\v\s+$//g<CR>
 
 map <leader>c :w !xclip<CR><CR>
 vmap <leader>c :w !xclip<CR><CR>
@@ -615,7 +636,7 @@ map <leader>gm :CtrlP app/models<cr>
 map <leader>gv :CtrlP app/views<cr>
 map <leader>gc :CtrlP app/controllers<cr>
 map <leader>gh :CtrlP app/helpers<cr>
-map <leader>gl :CtrlP config/lib<cr>
+map <leader>gl :CtrlP config/locales<cr>
 map <leader>gi :CtrlP config<cr>
 map <leader>gp :CtrlP public<cr>
 map <leader>gs :CtrlP public/stylesheets<cr>
@@ -647,7 +668,7 @@ let g:session_autosave_periodic=1
 autocmd FileType vimwiki setlocal wrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
-let wiki.nested_syntaxes = {'ruby': 'ruby', 'python': 'python', 'c++': 'cpp', 'json': 'json', 'js': 'javascript', 'yaml': 'yaml'}
+let wiki.nested_syntaxes = {'ruby': 'ruby', 'sql' : 'sql', 'python': 'python', 'c++': 'cpp', 'json': 'json', 'js': 'javascript', 'yaml': 'yaml', 'sh': 'sh'}
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'},
                     \ {'path': '~/Dropbox/vimwiki/Projects/ArenArt/'}]
 let g:vimwiki_dir_link = 'index'
@@ -700,12 +721,16 @@ let g:slimv_swank_cmd='!tmux new-window -d -n REPL-SBCL "sbcl --load  ~/.vim/bun
 let g:lisp_rainbow=1
 " }}}
 " indentLine {{{
+let g:indentLine_enabled = 0
 "let g:indentLine_setColors = 0
 let g:indentLine_char = '┊'
 " }}}
 " vim-localorie {{{
 nnoremap <silent> <leader>lt :call localorie#translate()<CR>
 nnoremap <silent> <leader>le :call localorie#expand_key()<CR>
+" }}}
+" romainl/vim-qf {{{
+let g:qf_loclist_window_bottom=0
 " }}}
 
 set history=1000    " remember more commands and search history
@@ -735,3 +760,8 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 " disable Background Color Erase(BCE) to properly display background color
 " inside tmux and GNU screen
 set t_ut=
+
+"
+let g:is_bash=1
+"
+set fileencodings=utf-8,cp1251,koi8-r,cp866

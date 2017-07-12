@@ -10,6 +10,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias tmux='TERM=xterm-256color /usr/bin/tmux'
 alias mocp='PULSE_LATENCY_MSEC=30 mocp'
 alias ts='tmuxinator start'
+alias trans='trans -pager more --'
+alias csd='cap staging deploy'
+alias csr='cap staging puma:restart'
 
 function _guard_command () {
     if [ -e "bin/guard" ]; then
