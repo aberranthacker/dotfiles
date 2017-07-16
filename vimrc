@@ -9,6 +9,8 @@ set shortmess+=I "remove useless splash screen
 
 set encoding=utf-8
 set fileformats=unix,dos,mac
+set fileencodings=utf-8,cp1251,koi8-r,cp866
+set spelllang=en,ru
 set   langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖЭБЮ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:\"<>
 set langmap+=,фисвуапршолдьтщзйкыегмцчняхъжэбю;abcdefghijklmnopqrstuvwxyz[];'\\,.
 ";',.
@@ -16,7 +18,6 @@ set langmap+=,фисвуапршолдьтщзйкыегмцчняхъжэбю;a
 set autowrite " Autowrite when switching to another file
 let loaded_errormaker = 1
 let mapleader="," "change the mapleader from \ to ,
-
 " Vundle config {{{
 filetype off                  " Vundle required
 
@@ -49,7 +50,7 @@ Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 " Bbye allows you to do delete buffers (close files) without closing your
 " windows or messing up your layout.
-Plugin 'moll/vim-bbye'
+Plugin 'olegtc/vim-bbye'
 " Monokai color scheme for Vim converted from Textmate theme
 Plugin 'sickill/vim-monokai'
 " one stop shop for vim colorschemes.
@@ -118,10 +119,6 @@ filetype plugin indent on    " required
 " }}}
 " Colors (also ExtraWhiteSpace and 81's column highlight) {{{
 "
-set t_Co=256 " terminal colors
-"set t_AB=^[[48;5;%dm
-"set t_AF=^[[38;5;%dm
-
 syntax on
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -132,17 +129,8 @@ highlight ColorColumn ctermbg=magenta guibg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 " set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
 
-
-set t_ZH=[3m
-set t_ZR=[23m
-
 let g:gruvbox_termcolors=16
-if has("gui_running")
-    colorscheme gruvbox
-else
-    colorscheme gruvbox
-endif
-
+colorscheme gruvbox
 "}}}
 " UI {{{
 "
@@ -157,15 +145,26 @@ set cpoptions+=$   " display $ at end of change motion
 set visualbell     " don't beep
 set noerrorbells   " don't beep
 "}}}
+" Terminal specific options {{{
+" check http://vimdoc.sourceforge.net/htmldoc/term.html#terminal-options
+" for details
+set t_Co=256    " terminal colors
+set t_ZH=[3m  " code to switch to italic mode
+set t_ZR=[23m " italic mode end
+" disable Background Color Erase(BCE) to properly display background color
+" inside tmux and GNU screen
+set t_ut=
+" }}}
 " GUI options {{{
+
 if has("gui_running")
     if has("gui_gtk2") || has("gui_gtk3")
-        set guifont=Inconsolata\ 14
+        set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
     elseif has("gui_photon")
-        set guifont=Inconsolata:s16
+        set guifont=Source\ Code\ Pro\ for\ Powerline:s16
     elseif has("gui_kde")
-        set guifont=Inconsolata/16/-1/5/50/0/0/0/1/0
-        " font family (in this example, 'Inconsolata')
+        set guifont=Source\ Code\ Pro\ for\ Powerline/16/-1/5/50/0/0/0/1/0
+        " font family (in this example, 'Source Code Pro for Powerline')
         " point size (default = 18)
         " pixel size (-1 = default)
         " style hint (what to do if requested family can't be found; 5 = AnyStyle = default)
@@ -176,9 +175,10 @@ if has("gui_running")
         " fixedPitch (1 = yes)
         " raw (0 = no)
     elseif has("x11")
+        " use xfontsel to find name of a font
         set guifont=-*-inconsolata-medium-r-normal-*-*-160-*-*-m-*-*
     else
-        set guifont=Inconsolata:h16:cDefault
+        set guifont=Source\ Code\ Pro\ for\ Powerline:h16:cDefault
     endif
     set title " change the terminal's title
     set go-=T " remove toolbar
@@ -188,7 +188,7 @@ endif
 "}}}
 " Status line {{{
 set laststatus=2 "always show statusline
-
+"
 " functions {{{
 " returns an approximate grey index for the given grey level
 fun! s:grey_number(x)
@@ -399,8 +399,8 @@ fun! s:X(group, fg, bg, attr)
         endif
     endif
 endfun
-" }}}
-
+"" }}}
+"
 call s:X("User1", "ffffff", "880c0e", "bold")
 call s:X("User2", "ffdad8", "880c0e", "")
 call s:X("User3", "000000", "F4905C", "")
@@ -428,7 +428,7 @@ set statusline+=%4*\ %{''.(&fenc!=''?&fenc:&enc).''} "Encoding
 set statusline+=%4*\ %{(&bomb?\",BOM\":\"\")}\       "Encoding2
 set statusline+=%5*\ %{&ff}\                         "FileFormat (dos/unix..)
 " Spellanguage & Highlight on?
-set statusline+=%6*\ %{&spelllang}\%{HighlightSearch()}\
+set statusline+=%6*\ %{&spelllang}\%{HighlightSearch()}
 set statusline+=%7*\ %=\ %l/%L\                      "Rownumber/total (%)
 set statusline+=%8*\ %03v\                           "Colnr
 set statusline+=%9*\ \ %m%r%w\ %P\ \                 "Modified? Readonly? Top/bot.
@@ -665,7 +665,7 @@ let g:session_directory="./"
 let g:session_autosave_periodic=1
 " }}}
 "{{{ VimWiki
-autocmd FileType vimwiki setlocal wrap spell
+autocmd FileType vimwiki setlocal nowrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
 let wiki.nested_syntaxes = {'ruby': 'ruby', 'sql' : 'sql', 'python': 'python', 'c++': 'cpp', 'json': 'json', 'js': 'javascript', 'yaml': 'yaml', 'sh': 'sh'}
@@ -707,7 +707,7 @@ let g:neomake_jsx_enabled_makers = ['eslint']
 autocmd! BufWritePost * Neomake
 " get out of the the quickfix menu... there must be a discrepancy between
 " vim/neovim in how the location lists are created
-function SwitchBackIfInQuickfix()
+function! SwitchBackIfInQuickfix()
   if &buftype == 'quickfix'
     wincmd p
     exe "norm! 6\<C-Y>"
@@ -756,12 +756,5 @@ set tags+=gems.tags
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
 set spellfile=$HOME/.vim-spell-en.utf-8.add
-
-" disable Background Color Erase(BCE) to properly display background color
-" inside tmux and GNU screen
-set t_ut=
-
 "
 let g:is_bash=1
-"
-set fileencodings=utf-8,cp1251,koi8-r,cp866
