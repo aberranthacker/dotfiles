@@ -45,6 +45,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 
+Plugin 'lifepillar/vim-cheat40'
 " Extended session management for Vim (:mksession on steroids)
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
@@ -131,6 +132,7 @@ call matchadd('ColorColumn', '\%81v', 100)
 
 let g:gruvbox_termcolors=16
 colorscheme gruvbox
+set background=dark
 "}}}
 " UI {{{
 "
@@ -159,7 +161,8 @@ set t_ut=
 
 if has("gui_running")
     if has("gui_gtk2") || has("gui_gtk3")
-        set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
+        "set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
+        set guifont=Source\ Code\ Pro\ Medium\ 13
     elseif has("gui_photon")
         set guifont=Source\ Code\ Pro\ for\ Powerline:s16
     elseif has("gui_kde")
@@ -184,6 +187,7 @@ if has("gui_running")
     set go-=T " remove toolbar
     set go-=m " remove menubar
     set go-=r " remove right-hand scroll bar
+    set go-=L " remove left-hand scroll bar
 endif
 "}}}
 " Status line {{{
@@ -672,6 +676,11 @@ let wiki.nested_syntaxes = {'ruby': 'ruby', 'sql' : 'sql', 'python': 'python', '
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'},
                     \ {'path': '~/Dropbox/vimwiki/Projects/ArenArt/'}]
 let g:vimwiki_dir_link = 'index'
+" ''       Disable folding.  
+" 'expr'   Folding based on expression (folds sections and code blocks).  
+" 'syntax' Folding based on syntax (folds sections; slower than 'expr').  
+" 'list'   Folding based on expression (folds list subitems; much slower).
+let g:vimwiki_folding = 'expr'
 "}}}
 " vim-ruby {{{
 let ruby_operators = 1
@@ -683,7 +692,7 @@ if split(getcwd(), "/")[-1] == 'brigade'
   let g:neomake_javascript_eslint_maker = {
         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
           \ '%W%f: line %l\, col %c\, Warning - %m',
-        \ 'exe': "./node_modules/.bin/eslint",
+        \ 'exe': "/usr/bin/eslint",
         \ 'args': ['-f', 'compact', '--rule', '{"no-console":[1]}'],
         \ }
 
@@ -699,7 +708,7 @@ if split(getcwd(), "/")[-1] == 'brigade'
         \ }
 endif
 
-let g:neomake_list_height = 2 " this doesn't work but hopefully will someday
+let g:neomake_list_height = 4 " this doesn't work but hopefully will someday
 let g:neomake_open_list = 2
 let g:neomake_ruby_enabled_makers = ['rubocop', 'mri']
 let g:neomake_javascript_enabled_makers = ['eslint']
