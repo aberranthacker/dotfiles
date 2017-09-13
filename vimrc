@@ -74,6 +74,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 " continuously updated session files
 Plugin 'tpope/vim-obsession'
+" use CTRL-A/CTRL-X to increment dates, times, and more
+Plugin 'tpope/vim-speeddating'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tmhedberg/matchit'
 Plugin 'scrooloose/nerdtree'
@@ -134,8 +136,18 @@ let g:gruvbox_termcolors=16
 colorscheme gruvbox
 set background=dark
 "}}}
+
+" Terminal specific options {{{
+" check http://vimdoc.sourceforge.net/htmldoc/term.html#terminal-options
+" for details
+set t_Co=256    " terminal colors
+set t_ZH=[3m  " code to switch to italic mode
+set t_ZR=[23m " italic mode end
+" disable Background Color Erase(BCE) to properly display background color
+" inside tmux and GNU screen
+set t_ut=
+" }}}
 " UI {{{
-"
 set relativenumber " always show line numbers
 set number         " show absolute line number for current line
 set textwidth=79   " width of document (used by gd)
@@ -147,16 +159,6 @@ set cpoptions+=$   " display $ at end of change motion
 set visualbell     " don't beep
 set noerrorbells   " don't beep
 "}}}
-" Terminal specific options {{{
-" check http://vimdoc.sourceforge.net/htmldoc/term.html#terminal-options
-" for details
-set t_Co=256    " terminal colors
-set t_ZH=[3m  " code to switch to italic mode
-set t_ZR=[23m " italic mode end
-" disable Background Color Erase(BCE) to properly display background color
-" inside tmux and GNU screen
-set t_ut=
-" }}}
 " GUI options {{{
 
 if has("gui_running")
@@ -538,9 +540,6 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
-"nnoremap ; :
-"nnoremap : ;
-
 " make F1 to act as Esc
 noremap <F1> <Esc>
 vnoremap <F1> <Esc>
@@ -553,8 +552,7 @@ noremap <C-n> :nohl<CR>
 noremap <C-Z> :update<CR>
 vnoremap <C-Z> <C-C>:update<CR>
 inoremap <C-Z> <C-O>:update<CR>
-" Quick quit command
-" delete current buffer without window closing
+" Quick quit command, delete current buffer without window closing
 noremap <Leader>q :Bdelete<CR>
 " Quit all windows
 noremap <Leader>Q :qa!<CR>
@@ -568,9 +566,6 @@ map <C-h> <C-w>h
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
 
-" map sort function to a key
-"vnoremap <Leader>s :sort<CR>
-
 " For local replace
 nnoremap gr gd[{V%:s/<C-R>///gc<left><left><left>
 " For global replace
@@ -579,34 +574,22 @@ nnoremap gR gD:%s/<C-R>///gc<left><left><left>
 
 "open .vimrc using \v
 map \v :next $MYVIMRC<CR>
+
+" match behaviour of C and D
+noremap Y y$
 "}}}
 " Disable backup and swap files {{{
 set nobackup
 set nowritebackup
 set noswapfile
 " }}}
-" RSpec {{{
-" RSpec.vim mappings
-let g:rspec_command = "! rspec {spec}"
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-"}}}
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher {{{
-if executable('ag')
-    " Use Ag over Grep
-    set grepprg=ag\ --nogroup\ --nocolor
 
-    " Use ag in ack
-    let g:ackprg = 'ag --vimgrep'
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden --ignore .git -g "" %s'
-
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-endif
+" A.L.E {{{
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+" Map movement through errors without wrapping.
+" nmap <silent> <C-k> <Plug>(ale_previous)
+" nmap <silent> <C-j> <Plug>(ale_next)
 " }}}
 " Maps to jump to specific CtrlP targets and files {{{
 " look in Silver Searcher section for more oprions
@@ -663,10 +646,39 @@ let g:rails_projections = {
             \  }
             \}
 "}}}
+" RSpec {{{
+" RSpec.vim mappings
+let g:rspec_command = "! rspec {spec}"
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+"}}}
+" slimv {{{
+let g:slimv_impl='sbcl'
+let g:slimv_swank_cmd='!tmux new-window -d -n REPL-SBCL "sbcl --load  ~/.vim/bundle/slimv/slime/start-swank.lisp"'
+let g:lisp_rainbow=1
+" }}}
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher {{{
+if executable('ag')
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in ack
+    let g:ackprg = 'ag --vimgrep'
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden --ignore .git -g "" %s'
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+endif
+" }}}
 " {{{ vim-session
+let g:session_autoload = 'yes'
 let g:session_autosave = 'no'
-let g:session_directory="./"
 let g:session_autosave_periodic=1
+let g:session_directory="./"
 " }}}
 "{{{ VimWiki
 autocmd FileType vimwiki setlocal nowrap spell
@@ -676,26 +688,20 @@ let wiki.nested_syntaxes = {'ruby': 'ruby', 'sql' : 'sql', 'python': 'python', '
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'},
                     \ {'path': '~/Dropbox/vimwiki/Projects/ArenArt/'}]
 let g:vimwiki_dir_link = 'index'
-" ''       Disable folding.  
-" 'expr'   Folding based on expression (folds sections and code blocks).  
-" 'syntax' Folding based on syntax (folds sections; slower than 'expr').  
+" ''       Disable folding.
+" 'expr'   Folding based on expression (folds sections and code blocks).
+" 'syntax' Folding based on syntax (folds sections; slower than 'expr').
 " 'list'   Folding based on expression (folds list subitems; much slower).
-let g:vimwiki_folding = 'expr'
+let g:vimwiki_folding = 'list'
 "}}}
+" vim-rails {{{
+nnoremap <C-@> :A<CR>
+" }}}
 " vim-ruby {{{
 let ruby_operators = 1
 let ruby_space_errors = 1
 let ruby_spellcheck_strings = 1
 "}}}
-" A.L.E {{{
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-" }}}
-" slimv {{{
-let g:slimv_impl='sbcl'
-let g:slimv_swank_cmd='!tmux new-window -d -n REPL-SBCL "sbcl --load  ~/.vim/bundle/slimv/slime/start-swank.lisp"'
-let g:lisp_rainbow=1
-" }}}
 " indentLine {{{
 let g:indentLine_enabled = 0
 "let g:indentLine_setColors = 0
@@ -705,7 +711,7 @@ let g:indentLine_char = '┊'
 nnoremap <silent> <leader>lt :call localorie#translate()<CR>
 nnoremap <silent> <leader>le :call localorie#expand_key()<CR>
 " }}}
-" romainl/vim-qf {{{
+" vim-qf {{{
 let g:qf_loclist_window_bottom=0
 " }}}
 
