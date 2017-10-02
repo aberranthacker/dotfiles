@@ -1,6 +1,5 @@
 ﻿"2.3.1 (created: 2010/04/07 18:56:53)
 
-set gui=nonavigation
 set hintmatching=fuzzy
 
 js services.services.autoCompleteSearch.class_="@mozilla.org/autocomplete/search;1?name=unifiedcomplete"
@@ -9,9 +8,21 @@ js services.services.autoCompleteSearch.class_="@mozilla.org/autocomplete/search
 " Use Control-S to search current domain for current selection
 map <silent> <C-s> :exe ":tabopen " + content.getSelection() + " site:" + content.document.domain<CR>
 
+map <silent> <C-/> :js toggle_navbar()<CR>
+    :js << EOF
+function toggle_navbar() {
+    var nb = document.getElementById('nav-bar');
+    if (!nb)
+	return;
+    nb.style.visibility = (nb.style.visibility == '') ? 'collapse' : '';
+    nb.style.overflow = (nb.style.height == '') ? '' : 'hidden';
+}
+toggle_navbar();
+EOF
+
 " Create user command to search current domain for input then map 's'
 command! -nargs=+ searchsite execute ":tabopen <args> site:" + content.document.domain
-map s :searchsite 
+map s :searchsite
 
 map пе gt
 map пЕ gT
