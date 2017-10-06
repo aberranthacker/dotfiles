@@ -11,4 +11,8 @@
 	st = status --short --branch
 	grog = log --graph --abbrev-commit --decorate --all --format=format:\"%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(dim white) - %an%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset)\"
 	commend = commit --amend --no-edit
-
+    # https://stackoverflow.com/questions/11269256/how-to-name-and-retrieve-a-stash-by-name-in-git
+    # git stash save "guacamole sauce WIP"
+    # git stash sapply guacamole
+    sshow = "!f() { git stash show stash^{/$*} -p; }; f"
+    sapply = "!f() { git stash apply stash^{/$*}; }; f"
