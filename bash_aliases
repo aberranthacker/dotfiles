@@ -1,6 +1,11 @@
 # some more ls aliases
+# Exa is an alternative for the ls command.
+# sudo dnf copr enable eclipseo/exa
+# sudo dnf install exa
+alias ls='exa'
 alias ll='ls -alF'
-alias la='ls -A'
+#alias la='ls -A'
+alias la='ls -a'
 alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
