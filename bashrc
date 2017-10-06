@@ -106,7 +106,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source ~/bin/tmuxinator.bash
+source ~/.bin/tmuxinator.bash
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
