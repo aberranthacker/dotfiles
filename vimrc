@@ -45,6 +45,13 @@ Plugin 'VundleVim/Vundle.vim'
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 
+" Plugin to help you stop repeating the basic movement keys
+Plugin 'takac/vim-hardtime'
+" UltiSnips - The ultimate snippet solution for Vim.
+" Plugin 'SirVer/ultisnips'
+" vim-snipmate default snippets (Previously snipmate-snippets)
+" Plugin 'honza/vim-snippets'
+
 Plugin 'lifepillar/vim-cheat40'
 " Extended session management for Vim (:mksession on steroids)
 Plugin 'xolox/vim-misc'
@@ -101,6 +108,10 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'jvirtanen/vim-octave'
 Plugin 'rkennedy/vim-delphi'
 Plugin 'vim-ruby/vim-ruby'
+" vim plugin for highliting code in ruby here document
+Plugin 'joker1007/vim-ruby-heredoc-syntax'
+"  Syntax Highlight for Vue.js components
+Plugin 'posva/vim-vue'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
 
@@ -485,6 +496,7 @@ augroup vimrcEx
     autocmd FileType ruby compiler ruby
     autocmd FileType html,eruby let g:html_indent_tags = '\|p\|li\|dt\|dd'
     autocmd FileType slim IndentLinesToggle
+
     autocmd BufRead *.axlsx set filetype=ruby
 
     autocmd FileType python set sw=4 sts=4 et
@@ -588,8 +600,8 @@ set noswapfile
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 " Map movement through errors without wrapping.
-" nmap <silent> <C-k> <Plug>(ale_previous)
-" nmap <silent> <C-j> <Plug>(ale_next)
+nmap <Up> <Plug>(ale_previous)
+nmap <Down> <Plug>(ale_next)
 " }}}
 " Maps to jump to specific CtrlP targets and files {{{
 " look in Silver Searcher section for more oprions
@@ -674,6 +686,13 @@ if executable('ag')
     let g:ctrlp_use_caching = 0
 endif
 " }}}
+" vim-hardmode {{{
+let g:hardtime_default_on = 1
+let g:hardtime_timeout = 2000
+let g:hardtime_ignore_quickfix = 1
+let g:hardtime_maxcount = 3
+let g:hardtime_ignore_buffer_patterns = [ "NERD.*", "vimwiki" ]
+" }}}
 " {{{ vim-session
 let g:session_autoload = 'yes'
 let g:session_autosave = 'no'
@@ -702,6 +721,13 @@ let ruby_operators = 1
 let ruby_space_errors = 1
 let ruby_spellcheck_strings = 1
 "}}}
+" vim-ruby-heredoc-syntax {{{
+let g:ruby_heredoc_syntax_filetypes = {
+        \ "sql" : {
+        \   "start" : "SQL",
+        \},
+  \}
+" }}}
 " indentLine {{{
 let g:indentLine_enabled = 0
 "let g:indentLine_setColors = 0
@@ -711,8 +737,13 @@ let g:indentLine_char = '┊'
 nnoremap <silent> <leader>lt :call localorie#translate()<CR>
 nnoremap <silent> <leader>le :call localorie#expand_key()<CR>
 " }}}
-" vim-qf {{{
-let g:qf_loclist_window_bottom=0
+" ultisnips {{{
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 " }}}
 
 set history=1000    " remember more commands and search history
@@ -741,3 +772,10 @@ set tags+=gems.tags;/
 set spellfile=$HOME/.vim-spell-en.utf-8.add
 "
 let g:is_bash=1
+
+" prettify JSON
+" :%!python -m json.tool
+" replace escaped codeponints with unicode chars
+" :%s#\\u[0-9a-f]*#\=eval('"'.submatch(0).'"')#g
+" or
+" :%s#\v\\u([0-9a-f]{4})#\=nr2char(str2nr(submatch(1),16))#g
