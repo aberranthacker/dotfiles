@@ -1,1 +1,1 @@
-sudo openvpn --config ~/projects/vpn/pl.openvpn.frootvpn.ovpn --auth-user-pass ~/projects/vpn/frootvpn
+sudo openvpn --config ~/projects/vpn/pl-gd-openvpn.frootvpn.ovpn --auth-user-pass ~/projects/vpn/frootvpn
