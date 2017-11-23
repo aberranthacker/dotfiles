@@ -1,3 +1,9 @@
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
 	url = git@github.com:VundleVim/Vundle.vim.git
+[submodule "colorschemes/gruvbox"]
+	path = colorschemes/gruvbox
+	url = git@github.com:morhetz/gruvbox.git
+[submodule "colorschemes/gruvbox-contrib"]
+	path = colorschemes/gruvbox-contrib
+	url = git@github.com:morhetz/gruvbox-contrib.git
