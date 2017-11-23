@@ -690,7 +690,8 @@ endif
 let g:hardtime_default_on = 1
 let g:hardtime_timeout = 2000
 let g:hardtime_ignore_quickfix = 1
-let g:hardtime_maxcount = 3
+" Read https://blog.samwhited.com/2015/04/the-dharma-of-vi/
+let g:hardtime_maxcount = 999
 let g:hardtime_ignore_buffer_patterns = [ "NERD.*", "vimwiki" ]
 " }}}
 " {{{ vim-session

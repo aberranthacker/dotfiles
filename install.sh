@@ -20,10 +20,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 vim -c "VundleInstall"
 
-mkdir colorschemes
-cd colorschemes
-git clone https://github.com/morhetz/gruvbox.git
-git clone https://github.com/morhetz/gruvbox-contrib.git
+git submodule update --init
 
 ln -sf ~/dotfiles/colorschemes/gruvbox-contrib/konsole/Gruvbox_dark.colorscheme ~/.local/share/konsole/Gruvbox_dark.colorscheme
 ln -sf ~/dotfiles/colorschemes/gruvbox-contrib/xresources/gruvbox-dark.xresources ~/.Xresources
