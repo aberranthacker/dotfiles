@@ -62,9 +62,13 @@ Plugin 'olegtc/vim-bbye'
 " Monokai color scheme for Vim converted from Textmate theme
 Plugin 'sickill/vim-monokai'
 " one stop shop for vim colorschemes.
-Plugin 'flazz/vim-colorschemes'
+" Plugin 'flazz/vim-colorschemes'
+" Retro groove color scheme for Vim
+Plugin 'morhetz/gruvbox'
 " Cycle easily through vim color schemes using F6/F7
 Plugin 'qualiabyte/vim-colorstepper'
+" lean & mean status/tabline for vim that's light as air
+Plugin 'vim-airline/vim-airline'
 " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'ctrlpvim/ctrlp.vim'
 " highlight columns in csv/tsv/*sv/xsv files in different colors
@@ -83,34 +87,35 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-obsession'
 " use CTRL-A/CTRL-X to increment dates, times, and more
 Plugin 'tpope/vim-speeddating'
+" Run Rspec specs from Vim
 Plugin 'thoughtbot/vim-rspec'
+" extended % matching for HTML, LaTeX, and many other languages
 Plugin 'tmhedberg/matchit'
+" A tree explorer plugin for vim.
 Plugin 'scrooloose/nerdtree'
 " Vim sugar for the UNIX shell commands that need it the most.
 Plugin 'tpope/vim-eunuch'
 " seamless switching between VIM windows and Tmux panes
 Plugin 'christoomey/vim-tmux-navigator'
-" Arduino support
-Plugin '4Evergreen4/vim-hardy'
 
 Plugin 'vimwiki/vimwiki'
 " Run your favorite search tool from Vim, with an enhanced results list.
 Plugin 'mileszs/ack.vim'
 " Asynchronous Lint Engine
 Plugin 'w0rp/ale'
-" Tame the quickfix window
-" Plugin 'romainl/vim-qf'
 " Zoom in/out of windows (toggle between one window and multi-window)
 Plugin 'vim-scripts/ZoomWin'
 " plugin for visually displaying indent levels in Vim.
 Plugin 'Yggdroot/indentLine'
 
+" Arduino support
+Plugin '4Evergreen4/vim-hardy'
 Plugin 'jvirtanen/vim-octave'
 Plugin 'rkennedy/vim-delphi'
 Plugin 'vim-ruby/vim-ruby'
 " vim plugin for highliting code in ruby here document
 Plugin 'joker1007/vim-ruby-heredoc-syntax'
-"  Syntax Highlight for Vue.js components
+" Syntax Highlight for Vue.js components
 Plugin 'posva/vim-vue'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
@@ -143,7 +148,8 @@ highlight ColorColumn ctermbg=magenta guibg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 " set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
 
-let g:gruvbox_termcolors=16
+" let g:gruvbox_termcolors=16
+let g:gruvbox_contrast_dark="medium"
 colorscheme gruvbox
 set background=dark
 "}}}
@@ -151,12 +157,10 @@ set background=dark
 " Terminal specific options {{{
 " check http://vimdoc.sourceforge.net/htmldoc/term.html#terminal-options
 " for details
-set t_Co=256    " terminal colors
-set t_ZH=[3m  " code to switch to italic mode
-set t_ZR=[23m " italic mode end
-" disable Background Color Erase(BCE) to properly display background color
-" inside tmux and GNU screen
-set t_ut=
+" In order for this to work, a couple of enviroment variables has to be set:
+" TERM=xterm-256color
+" COLORTERM=truecolor
+set termguicolors
 " }}}
 " UI {{{
 set relativenumber " always show line numbers
@@ -202,253 +206,6 @@ if has("gui_running")
     set go-=r " remove right-hand scroll bar
     set go-=L " remove left-hand scroll bar
 endif
-"}}}
-" Status line {{{
-set laststatus=2 "always show statusline
-"
-" functions {{{
-" returns an approximate grey index for the given grey level
-fun! s:grey_number(x)
-    if &t_Co == 88
-        if a:x < 23
-            return 0
-        elseif a:x < 69
-            return 1
-        elseif a:x < 103
-            return 2
-        elseif a:x < 127
-            return 3
-        elseif a:x < 150
-            return 4
-        elseif a:x < 173
-            return 5
-        elseif a:x < 196
-            return 6
-        elseif a:x < 219
-            return 7
-        elseif a:x < 243
-            return 8
-        else
-            return 9
-        endif
-    else
-        if a:x < 14
-            return 0
-        else
-            let l:n = (a:x - 8) / 10
-            let l:m = (a:x - 8) % 10
-            if l:m < 5
-                return l:n
-            else
-                return l:n + 1
-            endif
-        endif
-    endif
-endfun
-
-" returns the actual grey level represented by the grey index
-fun! s:grey_level(n)
-    if &t_Co == 88
-        if a:n == 0
-            return 0
-        elseif a:n == 1
-            return 46
-        elseif a:n == 2
-            return 92
-        elseif a:n == 3
-            return 115
-        elseif a:n == 4
-            return 139
-        elseif a:n == 5
-            return 162
-        elseif a:n == 6
-            return 185
-        elseif a:n == 7
-            return 208
-        elseif a:n == 8
-            return 231
-        else
-            return 255
-        endif
-    else
-        if a:n == 0
-            return 0
-        else
-            return 8 + (a:n * 10)
-        endif
-    endif
-endfun
-
-" returns the palette index for the given grey index
-fun! s:grey_color(n)
-    if &t_Co == 88
-        if a:n == 0
-            return 16
-        elseif a:n == 9
-            return 79
-        else
-            return 79 + a:n
-        endif
-    else
-        if a:n == 0
-            return 16
-        elseif a:n == 25
-            return 231
-        else
-            return 231 + a:n
-        endif
-    endif
-endfun
-
-" returns an approximate color index for the given color level
-fun! s:rgb_number(x)
-    if &t_Co == 88
-        if a:x < 69
-            return 0
-        elseif a:x < 172
-            return 1
-        elseif a:x < 230
-            return 2
-        else
-            return 3
-        endif
-    else
-        if a:x < 75
-            return 0
-        else
-            let l:n = (a:x - 55) / 40
-            let l:m = (a:x - 55) % 40
-            if l:m < 20
-                return l:n
-            else
-                return l:n + 1
-            endif
-        endif
-    endif
-endfun
-
-" returns the actual color level for the given color index
-fun! s:rgb_level(n)
-    if &t_Co == 88
-        if a:n == 0
-            return 0
-        elseif a:n == 1
-            return 139
-        elseif a:n == 2
-            return 205
-        else
-            return 255
-        endif
-    else
-        if a:n == 0
-            return 0
-        else
-            return 55 + (a:n * 40)
-        endif
-    endif
-endfun
-
-" returns the palette index for the given R/G/B color indices
-fun! s:rgb_color(x, y, z)
-    if &t_Co == 88
-        return 16 + (a:x * 16) + (a:y * 4) + a:z
-    else
-        return 16 + (a:x * 36) + (a:y * 6) + a:z
-    endif
-endfun
-
-" returns the palette index to approximate the given R/G/B color levels
-fun! s:color(r, g, b)
-    " get the closest grey
-    let l:gx = s:grey_number(a:r)
-    let l:gy = s:grey_number(a:g)
-    let l:gz = s:grey_number(a:b)
-
-    " get the closest color
-    let l:x = s:rgb_number(a:r)
-    let l:y = s:rgb_number(a:g)
-    let l:z = s:rgb_number(a:b)
-
-    if l:gx == l:gy && l:gy == l:gz
-        " there are two possibilities
-        let l:dgr = s:grey_level(l:gx) - a:r
-        let l:dgg = s:grey_level(l:gy) - a:g
-        let l:dgb = s:grey_level(l:gz) - a:b
-        let l:dgrey = (l:dgr * l:dgr) + (l:dgg * l:dgg) + (l:dgb * l:dgb)
-        let l:dr = s:rgb_level(l:gx) - a:r
-        let l:dg = s:rgb_level(l:gy) - a:g
-        let l:db = s:rgb_level(l:gz) - a:b
-        let l:drgb = (l:dr * l:dr) + (l:dg * l:dg) + (l:db * l:db)
-        if l:dgrey < l:drgb
-            " use the grey
-            return s:grey_color(l:gx)
-        else
-            " use the color
-            return s:rgb_color(l:x, l:y, l:z)
-        endif
-    else
-        " only one possibility
-        return s:rgb_color(l:x, l:y, l:z)
-    endif
-endfun
-
-" returns the palette index to approximate the 'rrggbb' hex string
-fun! s:rgb(rgb)
-    let l:r = ("0x" . strpart(a:rgb, 0, 2)) + 0
-    let l:g = ("0x" . strpart(a:rgb, 2, 2)) + 0
-    let l:b = ("0x" . strpart(a:rgb, 4, 2)) + 0
-    return s:color(l:r, l:g, l:b)
-endfun
-
-" sets the highlighting for the given group
-fun! s:X(group, fg, bg, attr)
-    if a:fg != ""
-        exec "hi ".a:group." guifg=#".a:fg." ctermfg=".s:rgb(a:fg)
-    endif
-    if a:bg != ""
-        exec "hi ".a:group." guibg=#".a:bg." ctermbg=".s:rgb(a:bg)
-    endif
-    if a:attr != ""
-        if a:attr == 'italic'
-            exec "hi ".a:group." gui=".a:attr." cterm=none"
-        else
-            exec "hi ".a:group." gui=".a:attr." cterm=".a:attr
-        endif
-    endif
-endfun
-"" }}}
-"
-call s:X("User1", "ffffff", "880c0e", "bold")
-call s:X("User2", "ffdad8", "880c0e", "")
-call s:X("User3", "000000", "F4905C", "")
-call s:X("User4", "292b00", "e4e587", "")
-call s:X("User5", "112605", "aefe7B", "")
-call s:X("User6", "051d00", "7dcc7d", "")
-call s:X("User7", "ffffff", "5b7fbb", "")
-call s:X("User8", "ffffff", "810085", "")
-call s:X("User9", "ffffff", "094afe", "")
-
-function! HighlightSearch()
-    if &hls
-        return 'H'
-    else
-        return ''
-    endif
-endfunction
-
-set statusline=
-set statusline+=%{fugitive#statusline()}
-set statusline+=%1*\[%n]                             "buffernr
-set statusline+=%2*\ %<%F\                           "File+path
-set statusline+=%3*\ %y\                             "FileType
-set statusline+=%4*\ %{''.(&fenc!=''?&fenc:&enc).''} "Encoding
-set statusline+=%4*\ %{(&bomb?\",BOM\":\"\")}\       "Encoding2
-set statusline+=%5*\ %{&ff}\                         "FileFormat (dos/unix..)
-" Spellanguage & Highlight on?
-set statusline+=%6*\ %{&spelllang}\%{HighlightSearch()}
-set statusline+=%7*\ %=\ %l/%L\                      "Rownumber/total (%)
-set statusline+=%8*\ %03v\                           "Colnr
-set statusline+=%9*\ \ %m%r%w\ %P\ \                 "Modified? Readonly? Top/bot.
 "}}}
 " Make the current window big, but leave others context {{{
 "
@@ -685,6 +442,25 @@ if executable('ag')
     " ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
 endif
+" }}}
+" vim-airline {{{
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_detect_spell=1
+let g:airline_detect_spelllang=1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+" unicode symbols
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
 " }}}
 " vim-hardmode {{{
 let g:hardtime_default_on = 1
