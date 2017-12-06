@@ -127,6 +127,8 @@ Plugin 'mxw/vim-jsx'
 Plugin 'isRuslan/vim-es6'
 " Superior Lisp Interaction Mode for Vim ("SLIME for Vim")
 Plugin 'kovisoft/slimv'
+" Improved nginx vim plugin (incl. syntax highlighting)
+Plugin 'chr4/nginx.vim'
 
 Plugin 'jceb/vim-orgmode'
 " ------------------------------------------------------------------------------
