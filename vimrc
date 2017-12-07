@@ -212,12 +212,12 @@ endif
 " Make the current window big, but leave others context {{{
 "
 set winwidth=125
-" " We have to have a winheight bigger than we want to set winminheight. But if
-" " we set winheight to be huge before winminheight, the winminheight set will
-" " fail.
-" set winheight=5
-" set winminheight=5
-" set winheight=60 "999
+" We have to have a winheight bigger than we want to set winminheight. But if
+" we set winheight to be huge before winminheight, the winminheight set will
+" fail.
+set winheight=5
+set winminheight=5
+set winheight=60 "999
 " }}}
 " Spaces, TABs and Indentation {{{
 " Real programmers don't use TABs but spaces
@@ -225,7 +225,7 @@ set tabstop=4     " a tab is four spaces
 set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set smarttab      " insert tabs on the start of a line according to
-" shiftwidth, not tabstop
+                  " shiftwidth, not tabstop
 set expandtab     " insert spaces instead of tabs
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
@@ -246,7 +246,7 @@ augroup vimrcEx
     autocmd FileType text setlocal textwidth=78
 
     "for ruby, autoindent with two spaces, always expand tabs
-    autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+    autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai shiftwidth=2 softtabstop=2 et
 
     " Setting global variables for Ruby
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -258,7 +258,7 @@ augroup vimrcEx
 
     autocmd BufRead *.axlsx set filetype=ruby
 
-    autocmd FileType python set sw=4 sts=4 et
+    autocmd FileType python set shiftwidth=4 softtabstop=4 et
 
     autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
@@ -359,8 +359,8 @@ set noswapfile
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 " Map movement through errors without wrapping.
-nmap <Up> <Plug>(ale_previous)
-nmap <Down> <Plug>(ale_next)
+nmap <silent> <leader>k <Plug>(ale_previous)
+nmap <silent> <leader>j <Plug>(ale_next)
 " }}}
 " Maps to jump to specific CtrlP targets and files {{{
 " look in Silver Searcher section for more oprions
@@ -447,6 +447,7 @@ endif
 " }}}
 " vim-airline {{{
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:airline_detect_spell=1
 let g:airline_detect_spelllang=1
 
