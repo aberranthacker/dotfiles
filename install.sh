@@ -7,6 +7,7 @@ ln -sf dotfiles/vimperatorrc ~/.vimperatorrc
 ln -sf dotfiles/bash_profile ~/.bash_profile
 ln -sf dotfiles/bash_aliases ~/.bash_aliases
 ln -sf dotfiles/bashrc ~/.bashrc
+ln -sf dotfiles/inputrc ~/.inputrc
 ln -sf dotfiles/tmux.conf ~/.tmux.conf
 ln -sf dotfiles/ctags ~/.ctags
 ln -sf dotfiles/gitconfig ~/.gitconfig
