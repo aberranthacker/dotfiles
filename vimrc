@@ -301,6 +301,10 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-p>
 "}}}
 
+" Show next matched string at the center of screen
+nnoremap n nzz
+nnoremap N Nzz
+
 map <leader>w :%s/\v\s+$//g<CR>
 
 map <leader>c :w !xclip<CR><CR>
@@ -506,6 +510,12 @@ let g:ruby_heredoc_syntax_filetypes = {
         \ "sql" : {
         \   "start" : "SQL",
         \},
+        \ "javascript" : {
+        \   "start" : "JS",
+        \},
+        \ "json" : {
+        \   "start" : "JSON",
+        \}
   \}
 " }}}
 " indentLine {{{
