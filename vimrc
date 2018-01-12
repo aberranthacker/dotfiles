@@ -67,6 +67,7 @@ Plugin 'morhetz/gruvbox'
 " Plugin 'qualiabyte/vim-colorstepper'
 " lean & mean status/tabline for vim that's light as air
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'ctrlpvim/ctrlp.vim'
 " highlight columns in csv/tsv/*sv/xsv files in different colors
@@ -447,6 +448,7 @@ if executable('ag')
 endif
 " }}}
 " vim-airline {{{
+let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_detect_spell=1
@@ -464,7 +466,6 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
-
 " }}}
 " vim-hardmode {{{
 let g:hardtime_default_on = 1
