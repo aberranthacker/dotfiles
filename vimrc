@@ -45,48 +45,43 @@ Plugin 'VundleVim/Vundle.vim'
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 
-" Plugin to help you stop repeating the basic movement keys
-Plugin 'takac/vim-hardtime'
-" UltiSnips - The ultimate snippet solution for Vim.
-" Plugin 'SirVer/ultisnips'
-" vim-snipmate default snippets (Previously snipmate-snippets)
-" Plugin 'honza/vim-snippets'
+"" " Plugin to help you stop repeating the basic movement keys
+"" Plugin 'takac/vim-hardtime'
+"" " UltiSnips - The ultimate snippet solution for Vim.
+"" " Plugin 'SirVer/ultisnips'
+"" " vim-snipmate default snippets (Previously snipmate-snippets)
+"" " Plugin 'honza/vim-snippets'
 
-Plugin 'lifepillar/vim-cheat40'
+"" Plugin 'lifepillar/vim-cheat40'
 " Extended session management for Vim (:mksession on steroids)
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
 " Bbye allows you to do delete buffers (close files) without closing your
 " windows or messing up your layout.
 Plugin 'olegtc/vim-bbye'
-" Monokai color scheme for Vim converted from Textmate theme
-Plugin 'sickill/vim-monokai'
 " one stop shop for vim colorschemes.
 " Plugin 'flazz/vim-colorschemes'
 " Retro groove color scheme for Vim
 Plugin 'morhetz/gruvbox'
 " Cycle easily through vim color schemes using F6/F7
-Plugin 'qualiabyte/vim-colorstepper'
+" Plugin 'qualiabyte/vim-colorstepper'
 " lean & mean status/tabline for vim that's light as air
 Plugin 'vim-airline/vim-airline'
 " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'ctrlpvim/ctrlp.vim'
 " highlight columns in csv/tsv/*sv/xsv files in different colors
-Plugin 'mechatroner/rainbow_csv'
-" A Vim plugin which makes working with Rails i18n locale files a little
-" easier.
-Plugin 'airblade/vim-localorie'
+" Plugin 'mechatroner/rainbow_csv'
 
 " Ruby on Rails power tools
 Plugin 'tpope/vim-rails'
-" quoting/parenthesizing made simple
-Plugin 'tpope/vim-surround'
+"" " quoting/parenthesizing made simple
+"" Plugin 'tpope/vim-surround'
 " a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
-" continuously updated session files
-Plugin 'tpope/vim-obsession'
-" use CTRL-A/CTRL-X to increment dates, times, and more
-Plugin 'tpope/vim-speeddating'
+"" " continuously updated session files
+"" Plugin 'tpope/vim-obsession'
+"" " use CTRL-A/CTRL-X to increment dates, times, and more
+"" Plugin 'tpope/vim-speeddating'
 " Run Rspec specs from Vim
 Plugin 'thoughtbot/vim-rspec'
 " extended % matching for HTML, LaTeX, and many other languages
@@ -103,10 +98,10 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'mileszs/ack.vim'
 " Asynchronous Lint Engine
 Plugin 'w0rp/ale'
-" Zoom in/out of windows (toggle between one window and multi-window)
-Plugin 'vim-scripts/ZoomWin'
-" plugin for visually displaying indent levels in Vim.
-Plugin 'Yggdroot/indentLine'
+"" " Zoom in/out of windows (toggle between one window and multi-window)
+"" Plugin 'vim-scripts/ZoomWin'
+"" " plugin for visually displaying indent levels in Vim.
+"" Plugin 'Yggdroot/indentLine'
 
 " Arduino support
 Plugin '4Evergreen4/vim-hardy'
@@ -119,7 +114,7 @@ Plugin 'joker1007/vim-ruby-heredoc-syntax'
 Plugin 'posva/vim-vue'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
-
+" Vastly improved Javascript indentation and syntax support in Vim.
 Plugin 'pangloss/vim-javascript'
 " React JSX syntax highlighting and indenting for vim.
 Plugin 'mxw/vim-jsx'
@@ -129,7 +124,7 @@ Plugin 'isRuslan/vim-es6'
 Plugin 'kovisoft/slimv'
 " Improved nginx vim plugin (incl. syntax highlighting)
 Plugin 'chr4/nginx.vim'
-
+"
 Plugin 'jceb/vim-orgmode'
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -176,6 +171,7 @@ set showmatch      " set show matching parenthesis
 set cpoptions+=$   " display $ at end of change motion
 set visualbell     " don't beep
 set noerrorbells   " don't beep
+set foldmethod=marker
 "}}}
 " GUI options {{{
 
@@ -541,8 +537,6 @@ set history=1000    " remember more commands and search history
 set undolevels=1000 " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
-set foldmethod=marker
-
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 " Better copy & paste
@@ -561,7 +555,7 @@ set tags+=gems.tags;/
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
 set spellfile=$HOME/.vim-spell-en.utf-8.add
-"
+" instruct the sh plugin to fall to Bash by default, rather than Bourne shell
 let g:is_bash=1
 
 " prettify JSON
