@@ -159,6 +159,7 @@ set background=dark
 " Terminal specific options {{{
 " check http://vimdoc.sourceforge.net/htmldoc/term.html#terminal-options
 " for details
+"
 " In order for this to work, a couple of enviroment variables has to be set:
 " TERM=xterm-256color
 " COLORTERM=truecolor
