@@ -16,7 +16,6 @@ set langmap+=,фисвуапршолдьтщзйкыегмцчняхъжэбю;a
 ";',.
 
 set autowrite " Autowrite when switching to another file
-let loaded_errormaker = 1
 let mapleader="," "change the mapleader from \ to ,
 " Vundle config {{{
 filetype off                  " Vundle required
@@ -45,75 +44,64 @@ Plugin 'VundleVim/Vundle.vim'
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 
-"" " Plugin to help you stop repeating the basic movement keys
-"" Plugin 'takac/vim-hardtime'
-"" " UltiSnips - The ultimate snippet solution for Vim.
-"" " Plugin 'SirVer/ultisnips'
-"" " vim-snipmate default snippets (Previously snipmate-snippets)
-"" " Plugin 'honza/vim-snippets'
+" UltiSnips - The ultimate snippet solution for Vim.
+" Plugin 'SirVer/ultisnips'
+" vim-snipmate default snippets (Previously snipmate-snippets)
+" Plugin 'honza/vim-snippets'
 
-"" Plugin 'lifepillar/vim-cheat40'
 " Extended session management for Vim (:mksession on steroids)
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
+" continuously updated session files
+Plugin 'tpope/vim-obsession'
 " Bbye allows you to do delete buffers (close files) without closing your
 " windows or messing up your layout.
 Plugin 'olegtc/vim-bbye'
-" one stop shop for vim colorschemes.
-" Plugin 'flazz/vim-colorschemes'
 " Retro groove color scheme for Vim
 Plugin 'morhetz/gruvbox'
-" Cycle easily through vim color schemes using F6/F7
-" Plugin 'qualiabyte/vim-colorstepper'
 " lean & mean status/tabline for vim that's light as air
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'ctrlpvim/ctrlp.vim'
-" highlight columns in csv/tsv/*sv/xsv files in different colors
-" Plugin 'mechatroner/rainbow_csv'
-
-" Ruby on Rails power tools
-Plugin 'tpope/vim-rails'
-"" " quoting/parenthesizing made simple
-"" Plugin 'tpope/vim-surround'
+" A tree explorer plugin for vim.
+" Plugin 'scrooloose/nerdtree'
+" combine with netrw to create a delicious salad dressing
+Plugin 'tpope/vim-vinegar'
 " a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
-"" " continuously updated session files
-"" Plugin 'tpope/vim-obsession'
 "" " use CTRL-A/CTRL-X to increment dates, times, and more
 "" Plugin 'tpope/vim-speeddating'
 " Run Rspec specs from Vim
 Plugin 'thoughtbot/vim-rspec'
-" extended % matching for HTML, LaTeX, and many other languages
-Plugin 'tmhedberg/matchit'
-" A tree explorer plugin for vim.
-Plugin 'scrooloose/nerdtree'
 " Vim sugar for the UNIX shell commands that need it the most.
 Plugin 'tpope/vim-eunuch'
-" seamless switching between VIM windows and Tmux panes
+" Seamless switching between VIM windows and Tmux panes
 Plugin 'christoomey/vim-tmux-navigator'
-
+" A Personal Wiki For Vim
 Plugin 'vimwiki/vimwiki'
+" Text outlining and task management for Vim based on Emacs' Org-Mode
+Plugin 'jceb/vim-orgmode'
 " Run your favorite search tool from Vim, with an enhanced results list.
 Plugin 'mileszs/ack.vim'
 " Asynchronous Lint Engine
 Plugin 'w0rp/ale'
-"" " Zoom in/out of windows (toggle between one window and multi-window)
-"" Plugin 'vim-scripts/ZoomWin'
-"" " plugin for visually displaying indent levels in Vim.
-"" Plugin 'Yggdroot/indentLine'
 
-" Arduino support
+" Arduino IDE intregation for vim.
 Plugin '4Evergreen4/vim-hardy'
+" Syntax highlighting for GNU Octave
 Plugin 'jvirtanen/vim-octave'
-Plugin 'rkennedy/vim-delphi'
+" Vim/Ruby Configuration Files
 Plugin 'vim-ruby/vim-ruby'
+" Ruby on Rails power tools
+Plugin 'tpope/vim-rails'
 " vim plugin for highliting code in ruby here document
 Plugin 'joker1007/vim-ruby-heredoc-syntax'
 " Syntax Highlight for Vue.js components
 Plugin 'posva/vim-vue'
+" CoffeeScript support for vim
 Plugin 'kchmck/vim-coffee-script'
+" Slim syntax highlighting for vim.
 Plugin 'slim-template/vim-slim'
 " Vastly improved Javascript indentation and syntax support in Vim.
 Plugin 'pangloss/vim-javascript'
@@ -125,8 +113,6 @@ Plugin 'isRuslan/vim-es6'
 Plugin 'kovisoft/slimv'
 " Improved nginx vim plugin (incl. syntax highlighting)
 Plugin 'chr4/nginx.vim'
-"
-Plugin 'jceb/vim-orgmode'
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -141,9 +127,9 @@ syntax on
 " MUST be inserted BEFORE the colorscheme command
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhitespace /\s\+$/
-
-highlight ColorColumn ctermbg=magenta guibg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+"
+" highlight ColorColumn ctermbg=magenta guibg=magenta
+call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
 
 " let g:gruvbox_termcolors=16
@@ -169,7 +155,7 @@ set nowrap         " don't wrap lines on load
 set linebreak      " wrap only at a character in the breakat option
 set formatoptions-=t " don't wrap text when typing
 set showmatch      " set show matching parenthesis
-set cpoptions+=$   " display $ at end of change motion
+" set cpoptions+=$   " display $ at end of change motion
 set visualbell     " don't beep
 set noerrorbells   " don't beep
 set foldmethod=marker
@@ -358,8 +344,9 @@ set noswapfile
 " }}}
 
 " A.L.E {{{
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:ale_lint_on_text_changed = 'never'
+" don't run linters on opening a file
+let g:ale_lint_on_enter = 0
 " Map movement through errors without wrapping.
 nmap <silent> <leader>k <Plug>(ale_previous)
 nmap <silent> <leader>j <Plug>(ale_next)
@@ -467,34 +454,6 @@ let g:airline_symbols.spell = 'Ꞩ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
 " }}}
-" vim-hardmode {{{
-let g:hardtime_default_on = 1
-let g:hardtime_timeout = 2000
-let g:hardtime_ignore_quickfix = 1
-" Read https://blog.samwhited.com/2015/04/the-dharma-of-vi/
-let g:hardtime_maxcount = 999
-let g:hardtime_ignore_buffer_patterns = [ "NERD.*", "vimwiki" ]
-" }}}
-" {{{ vim-session
-let g:session_autoload = 'yes'
-let g:session_autosave = 'no'
-let g:session_autosave_periodic=1
-let g:session_directory="./"
-" }}}
-"{{{ VimWiki
-autocmd FileType vimwiki setlocal nowrap spell
-let wiki = {}
-let wiki.path =  '~/Dropbox/vimwiki'
-let wiki.nested_syntaxes = {'ruby': 'ruby', 'sql' : 'sql', 'python': 'python', 'c++': 'cpp', 'json': 'json', 'js': 'javascript', 'yaml': 'yaml', 'sh': 'sh'}
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'},
-                    \ {'path': '~/Dropbox/vimwiki/Projects/ArenArt/'}]
-let g:vimwiki_dir_link = 'index'
-" ''       Disable folding.
-" 'expr'   Folding based on expression (folds sections and code blocks).
-" 'syntax' Folding based on syntax (folds sections; slower than 'expr').
-" 'list'   Folding based on expression (folds list subitems; much slower).
-let g:vimwiki_folding = 'list'
-"}}}
 " vim-rails {{{
 nnoremap <C-@> :A<CR>
 " }}}
@@ -516,15 +475,26 @@ let g:ruby_heredoc_syntax_filetypes = {
         \}
   \}
 " }}}
-" indentLine {{{
-let g:indentLine_enabled = 0
-"let g:indentLine_setColors = 0
-let g:indentLine_char = '┊'
+" {{{ vim-session
+let g:session_autoload = 'yes'
+let g:session_autosave = 'no'
+let g:session_autosave_periodic=1
+let g:session_directory="./"
 " }}}
-" vim-localorie {{{
-nnoremap <silent> <leader>lt :call localorie#translate()<CR>
-nnoremap <silent> <leader>le :call localorie#expand_key()<CR>
-" }}}
+"{{{ VimWiki
+autocmd FileType vimwiki setlocal nowrap spell
+let wiki = {}
+let wiki.path =  '~/Dropbox/vimwiki'
+let wiki.nested_syntaxes = {'ruby': 'ruby', 'sql' : 'sql', 'python': 'python', 'c++': 'cpp', 'json': 'json', 'js': 'javascript', 'yaml': 'yaml', 'sh': 'sh'}
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'},
+                    \ {'path': '~/Dropbox/vimwiki/Projects/ArenArt/'}]
+let g:vimwiki_dir_link = 'index'
+" ''       Disable folding.
+" 'expr'   Folding based on expression (folds sections and code blocks).
+" 'syntax' Folding based on syntax (folds sections; slower than 'expr').
+" 'list'   Folding based on expression (folds list subitems; much slower).
+let g:vimwiki_folding = 'list'
+"}}}
 " ultisnips {{{
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -545,6 +515,9 @@ set pastetoggle=<F2>  " toggle pasting unmodified text from system clipboard
 set clipboard=unnamed " use system clipboard
 
 set omnifunc=syntaxcomplete#Complete
+
+" % to bounce from do to end etc.
+runtime! macros/matchit.vim
 
 " add tags files generated by guard-ctags-bundler
 set tags+=tags;/
