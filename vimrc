@@ -344,6 +344,9 @@ set noswapfile
 " }}}
 
 " A.L.E {{{
+let g:ale_fixers = {
+            \'ruby': ['rubocop'],
+            \}
 let g:ale_lint_on_text_changed = 'never'
 " don't run linters on opening a file
 let g:ale_lint_on_enter = 0
@@ -485,7 +488,15 @@ let g:session_directory="./"
 autocmd FileType vimwiki setlocal nowrap spell
 let wiki = {}
 let wiki.path =  '~/Dropbox/vimwiki'
-let wiki.nested_syntaxes = {'ruby': 'ruby', 'sql' : 'sql', 'python': 'python', 'c++': 'cpp', 'json': 'json', 'js': 'javascript', 'yaml': 'yaml', 'sh': 'sh'}
+let wiki.nested_syntaxes = {
+            \'ruby': 'ruby',
+            \'sql' : 'sql',
+            \'python': 'python',
+            \'c++': 'cpp',
+            \'json': 'json',
+            \'js': 'javascript',
+            \'yaml': 'yaml',
+            \'sh': 'sh'}
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'},
                     \ {'path': '~/Dropbox/vimwiki/Projects/ArenArt/'}]
 let g:vimwiki_dir_link = 'index'
