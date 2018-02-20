@@ -23,6 +23,8 @@ ln -sf dotfiles/global-gitignore ~/.gitignore
 
 ln -sf dotfiles/bin  ~/.bin
 
+ln -sf dotfiles/pryrc ~/.pryrc
+
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
