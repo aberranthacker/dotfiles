@@ -423,18 +423,29 @@ let g:slimv_swank_cmd='!tmux new-window -d -n REPL-SBCL "sbcl --load  ~/.vim/bun
 let g:lisp_rainbow=1
 " }}}
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher {{{
+if executable('rg')
+    " Use ripgrep in CtrlP for listing files. Lock-free parallel recursive
+    " directory search and respects .gitignore
+    let g:ctrlp_user_command = 'rg -F -l --color never --hidden -g !.git -g "" %s --files'
+    " ripgrep is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+elseif executable('ag')
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden --ignore .git -g "" %s'
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+endif
+
 if executable('ag')
     " Use Ag over Grep
     set grepprg=ag\ --nogroup\ --nocolor
-
     " Use ag in ack
     let g:ackprg = 'ag --vimgrep'
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden --ignore .git -g "" %s'
-
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
+elseif executable('rg')
+    " Use ripgrep over Grep
+    set grepprg=rg\ --no-heading\ --color\ never
+    " Use ripgrep in ack
+    let g:ackprg = 'rg --vimgrep'
 endif
 " }}}
 " vim-airline {{{
