@@ -41,6 +41,7 @@ values."
      auto-completion
      ; better-defaults
      emacs-lisp
+     evil-russian
      git
      html
      javascript
