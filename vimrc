@@ -120,6 +120,23 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 " }}}
+
+" Terminal specific options {{{
+" check http://vimdoc.sourceforge.net/htmldoc/term.html#terminal-options
+" for details
+if $COLORTERM == 'truecolor'
+    " In order for this to work, a couple of environment variables has to be set:
+    " TERM=xterm-256color
+    " COLORTERM=truecolor
+    set termguicolors
+else
+    let g:gruvbox_termcolors=16
+    " set t_Co=256 " assume 256 colors terminal
+    " disable Background Color Erase(BCE) to properly display background color
+    " inside tmux and GNU screen
+    set t_ut=
+endif
+" }}}
 " Colors (also ExtraWhiteSpace and 81's column highlight) {{{
 "
 syntax on
@@ -132,21 +149,10 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
 
-" let g:gruvbox_termcolors=16
 let g:gruvbox_contrast_dark="medium"
 colorscheme gruvbox
 set background=dark
 "}}}
-
-" Terminal specific options {{{
-" check http://vimdoc.sourceforge.net/htmldoc/term.html#terminal-options
-" for details
-"
-" In order for this to work, a couple of enviroment variables has to be set:
-" TERM=xterm-256color
-" COLORTERM=truecolor
-set termguicolors
-" }}}
 " UI {{{
 set relativenumber " always show line numbers
 set number         " show absolute line number for current line
