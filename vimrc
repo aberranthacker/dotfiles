@@ -149,7 +149,9 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
 
+" https://github.com/morhetz/gruvbox/wiki/Terminal-specific
 let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_italic=1
 colorscheme gruvbox
 set background=dark
 "}}}
