@@ -239,6 +239,7 @@ augroup vimrcEx
 
     "for ruby, autoindent with two spaces, always expand tabs
     autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai shiftwidth=2 softtabstop=2 et
+    autocmd FileType json set ai shiftwidth=4 softtabstop=4 et
 
     " Setting global variables for Ruby
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
