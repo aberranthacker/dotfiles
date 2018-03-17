@@ -192,7 +192,7 @@ if has("gui_running")
         " use xfontsel to find name of a font
         set guifont=-*-inconsolata-medium-r-normal-*-*-160-*-*-m-*-*
     else
-        set guifont=Source\ Code\ Pro\ for\ Powerline:h16:cDefault
+        set guifont=Consolas:h14
     endif
     set title " change the terminal's title
     set go-=T " remove toolbar
