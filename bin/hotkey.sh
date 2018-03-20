@@ -1,10 +1,11 @@
 #!/bin/sh
-desk_id=$(xdotool get_desktop)
-apps_table=$(wmctrl -lx | awk -v \
-    desk_id="$desk_id" '$2==desk_id || $2==-1 {print $0}')
+desk_id=0
+#$(xdotool get_desktop)
+apps_table=$(\
+    wmctrl -lx | awk -v desk_id="$desk_id" '$2==desk_id || $2==-1 {print $0}')
 win_id=$(printf '%x' "$(xdotool getactivewindow)")
-active_window_class=$(echo "$apps_table" | awk -v \
-    id="$win_id" '$0 ~ id {print $3}')
+active_window_class=$(\
+    echo "$apps_table" | awk -v id="$win_id" '$0 ~ id {print $3}')
 
 if [ "$active_window_class" = "$2" ];
 then

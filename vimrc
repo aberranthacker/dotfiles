@@ -239,7 +239,8 @@ augroup vimrcEx
 
     "for ruby, autoindent with two spaces, always expand tabs
     autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai shiftwidth=2 softtabstop=2 et
-    autocmd FileType json set ai shiftwidth=4 softtabstop=4 et
+    autocmd FileType json,xml set autoindent shiftwidth=4 softtabstop=4 expandtab
+    autocmd FileType json,xml setlocal foldmethod=syntax
 
     " Setting global variables for Ruby
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -251,7 +252,7 @@ augroup vimrcEx
 
     autocmd BufRead *.axlsx set filetype=ruby
 
-    autocmd FileType python set shiftwidth=4 softtabstop=4 et
+    autocmd FileType python set shiftwidth=4 softtabstop=4 expandtab
 
     autocmd! BufRead,BufNewFile *.sass setfiletype sass
 
@@ -402,7 +403,7 @@ map <leader>gs :CtrlP public/stylesheets<cr>
 map <leader>gf :CtrlP features<cr>
 map <leader>gt :CtrlP spec<cr>
 map <leader>f  :CtrlPClearCache<cr>\|:CtrlP<cr>
-map <leader>F  :CtrlP %%<cr>>
+map <leader>F  :CtrlP %%<cr>
 "}}}
 " Rails projections {{{
 "
@@ -517,8 +518,7 @@ let wiki.nested_syntaxes = {
             \'js': 'javascript',
             \'yaml': 'yaml',
             \'sh': 'sh'}
-let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'},
-                    \ {'path': '~/Dropbox/vimwiki/Projects/ArenArt/'}]
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
 let g:vimwiki_dir_link = 'index'
 " ''       Disable folding.
 " 'expr'   Folding based on expression (folds sections and code blocks).
