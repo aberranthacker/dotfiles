@@ -65,7 +65,7 @@ Plugin 'vim-airline/vim-airline-themes'
 " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'ctrlpvim/ctrlp.vim'
 " A tree explorer plugin for vim.
-" Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 " combine with netrw to create a delicious salad dressing
 Plugin 'tpope/vim-vinegar'
 " a Git wrapper so awesome, it should be illegal
@@ -403,6 +403,10 @@ map <leader>gs :CtrlP public/stylesheets<cr>
 map <leader>gf :CtrlP features<cr>
 map <leader>gt :CtrlP spec<cr>
 map <leader>f  :CtrlPClearCache<cr>\|:CtrlP<cr>
+" CtrlP on VIM Buffers
+map <leader>b  :CtrlPBuffer<cr>
+" CtrlP on Most Recently Used files
+map <leader>r  :CtrlPMRU<cr>
 map <leader>F  :CtrlP %%<cr>
 "}}}
 " Rails projections {{{
