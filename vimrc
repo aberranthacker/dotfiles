@@ -1,5 +1,5 @@
 " “When you look at the dark side, careful you must be.
-"  For the dark side looks back.” — Yoda
+"  For the dark side looks back.” - Yoda
 
 " This must be first, because it changes other options as side effect
 set nocompatible " be iMproved
@@ -241,6 +241,7 @@ augroup vimrcEx
     autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai shiftwidth=2 softtabstop=2 et
     autocmd FileType json,xml set autoindent shiftwidth=4 softtabstop=4 expandtab
     autocmd FileType json,xml setlocal foldmethod=syntax
+    autocmd FileType mac set ai shiftwidth=4 softtabstop=8 et
 
     " Setting global variables for Ruby
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
