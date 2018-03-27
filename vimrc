@@ -16,7 +16,7 @@ set langmap+=,фисвуапршолдьтщзйкыегмцчняхъжэбю;a
 ";',.
 
 set autowrite " Autowrite when switching to another file
-let mapleader="," "change the mapleader from \ to ,
+let mapleader=" " "change the mapleader from \ to Spc
 " Vundle config {{{
 filetype off                  " Vundle required
 
@@ -67,7 +67,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 " A tree explorer plugin for vim.
 Plugin 'scrooloose/nerdtree'
 " combine with netrw to create a delicious salad dressing
-Plugin 'tpope/vim-vinegar'
+" Plugin 'tpope/vim-vinegar'
 " a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
 "" " use CTRL-A/CTRL-X to increment dates, times, and more
@@ -132,10 +132,10 @@ if $COLORTERM == 'truecolor'
 else
     let g:gruvbox_termcolors=16
     " set t_Co=256 " assume 256 colors terminal
-    " disable Background Color Erase(BCE) to properly display background color
-    " inside tmux and GNU screen
-    set t_ut=
 endif
+" disable Background Color Erase(BCE) to properly display background color
+" inside tmux and GNU screen
+set t_ut=
 " }}}
 " Colors (also ExtraWhiteSpace and 81's column highlight) {{{
 "
