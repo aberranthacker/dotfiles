@@ -345,6 +345,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
                   (lambda () (interactive) (find-file "~/org/dev/index.org")))
   (global-set-key (kbd "C-c u")
                   (lambda () (interactive) (find-file "~/org/projects/uknc/index.org")))
+  (global-set-key (kbd "C-c j")
+                  (lambda () (interactive) (find-file "~/org/projects/projects.org")))
   ;;
   (global-set-key (kbd "C-h") 'org-mark-ring-goto)
   ;; }}}

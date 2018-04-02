@@ -113,6 +113,8 @@ Plugin 'isRuslan/vim-es6'
 Plugin 'kovisoft/slimv'
 " Improved nginx vim plugin (incl. syntax highlighting)
 Plugin 'chr4/nginx.vim'
+"  Vim syntax for PDP11-40
+Plugin 'olegtc/asmpdp11'
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -241,7 +243,10 @@ augroup vimrcEx
     autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai shiftwidth=2 softtabstop=2 et
     autocmd FileType json,xml set autoindent shiftwidth=4 softtabstop=4 expandtab
     autocmd FileType json,xml setlocal foldmethod=syntax
-    autocmd FileType mac set ai shiftwidth=4 softtabstop=8 et
+
+
+    autocmd BufRead,BufNewFile *.MAC set filetype=asmpdp11
+    autocmd FileType asmpdp11 set ai shiftwidth=8 tabstop=8 et
 
     " Setting global variables for Ruby
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
