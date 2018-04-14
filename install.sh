@@ -7,6 +7,7 @@ ln -sf dotfiles/vimrc ~/.vimrc
 ln -sf dotfiles/_spacemacs ~/.spacemacs
 ln -sf dotfiles/spacemacs  ~/spacemacs
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+git clone https://github.com/artempyanykh/evil-russian.git ~/.emacs.d/layers/private/evil-russian
 
 ln -sf dotfiles/vimperatorrc ~/.vimperatorrc
 
