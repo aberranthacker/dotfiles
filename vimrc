@@ -113,9 +113,10 @@ Plugin 'isRuslan/vim-es6'
 Plugin 'kovisoft/slimv'
 " Improved nginx vim plugin (incl. syntax highlighting)
 Plugin 'chr4/nginx.vim'
-" syntax for PDP11-40 assembly
+" Syntax for PDP11-40 assembly
 Plugin 'olegtc/asmpdp11'
-
+" The best PostgreSQL plugin for Vim!
+Plugin 'lifepillar/pgsql.vim'
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -217,12 +218,15 @@ set winheight=60 "999
 " }}}
 " Spaces, TABs and Indentation {{{
 " Real programmers don't use TABs but spaces
-set tabstop=4     " a tab is four spaces
+" https://www.reddit.com/r/vim/wiki/tabstop
+set tabstop=8     " a tab is eight spaces
+set softtabstop=4 " This is useful to keep the 'ts' setting at its standard
+                  " value of 8, while being able to edit like it is set to 'sts'.
 set shiftwidth=4  " number of spaces to use for autoindenting
+set expandtab     " insert spaces instead of tabs
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set smarttab      " insert tabs on the start of a line according to
                   " shiftwidth, not tabstop
-set expandtab     " insert spaces instead of tabs
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
 "}}}
@@ -501,6 +505,9 @@ let ruby_spellcheck_strings = 1
 let g:ruby_heredoc_syntax_filetypes = {
         \ "sql" : {
         \   "start" : "SQL",
+        \},
+        \ "pgsql" : {
+        \   "start" : "PGSQL",
         \},
         \ "javascript" : {
         \   "start" : "JS",
