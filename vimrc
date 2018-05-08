@@ -117,6 +117,9 @@ Plugin 'chr4/nginx.vim'
 Plugin 'olegtc/asmpdp11'
 " The best PostgreSQL plugin for Vim!
 Plugin 'lifepillar/pgsql.vim'
+" Vim configuration files for Elixir
+Plugin 'elixir-editors/vim-elixir'
+
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -558,6 +561,9 @@ set undolevels=1000 " use many muchos levels of undo
 set wildignore=*.swp,*.bak,*.pyc,*.class
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
+
+" Display all mathching files when we tab complete
+set wildmenu
 
 " Better copy & paste
 set pastetoggle=<F2>  " toggle pasting unmodified text from system clipboard
