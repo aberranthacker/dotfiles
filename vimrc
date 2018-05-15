@@ -4,6 +4,8 @@
 " This must be first, because it changes other options as side effect
 set nocompatible " be iMproved
 "------------------------------------------------------------------------------
+" vimrc checklist
+" https://www.reddit.com/r/vim/wiki/vimrctips
 lan C
 set shortmess+=I "remove useless splash screen
 
@@ -150,13 +152,13 @@ set t_ut=
 syntax on
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
-"
-" highlight ColorColumn ctermbg=magenta guibg=magenta
+augroup MyColors
+    autocmd!
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+                      "\ | highlight ColorColumn ctermbg=magenta guibg=magenta
+augroup END
 call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
-
 " https://github.com/morhetz/gruvbox/wiki/Terminal-specific
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_italic=1
@@ -181,7 +183,7 @@ set foldmethod=marker
 if has("gui_running")
     if has("gui_gtk2") || has("gui_gtk3")
         "set guifont=Source\ Code\ Pro\ for\ Powerline\ 13
-        set guifont=Source\ Code\ Pro\ Medium\ 13
+        set guifont=Source\ Code\ Pro\ for Powerline\ 13
     elseif has("gui_photon")
         set guifont=Source\ Code\ Pro\ for\ Powerline:s16
     elseif has("gui_kde")
