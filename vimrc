@@ -74,8 +74,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 "" " use CTRL-A/CTRL-X to increment dates, times, and more
 "" Plugin 'tpope/vim-speeddating'
-" Run Rspec specs from Vim
-Plugin 'thoughtbot/vim-rspec'
+" Run your tests at the speed of thought
+Plugin 'janko-m/vim-test'
 " Vim sugar for the UNIX shell commands that need it the most.
 Plugin 'tpope/vim-eunuch'
 " Seamless switching between VIM windows and Tmux panes
@@ -121,6 +121,10 @@ Plugin 'olegtc/asmpdp11'
 Plugin 'lifepillar/pgsql.vim'
 " Vim configuration files for Elixir
 Plugin 'elixir-editors/vim-elixir'
+" Projectionist provides granular project configuration using "projections".
+Plugin 'tpope/vim-projectionist'
+" rails.vim inspired tools for Phoenix
+Plugin 'c-brenn/phoenix.vim'
 
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -213,7 +217,7 @@ endif
 "}}}
 " Make the current window big, but leave others context {{{
 "
-set winwidth=125
+set winwidth=114
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
 " fail.
@@ -439,14 +443,6 @@ let g:rails_projections = {
             \  }
             \}
 "}}}
-" RSpec {{{
-" RSpec.vim mappings
-let g:rspec_command = "! rspec {spec}"
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-"}}}
 " slimv {{{
 let g:slimv_impl='sbcl'
 let g:slimv_swank_cmd='!tmux new-window -d -n REPL-SBCL "sbcl --load  ~/.vim/bundle/slimv/slime/start-swank.lisp"'
@@ -528,6 +524,13 @@ let g:session_autosave = 'no'
 let g:session_autosave_periodic=1
 let g:session_directory="./"
 " }}}
+" vim-test {{{
+map <Leader>t :TestFile<CR>
+map <Leader>s :TestNearest<CR>
+map <Leader>l :TestLast<CR>
+map <Leader>a :TestSuite<CR>
+"nmap <silent> t<C-g> :TestVisit<CR>   " t Ctrl+g
+"}}}
 "{{{ VimWiki
 autocmd FileType vimwiki setlocal nowrap spell
 let wiki = {}
