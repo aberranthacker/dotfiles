@@ -375,6 +375,15 @@ you should place your code here."
   (spacemacs/load-theme 'gruvbox)
   )
 
+  ;; To save the clock history in org mode across Emacs sessions, use 
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
+
+  ;; Always load golden-ratio
+  (require 'golden-ratio)
+;;------------------------------------------------------------------------------
+;; End of user specified settings
+;;------------------------------------------------------------------------------
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables

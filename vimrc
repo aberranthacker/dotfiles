@@ -125,6 +125,8 @@ Plugin 'elixir-editors/vim-elixir'
 Plugin 'tpope/vim-projectionist'
 " rails.vim inspired tools for Phoenix
 Plugin 'c-brenn/phoenix.vim'
+" A Vim plugin that manages your tag files
+" Plugin 'ludovicchabant/vim-gutentags'
 
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
