@@ -37,4 +37,8 @@ git submodule update --init
 ln -sf ~/dotfiles/colorschemes/gruvbox-contrib/konsole/Gruvbox_dark.colorscheme ~/.local/share/konsole/Gruvbox_dark.colorscheme
 ln -sf ~/dotfiles/colorschemes/gruvbox-contrib/xresources/gruvbox-dark.xresources ~/.Xresources
 
+# git clone https://github.com/soimort/translate-shell
+# cd translate-shell/
+# make PREFIX=~/.local install
+
 cd

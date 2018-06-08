@@ -154,7 +154,7 @@ values."
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
-   ;; (default "SPC"
+   ;; (default "SPC")
    dotspacemacs-emacs-command-key "SPC"
    ;; The key used for Vim Ex commands (default ":")
    dotspacemacs-ex-command-key ":"
@@ -309,6 +309,41 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (add-hook 'prog-mode-hook (lambda () (setq-local origami-fold-style 'triple-braces)))
   (load-file "~/spacemacs/dash.el")
   (load-file "~/spacemacs/autothemer.el")
+  ;; }}}
+  )
+
+;; -----------------------------------------------------------------------------
+;; You are looking for this section
+;; -----------------------------------------------------------------------------
+(defun dotspacemacs/user-config ()
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration.
+This is the place where most of your configurations should be done. Unless it is
+explicitly specified that a variable should be set before a package is loaded,
+you should place your code here."
+
+  (spacemacs/load-theme 'gruvbox)
+
+  ;; --------------- start of org mode related settings -------------------- {{{
+  ;; always load org layer
+  (require 'org)
+  ;; Prompt for a note after clock out
+  (setq org-log-note-clock-out t)
+  ;; auto-save each hour
+  (run-at-time "00:59" 3600 'org-save-all-org-buffers)
+  (define-globalized-minor-mode global-fci-mode
+                                fci-mode (lambda () (fci-mode 1)))
+  (global-fci-mode 1)
+  ;; Open org link in a same window
+  (setq org-link-frame-setup '((file . find-file)))
+  (setq org-file-apps
+        '((auto-mode . emacs)
+          ("\\.x?html?\\'" . "xdg-open %s")
+          ("\\.pdf\\'" . "xdg-open \"%s\"")))
+  ;; To save the clock history in org mode across Emacs sessions, use
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
   ;; soft-wrap lines in org-mode
   (setq org-startup-truncated nil)
   (setq plantuml-jar-path "/usr/share/java/plantuml.jar")
@@ -349,41 +384,24 @@ before packages are loaded. If you are unsure, you should try in setting them in
                   (lambda () (interactive) (find-file "~/org/projects/projects.org")))
   ;;
   (global-set-key (kbd "C-h") 'org-mark-ring-goto)
-  ;; }}}
-  )
 
-(defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
-  ;; auto-save each hour
-  (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-  ;; Show 80-column marker
-  (setq fci-rule-color "#444")
-  (define-globalized-minor-mode global-fci-mode
-                                fci-mode (lambda () (fci-mode 1)))
-  (global-fci-mode 1)
-  ;; Open org link in a same window
-  (setq org-link-frame-setup '((file . find-file)))
-  (setq org-file-apps
-        '((auto-mode . emacs)
-          ("\\.x?html?\\'" . "xdg-open %s")
-          ("\\.pdf\\'" . "xdg-open \"%s\"")))
-  (spacemacs/load-theme 'gruvbox)
-  )
-
-  ;; To save the clock history in org mode across Emacs sessions, use 
-  (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate)
+  ;; }}} ------------ end of org mode related setting --------------------------
 
   ;; Always load golden-ratio
   (require 'golden-ratio)
+
+  ;; Alternative for golden-ratio
+  ;; (require 'zoom)
+  ;; (with-eval-after-load 'zoom
+  ;;   (setq zoom-size '(0.618 . 0.618))
+  ;;   (spacemacs/set-leader-keys "tg" 'zoom-mode))
+
+  ;; Show 80-column marker
+  (setq fci-rule-color "#444")
+  ) ;; user-config
 ;;------------------------------------------------------------------------------
-;; End of user specified settings
 ;;------------------------------------------------------------------------------
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -450,7 +468,7 @@ static char *gnus-pointer[] = {
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (winum sudoku org-category-capture org-mime fuzzy ghub let-alist obsidian-theme zenburn-theme niflheim-theme ample-zen-theme alect-themes cyberpunk-theme rainbow-mode rainbow-identifiers color-identifiers-mode gruvbox-dark-medium-theme origami plantuml-mode org-trello twittering-mode projectile-rails inflections feature-mode pomidor mu4e-maildirs-extension mu4e-alert ht typit mmt pacmacs 2048-game web-mode web-beautify tagedit smeargle slim-mode scss-mode sass-mode pug-mode orgit mmm-mode markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor emmet-mode diff-hl company-web web-completion-data company-tern dash-functional tern company-statistics company coffee-mode auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete gruvbox-theme org-projectile org-present org org-pomodoro alert log4e gntp org-download htmlize gnuplot rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
+    (zoom winum sudoku org-category-capture org-mime fuzzy ghub let-alist obsidian-theme zenburn-theme niflheim-theme ample-zen-theme alect-themes cyberpunk-theme rainbow-mode rainbow-identifiers color-identifiers-mode gruvbox-dark-medium-theme origami plantuml-mode org-trello twittering-mode projectile-rails inflections feature-mode pomidor mu4e-maildirs-extension mu4e-alert ht typit mmt pacmacs 2048-game web-mode web-beautify tagedit smeargle slim-mode scss-mode sass-mode pug-mode orgit mmm-mode markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor emmet-mode diff-hl company-web web-completion-data company-tern dash-functional tern company-statistics company coffee-mode auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete gruvbox-theme org-projectile org-present org org-pomodoro alert log4e gntp org-download htmlize gnuplot rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(tool-bar-mode nil)
  '(vc-annotate-background "#3b3b3b")
