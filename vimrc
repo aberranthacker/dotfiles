@@ -1,14 +1,14 @@
+"------------------------------------------------------------------------------
 " “When you look at the dark side, careful you must be.
 "  For the dark side looks back.” - Yoda
-
-" This must be first, because it changes other options as side effect
-set nocompatible " be iMproved
 "------------------------------------------------------------------------------
 " vimrc checklist
 " https://www.reddit.com/r/vim/wiki/vimrctips
+"------------------------------------------------------------------------------
+" This must be first, because it changes other options as side effect
+set nocompatible " be iMproved
+"------------------------------------------------------------------------------
 lan C
-set shortmess+=I "remove useless splash screen
-
 set encoding=utf-8
 set fileformats=unix,dos,mac
 set fileencodings=utf-8,cp1251,koi8-r,cp866
@@ -127,7 +127,8 @@ Plugin 'tpope/vim-projectionist'
 Plugin 'c-brenn/phoenix.vim'
 " A Vim plugin that manages your tag files
 " Plugin 'ludovicchabant/vim-gutentags'
-
+" Fsociety's synthwave theme
+Plugin 'exitface/synthwave.vim'
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -168,10 +169,12 @@ call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " https://github.com/morhetz/gruvbox/wiki/Terminal-specific
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_italic=1
-colorscheme gruvbox
 set background=dark
+colorscheme gruvbox
+" colorscheme synthwave
 "}}}
 " UI {{{
+set shortmess+=I   "remove useless splash screen
 set relativenumber " always show line numbers
 set number         " show absolute line number for current line
 set textwidth=79   " width of document (used by gd)
@@ -478,6 +481,7 @@ endif
 " }}}
 " vim-airline {{{
 let g:airline_theme='gruvbox'
+" let g:airline_theme='synthwave'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_detect_spell=1
