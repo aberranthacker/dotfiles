@@ -3,7 +3,7 @@
 
 # User specific environment and startup programs
 export EDITOR='vim'
-export PATH=$PATH:$HOME/.bin:$HOME/bin:/usr/local/heroku/bin
+export PATH=$PATH:$HOME/.bin:$HOME/bin:$HOME/.local/bin:/usr/local/heroku/bin
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then

@@ -384,7 +384,8 @@ you should place your code here."
                   (lambda () (interactive) (find-file "~/org/projects/projects.org")))
   ;;
   (global-set-key (kbd "C-h") 'org-mark-ring-goto)
-
+  ;; display clocked time in hours instead of days and hours
+  (setq org-duration-format (quote h:mm))
   ;; }}} ------------ end of org mode related setting --------------------------
 
   ;; Always load golden-ratio
