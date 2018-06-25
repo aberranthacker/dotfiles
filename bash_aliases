@@ -18,6 +18,7 @@ alias ts='tmuxinator start'
 alias tns='trans -pager more --'
 alias csd='cap staging deploy'
 alias csr='cap staging puma:restart'
+alias gpu='git push'
 
 function _guard_command () {
     if [ -e "bin/guard" ]; then

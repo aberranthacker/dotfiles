@@ -382,6 +382,9 @@ set noswapfile
 let g:ale_fixers = {
             \'ruby': ['rubocop'],
             \}
+let g:ale_linters = {
+            \'elixir': ['credo'],
+            \}
 let g:ale_lint_on_text_changed = 'never'
 " don't run linters on opening a file
 let g:ale_lint_on_enter = 0
