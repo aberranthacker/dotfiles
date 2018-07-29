@@ -16,6 +16,7 @@ set spelllang=en,ru
 set   langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖЭБЮ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:\"<>
 set langmap+=,фисвуапршолдьтщзйкыегмцчняхъжэбю;abcdefghijklmnopqrstuvwxyz[];'\\,.
 ";',.
+set listchars=eol:$,tab:>-,trail:.,nbsp:_,extends:+,precedes:+
 
 set autowrite " Autowrite when switching to another file
 let mapleader=" " "change the mapleader from \ to Spc
@@ -338,6 +339,9 @@ map <leader>v :view %%
 noremap <F1> <Esc>
 vnoremap <F1> <Esc>
 inoremap <F1> <Esc>
+" F8 toggles showing non-printable characters
+noremap <F8> :set list!<CR>
+inoremap <F8> <Esc>:set list!<CR>a
 
 " Bind nohl
 " Removes highlight of your last search
