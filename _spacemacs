@@ -333,7 +333,7 @@ you should place your code here."
   ;; auto-save each hour
   (run-at-time "00:59" 3600 'org-save-all-org-buffers)
   (define-globalized-minor-mode global-fci-mode
-                                fci-mode (lambda () (fci-mode 1)))
+    fci-mode (lambda () (fci-mode 1)))
   (global-fci-mode 1)
   ;; Open org link in a same window
   (setq org-link-frame-setup '((file . find-file)))
@@ -386,6 +386,63 @@ you should place your code here."
   (global-set-key (kbd "C-h") 'org-mark-ring-goto)
   ;; display clocked time in hours instead of days and hours
   (setq org-duration-format (quote h:mm))
+  ;; ---------------------------------------------------------------------------
+  (setq org-todo-keywords
+        '(
+          (sequence "IDEA(i)" "TODO(t)" "STARTED(s)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)")
+          (sequence "|" "CANCELED(c)" "DELEGATED(l)" "SOMEDAY(f)")
+          ))
+
+  (setq org-todo-keyword-faces
+        '(("IDEA" . (:foreground "GoldenRod" :weight bold))
+          ("NEXT" . (:foreground "IndianRed1" :weight bold))
+          ("STARTED" . (:foreground "OrangeRed" :weight bold))
+          ("WAITING" . (:foreground "coral" :weight bold))
+          ("CANCELED" . (:foreground "LimeGreen" :weight bold))
+          ("DELEGATED" . (:foreground "LimeGreen" :weight bold))
+          ("SOMEDAY" . (:foreground "LimeGreen" :weight bold))
+          ))
+
+  (setq org-tag-persistent-alist
+        '((:startgroup . nil)
+          ("HOME" . ?h)
+          ("RESEARCH" . ?r)
+          ("TEACHING" . ?t)
+          (:endgroup . nil)
+          (:startgroup . nil)
+          ("OS" . ?o)
+          ("DEV" . ?d)
+          ("WWW" . ?w)
+          (:endgroup . nil)
+          (:startgroup . nil)
+          ("EASY" . ?e)
+          ("MEDIUM" . ?m)
+          ("HARD" . ?a)
+          (:endgroup . nil)
+          ("URGENT" . ?u)
+          ("KEY" . ?k)
+          ("BONUS" . ?b)
+          ("noexport" . ?x)
+          )
+        )
+
+  (setq org-tag-faces
+        '(
+          ("HOME" . (:foreground "GoldenRod" :weight bold))
+          ("RESEARCH" . (:foreground "GoldenRod" :weight bold))
+          ("TEACHING" . (:foreground "GoldenRod" :weight bold))
+          ("OS" . (:foreground "IndianRed1" :weight bold))
+          ("DEV" . (:foreground "IndianRed1" :weight bold))
+          ("WWW" . (:foreground "IndianRed1" :weight bold))
+          ("URGENT" . (:foreground "Red" :weight bold))
+          ("KEY" . (:foreground "Red" :weight bold))
+          ("EASY" . (:foreground "OrangeRed" :weight bold))
+          ("MEDIUM" . (:foreground "OrangeRed" :weight bold))
+          ("HARD" . (:foreground "OrangeRed" :weight bold))
+          ("BONUS" . (:foreground "GoldenRod" :weight bold))
+          ("noexport" . (:foreground "LimeGreen" :weight bold))
+          )
+        )
   ;; }}} ------------ end of org mode related setting --------------------------
 
   ;; Always load golden-ratio

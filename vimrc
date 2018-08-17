@@ -118,6 +118,8 @@ Plugin 'kovisoft/slimv'
 Plugin 'chr4/nginx.vim'
 " Syntax for PDP11-40 assembly
 Plugin 'olegtc/asmpdp11'
+" Syntax for Z80 assembly
+Plugin 'cpcsdk/vim-z80-democoding'
 " The best PostgreSQL plugin for Vim!
 Plugin 'lifepillar/pgsql.vim'
 " Vim configuration files for Elixir
@@ -264,9 +266,6 @@ augroup vimrcEx
     autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai shiftwidth=2 softtabstop=2 et
     autocmd FileType json,xml set autoindent shiftwidth=4 softtabstop=4 expandtab
     autocmd FileType json,xml setlocal foldmethod=syntax
-
-    autocmd BufRead,BufNewFile *.MAC set filetype=asmpdp11
-    autocmd FileType asmpdp11 set ai shiftwidth=8 tabstop=8 et
 
     " Setting global variables for Ruby
     autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
