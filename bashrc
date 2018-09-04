@@ -111,5 +111,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 eval "$(thefuck --alias)"
 eval "$(direnv hook bash)"
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+
+#  Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
+# . $HOME/.asdf/asdf.sh
+# . $HOME/.asdf/completions/asdf.bash

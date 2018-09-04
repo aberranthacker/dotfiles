@@ -62,6 +62,10 @@ Plugin 'tpope/vim-obsession'
 Plugin 'olegtc/vim-bbye'
 " Retro groove color scheme for Vim
 Plugin 'morhetz/gruvbox'
+Plugin 'romainl/flattened'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'junegunn/seoul256.vim'
+
 " lean & mean status/tabline for vim that's light as air
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -172,9 +176,14 @@ call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " https://github.com/morhetz/gruvbox/wiki/Terminal-specific
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_italic=1
-set background=dark
-colorscheme gruvbox
+let g:seoul256_background = 233
+let g:seoul256_light_background = 256
+
+" colorscheme gruvbox
 " colorscheme synthwave
+"colorscheme seoul256
+colorscheme seoul256-light
+" set background=dark
 "}}}
 " UI {{{
 set shortmess+=I   "remove useless splash screen
@@ -229,9 +238,9 @@ set winwidth=114
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
 " fail.
-set winheight=5
-set winminheight=5
-set winheight=60 "999
+" set winheight=5
+" set winminheight=5
+" set winheight=60 "999
 " }}}
 " Spaces, TABs and Indentation {{{
 " Real programmers don't use TABs but spaces
@@ -486,8 +495,9 @@ elseif executable('rg')
 endif
 " }}}
 " vim-airline {{{
-let g:airline_theme='gruvbox'
+" let g:airline_theme='gruvbox'
 " let g:airline_theme='synthwave'
+let g:airline_theme='seoul256'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_detect_spell=1
