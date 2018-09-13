@@ -1,8 +1,6 @@
-# some more ls aliases
 # Exa is an alternative for the ls command.
-# sudo dnf copr enable eclipseo/exa
-# sudo dnf install exa
 alias ls='exa'
+# some more ls aliases
 # -a, --all -- do not ignore entries starting with .
 # -l -- use a long listing format
 # -F, --classify -- append indicator (one of */=>@|) to entries
@@ -25,6 +23,7 @@ alias tns='trans -pager more --'
 alias csd='cap staging deploy'
 alias csr='cap staging puma:restart'
 alias gpu='git push'
+alias g='git st'
 
 function _guard_command () {
     if [ -e "bin/guard" ]; then

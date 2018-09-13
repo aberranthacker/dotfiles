@@ -16,6 +16,7 @@ set spelllang=en,ru
 set   langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖЭБЮ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:\"<>
 set langmap+=,фисвуапршолдьтщзйкыегмцчняхъжэбю;abcdefghijklmnopqrstuvwxyz[];'\\,.
 ";',.
+" characters to show for non-printable characters
 set listchars=eol:$,tab:>-,trail:.,nbsp:_,extends:+,precedes:+
 
 set autowrite " Autowrite when switching to another file
@@ -89,8 +90,9 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'vimwiki/vimwiki'
 " Text outlining and task management for Vim based on Emacs' Org-Mode
 Plugin 'jceb/vim-orgmode'
-" Run your favorite search tool from Vim, with an enhanced results list.
-Plugin 'mileszs/ack.vim'
+"  An ack.vim alternative mimics Ctrl-Shift-F on Sublime Text 2
+" https://github.com/dyng/ctrlsf.vim
+Plugin 'dyng/ctrlsf.vim'
 " Asynchronous Lint Engine
 Plugin 'w0rp/ale'
 
@@ -174,16 +176,17 @@ augroup END
 call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
 " https://github.com/morhetz/gruvbox/wiki/Terminal-specific
-let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_italic=1
 let g:seoul256_background = 233
 let g:seoul256_light_background = 256
 
-" colorscheme gruvbox
+let g:gruvbox_contrast_dark="medium"
+let g:gruvbox_contrast_light="hard"
+colorscheme gruvbox
 " colorscheme synthwave
-"colorscheme seoul256
-colorscheme seoul256-light
-" set background=dark
+" colorscheme seoul256
+" colorscheme seoul256-light
+set background=light
 "}}}
 " UI {{{
 set shortmess+=I   "remove useless splash screen
@@ -468,7 +471,7 @@ let g:slimv_impl='sbcl'
 let g:slimv_swank_cmd='!tmux new-window -d -n REPL-SBCL "sbcl --load  ~/.vim/bundle/slimv/slime/start-swank.lisp"'
 let g:lisp_rainbow=1
 " }}}
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher {{{
+" Use The Silver Searcher or ripgrep, which depends... {{{
 if executable('rg')
     " Use ripgrep in CtrlP for listing files. Lock-free parallel recursive
     " directory search and respects .gitignore
@@ -495,9 +498,9 @@ elseif executable('rg')
 endif
 " }}}
 " vim-airline {{{
-" let g:airline_theme='gruvbox'
+let g:airline_theme='gruvbox'
 " let g:airline_theme='synthwave'
-let g:airline_theme='seoul256'
+" let g:airline_theme='seoul256'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline_detect_spell=1
