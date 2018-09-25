@@ -556,6 +556,10 @@ map <Leader>l :TestLast<CR>
 map <Leader>a :TestSuite<CR>
 "nmap <silent> t<C-g> :TestVisit<CR>   " t Ctrl+g
 "}}}
+" vim-vue {{{
+let g:vue_disable_pre_processors=0
+autocmd FileType vue syntax sync fromstart
+" }}}
 "{{{ VimWiki
 autocmd FileType vimwiki setlocal nowrap spell
 let wiki = {}
