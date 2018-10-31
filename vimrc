@@ -19,7 +19,10 @@ set langmap+=,фисвуапршолдьтщзйкыегмцчняхъжэбю;a
 " characters to show for non-printable characters
 set listchars=eol:$,tab:>-,trail:.,nbsp:_,extends:+,precedes:+
 
-set autowrite " Autowrite when switching to another file
+" set autowrite " Autowrite when switching to another file
+set hidden "
+set autoread " Autoread files modified outside of VIM
+
 let mapleader=" " "change the mapleader from \ to Spc
 " Vundle config {{{
 filetype off                  " Vundle required
@@ -177,8 +180,8 @@ call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " set colorcolumn=81 " highligh 80's column with ColorColumn hl-ColorColumn
 " https://github.com/morhetz/gruvbox/wiki/Terminal-specific
 let g:gruvbox_italic=1
-let g:seoul256_background = 233
-let g:seoul256_light_background = 256
+" let g:seoul256_background = 233
+" let g:seoul256_light_background = 256
 
 let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
@@ -186,7 +189,7 @@ colorscheme gruvbox
 " colorscheme synthwave
 " colorscheme seoul256
 " colorscheme seoul256-light
-set background=light
+set background=dark
 "}}}
 " UI {{{
 set shortmess+=I   "remove useless splash screen
