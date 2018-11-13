@@ -41,4 +41,13 @@ ln -sf ~/dotfiles/colorschemes/gruvbox-contrib/xresources/gruvbox-dark.xresource
 # cd translate-shell/
 # make PREFIX=~/.local install
 
+sudo dnf install -y emacs wmctrl xdotool exa ripgrep direnv
+
+# install poweline fonts
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts
+
 cd
