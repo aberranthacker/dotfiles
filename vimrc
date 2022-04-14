@@ -158,6 +158,8 @@ Plugin 'AndrewRadev/splitjoin.vim'
 " A Vim plugin to move function arguments (and other delimited-by-something
 " items) left and right
 " Plugin 'AndrewRadev/sideways.vim'
+
+Plugin 'zxqfl/tabnine-vim'
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -290,7 +292,7 @@ endif
 "}}}
 " Make the current window big, but leave others context {{{
 "
-set winwidth=124
+set winwidth=104
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
 " fail.
