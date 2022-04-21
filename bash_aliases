@@ -22,6 +22,12 @@ alias gpu='git push'
 alias g='git'
 alias please='sudo'
 
+if [ -n "$DISPLAY" ]; then
+  alias vim='vimx'
+else
+  # do nothing
+fi
+
 alias erb='erb -U'
 
 function _guard_command () {
@@ -52,7 +58,7 @@ function _rails_command () {
 alias rails='_rails_command'
 
 if [ "$(uname)" == "Darwin" ]; then
-    # Do something under Shit OS X platform
+    # Do something under shitOS X platform
     alias vim='/usr/local/bin/vim'
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     # Do something under GNU/Linux platform
