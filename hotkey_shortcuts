@@ -1,0 +1,4 @@
+CommandURL=hotkey.sh konsole konsole.konsole
+CommandURL=hotkey.sh firefox Navigator.firefox
+CommandURL=hotkey.sh /home/random/opt/Obsidian/obsidian obsidian.obsidian
+CommandURL=hotkey.sh dolphin dolphin.dolphin

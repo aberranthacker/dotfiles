@@ -26,3 +26,7 @@ default.vim.lock
 *.id1
 *.nam
 *.til
+
+**/public/javascripts/redmine_extensions
+
+.gitattributes

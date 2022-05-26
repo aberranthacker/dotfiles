@@ -223,7 +223,7 @@ let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="hard"
 let g:gruvbox_italic=1
 
-colorscheme PaperColor
+colorscheme gruvbox
 
 let g:colorscheme_switcher_exclude = [
       \'default',
@@ -292,7 +292,7 @@ endif
 "}}}
 " Make the current window big, but leave others context {{{
 "
-set winwidth=104
+set winwidth=105
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
 " fail.
