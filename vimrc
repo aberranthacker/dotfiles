@@ -8,6 +8,8 @@
 " This must be first, because it changes other options as side effect
 set nocompatible " be iMproved
 "------------------------------------------------------------------------------
+set mouse=
+"set ttymouse=
 lan C
 set encoding=utf-8
 set fileformats=unix,dos,mac
@@ -59,8 +61,10 @@ Plugin 'VundleVim/Vundle.vim'
 " Extended session management for Vim (:mksession on steroids)
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-session'
+
 " continuously updated session files
 Plugin 'tpope/vim-obsession'
+
 " Bbye allows you to do delete buffers (close files) without closing your
 " windows or messing up your layout.
 Plugin 'olegtc/vim-bbye'
@@ -76,78 +80,133 @@ Plugin 'xolox/vim-colorscheme-switcher'
 " lean & mean status/tabline for vim that's light as air
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
 " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'ctrlpvim/ctrlp.vim'
+
 " A tree explorer plugin for vim.
 Plugin 'scrooloose/nerdtree'
+
 " combine with netrw to create a delicious salad dressing
 " Plugin 'tpope/vim-vinegar'
 " a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
+
 " use CTRL-A/CTRL-X to increment dates, times, and more
 Plugin 'tpope/vim-speeddating'
+
 " Run your tests at the speed of thought
 Plugin 'janko-m/vim-test'
+
 " Vim sugar for the UNIX shell commands that need it the most.
 Plugin 'tpope/vim-eunuch'
+
+" Abbreviation
+"
+" Substitution
+"
+" Coercion
+"
+" Want to turn fooBar into foo_bar? Press crs (coerce to snake_case).
+" MixedCase (crm), camelCase (crc), snake_case (crs), UPPER_CASE (cru),
+" dash-case (cr-), dot.case (cr.), space case (cr<space>),
+" and Title Case (crt) are all just 3 keystrokes away.
+" https://github.com/tpope/vim-abolish
+Plugin 'tpope/vim-abolish'
+
+" If you've ever tried using the . command after a plugin map, you were likely
+" disappointed to discover it only repeated the last native command inside that
+" map, rather than the map as a whole.
+" That disappointment ends today.
+" Repeat.vim remaps . in a way that plugins can tap into it.
+" https://github.com/tpope/vim-repeat
+Plugin 'tpope/vim-repeat'
+
 " Seamless switching between VIM windows and Tmux panes
 Plugin 'christoomey/vim-tmux-navigator'
+
 " Send command from vim to a running tmux session
 Plugin 'jgdavey/tslime.vim'
+
 " A Personal Wiki For Vim
 Plugin 'vimwiki/vimwiki'
+
 " Text outlining and task management for Vim based on Emacs' Org-Mode
 Plugin 'jceb/vim-orgmode'
+
 " An ack.vim alternative mimics Ctrl-Shift-F on Sublime Text 2
 " https://github.com/dyng/ctrlsf.vim
 Plugin 'dyng/ctrlsf.vim'
+
 " Jump to any definition and references 👁 IDE madness without overhead 🚀
 Plugin 'pechorin/any-jump.vim'
+
 " Asynchronous Lint Engine
 Plugin 'w0rp/ale'
 
 " A Vim plugin that manages your tag files bolt80.com/gutentags
 Plugin 'ludovicchabant/vim-gutentags'
+
 " Arduino IDE intregation for vim.
 Plugin '4Evergreen4/vim-hardy'
+
 " Syntax highlighting for GNU Octave
 Plugin 'jvirtanen/vim-octave'
+
 " Vim/Ruby Configuration Files
 Plugin 'vim-ruby/vim-ruby'
+
 " Ruby on Rails power tools
 Plugin 'tpope/vim-rails'
+
 " vim plugin for highliting code in ruby here document
 Plugin 'joker1007/vim-ruby-heredoc-syntax'
+
 " Syntax Highlight for Vue.js components
 Plugin 'posva/vim-vue'
+
 " CoffeeScript support for vim
 Plugin 'kchmck/vim-coffee-script'
+
 " Slim syntax highlighting for vim.
 Plugin 'slim-template/vim-slim'
+
 " Vastly improved Javascript indentation and syntax support in Vim.
 Plugin 'pangloss/vim-javascript'
+
 " React JSX syntax highlighting and indenting for vim.
 Plugin 'mxw/vim-jsx'
+
 " List of JavaScript ES6 snippets and syntax highlighting for vim.
 Plugin 'isRuslan/vim-es6'
+
 " Superior Lisp Interaction Mode for Vim ("SLIME for Vim")
 Plugin 'kovisoft/slimv'
+
 " Improved nginx vim plugin (incl. syntax highlighting)
 Plugin 'chr4/nginx.vim'
+
 " Syntax for PDP11-40 assembly
 Plugin 'olegtc/asmpdp11'
+
 " PDP11 syntax for GNU assembler
 Plugin 'aberranth/vim-gas-pdp11'
+
 " Syntax for Z80 assembly
 Plugin 'cpcsdk/vim-z80-democoding'
+
 " The best PostgreSQL plugin for Vim!
 Plugin 'lifepillar/pgsql.vim'
+
 " Vim configuration files for Elixir
-Plugin 'elixir-editors/vim-elixir'
-" Projectionist provides granular project configuration using "projections".
-Plugin 'tpope/vim-projectionist'
+"Plugin 'elixir-editors/vim-elixir'
+
 " rails.vim inspired tools for Phoenix
 Plugin 'c-brenn/phoenix.vim'
+
+" Projectionist provides granular project configuration using "projections".
+Plugin 'tpope/vim-projectionist'
+
 " A vim plugin that simplifies the transition between multiline and single-line
 " code
 Plugin 'AndrewRadev/splitjoin.vim'
@@ -159,7 +218,68 @@ Plugin 'AndrewRadev/splitjoin.vim'
 " items) left and right
 " Plugin 'AndrewRadev/sideways.vim'
 
-Plugin 'zxqfl/tabnine-vim'
+" Visualize your undo tree
+Plugin 'mbbill/undotree'
+
+"Plugin 'tabnine/YouCompleteMe'
+
+" Dadbod is a Vim plugin for interacting with databases.
+" It's a more modern take on dbext.vim, improving on it.
+Plugin 'tpope/vim-dadbod'
+
+" This vim plugin allows toggling bookmarks per line.
+" A quickfix window gives access to all bookmarks.
+" Annotations can be added as well. These are special bookmarks with a comment attached.
+" They are useful for preparing code reviews.
+" All bookmarks will be restored on the next startup.
+" https://github.com/MattesGroeger/vim-bookmarks
+Plugin 'MattesGroeger/vim-bookmarks' 
+let g:bookmark_no_default_key_mappings = 1
+let g:bookmark_save_per_working_dir = 1
+function! BookmarkMapKeys()
+    nmap mm :BookmarkToggle<CR>
+    nmap mi :BookmarkAnnotate<CR>
+    nmap mn :BookmarkNext<CR>
+    nmap mp :BookmarkPrev<CR>
+    nmap ma :BookmarkShowAll<CR>
+    nmap mc :BookmarkClear<CR>
+    nmap mx :BookmarkClearAll<CR>
+    nmap mkk :BookmarkMoveUp
+    nmap mjj :BookmarkMoveDown
+endfunction
+function! BookmarkUnmapKeys()
+    unmap mm
+    unmap mi
+    unmap mn
+    unmap mp
+    unmap ma
+    unmap mc
+    unmap mx
+    unmap mkk
+    unmap mjj
+endfunction
+autocmd BufEnter * :call BookmarkMapKeys()
+autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
+
+" Plugin for the Pomodoro time management technique.
+Plugin 'tricktux/pomodoro.vim'
+" Duration of a pomodoro in minutes (default: 25)
+let g:pomodoro_time_work = 25
+" Duration of a break in minutes (default: 5)
+let g:pomodoro_time_slack = 5
+" Log completed pomodoros, 0 = False, 1 = True (default: 0)
+let g:pomodoro_do_log = 1
+" Path to the pomodoro log file (default: /tmp/pomodoro.log)
+let g:pomodoro_log_file = "/home/random/pomodoro.log"
+let g:pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
+
+" Maximizes and restores the current window in Vim.
+Plugin  'szw/vim-maximizer'
+
+" Many people follow the convention of writing SQL keywords in upper case.
+" Few people enjoy using shift or caps lock to do it.
+" This plugin fixes that.
+Plugin 'jsborjesson/vim-uppercase-sql'
 " ------------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -219,7 +339,7 @@ call matchadd('ColorColumn', '\%81v', 100) " highligh 80's column with text
 " let g:seoul256_light_background = 256
 
 set background=dark
-let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_dark="medium"
 let g:gruvbox_contrast_light="hard"
 let g:gruvbox_italic=1
 
@@ -292,7 +412,7 @@ endif
 "}}}
 " Make the current window big, but leave others context {{{
 "
-set winwidth=105
+set winwidth=106
 " We have to have a winheight bigger than we want to set winminheight. But if
 " we set winheight to be huge before winminheight, the winminheight set will
 " fail.
@@ -360,7 +480,7 @@ augroup vimrcEx
 
     " saves and restores manual folds and other stuff of a view
     autocmd BufWinLeave *.* mkview
-    autocmd BufWinEnter *.* silent loadview
+    autocmd BufWinEnter *.* silent! loadview
 
     " Don't syntax highlight markdown because it's often wrong
     autocmd! FileType mkd setlocal syn=off
@@ -396,6 +516,11 @@ nnoremap gf gF
 nnoremap gF gf
 
 map <leader>w :%s/\v\s+$//g<CR>
+" " we want very magic regexp by default, but we don't want to break plugings by
+" " 'set nomagic'
+" nnoremap / /\v
+" " cnoremap %s/ %s/\v
+" cnoremap %s %s/\v
 
 if g:os == "Darwin"
   map <leader>c :w !pbcopy<CR><CR>
@@ -416,6 +541,9 @@ map <leader>v :view %%
 noremap <F1> <Esc>
 vnoremap <F1> <Esc>
 inoremap <F1> <Esc>
+
+nnoremap <F5> :UndotreeToggle<CR>
+
 " F8 toggles showing non-printable characters
 noremap <F9> :set list!<CR>
 inoremap <F9> <Esc>:set list!<CR>a
@@ -482,6 +610,7 @@ set wildmenu
 " A.L.E {{{
 let g:ale_fixers = {
             \'ruby': ['rubocop'],
+            \'javascript': ['eslint'],
             \}
 let g:ale_linters = {
             \'elixir': ['credo'],
@@ -498,9 +627,11 @@ let g:airline#extensions#ale#enabled = 1
 " nmap <silent> <leader>k <Plug>(ale_previous)
 " nmap <silent> <leader>j <Plug>(ale_next)
 " }}}
+nmap <leader>p :%DB postgresql://redmine@localhost/redmine_vd<CR>
 " Maps to jump to specific CtrlP targets and files {{{
 " look in Silver Searcher section for more oprions
 let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_user_command = "fd --color never --type f --glob --full-path '**/%s/*"
 
 set wildignore+=*/.git/*,*/tmp/*,*/log/*,*.so,*.swp,*.zip,*.un~ " MacOSX/Linux
 
@@ -551,6 +682,105 @@ map <Leader>sw <Plug>CtrlSFVwordPath
 " NerdTree {{{
 noremap <BS> :NERDTreeToggle<cr>
 let g:NERDTreeAutoDeleteBuffer=1
+" added as temporary workaround until issue
+" https://github.com/preservim/nerdtree/issues/1321
+" will be fixed
+let g:NERDTreeMinimalMenu=1
+" let g:NERDTreeIgnore=[
+"   \'advanced_html_to_xlsx_export',
+"   \'advanced_issues',
+"   \'advanced_personal_page',
+"   \'backlight_delay',
+"   \'base_4_additions',
+"   \'clipboard_image_paste',
+"   \'computed_custom_field',
+"   \'covid_opros_additions',
+"   \'custom_field_groups',
+"   \'custom_projects_reports',
+"   \'custom_tables',
+"   \'dynamically_added_custom_fields',
+"   \'dynamically_required_custom_fields',
+"   \'easy_baseline',
+"   \'easy_gantt',
+"   \'easy_gantt_pro',
+"   \'easy_mindmup',
+"   \'easy_wbs',
+"   \'extra_queries',
+"   \'extra_queries_extend',
+"   \'global_roles',
+"   \'gu_additions',
+"   \'hot_additions',
+"   \'import_privivki_issues',
+"   \'info_message',
+"   \'issue_project_user_query_columns',
+"   \'issues_importer',
+"   \'issues_reports',
+"   \'logo_plugin',
+"   \'magic_numbers_constantize',
+"   \'metrika',
+"   \'new_scoring_layout',
+"   \'nxs_chat',
+"   \'plugin_mep_api',
+"   \'plugin_support',
+"   \'projects_importer',
+"   \'redmine_agile',
+"   \'redmine_dashboards_charts',
+"   \'redmine_editauthor',
+"   \'redmine_extended_csv',
+"   \'redmine_load_xlsx',
+"   \'redmine_mail_reminder',
+"   \'redmine_paper_trail',
+"   \'redmine_people',
+"   \'redmine_percent_done',
+"   \'redmine_pivot_table',
+"   \'redmine_pretend',
+"   \'project_columns',
+"   \'project_emails',
+"   \'projects_reports',
+"   \'projects_table',
+"   \'redmine_checklists',
+"   \'redmine_ckeditor',
+"   \'redmine_sidekiq',
+"   \'redmine_xlsx_format_issue_exporter',
+"   \'redmineup_tags',
+"   \'row_estimator',
+"   \'select2_make',
+"   \'set_custom_field_default',
+"   \'smi_additions',
+"   \'soft_reports',
+"   \'subtask_list_columns',
+"   \'telegram_bot',
+"   \'upages_projects',
+"   \'usability',
+"   \'user_journal',
+"   \'vd_additions',
+"   \'vd_epic_dashboard',
+"   \'vd_extended_projects',
+"   \'vd_external_data',
+"   \'vd_hidden_users',
+"   \'vd_hierarchy_issues',
+"   \'vd_hr_reports',
+"   \'vd_import_file',
+"   \'vd_issue_subissue_count_query_columns',
+"   \'vd_linked_list',
+"   \'vd_links_multiple',
+"   \'vd_lists_menu',
+"   \'vd_mc_additions',
+"   \'vd_meta_info',
+"   \'vd_mg_additions',
+"   \'vd_mz_additions',
+"   \'vd_offer',
+"   \'vd_people_analytics',
+"   \'vd_project_list_attribute',
+"   \'vd_redmine_api',
+"   \'vd_rgis_integration',
+"   \'vd_status_extended',
+"   \'vd_time_entries_attachments',
+"   \'vd_time_tracking',
+"   \'vd_user_additional_rights',
+"   \'vd_vacation_time',
+"   \'vd_views_projects',
+"   \]
 " }}}
 " pgsql {{{
 let g:sql_type_default = 'pgsql'
@@ -661,7 +891,7 @@ let g:ruby_heredoc_syntax_filetypes = {
 " }}}
 " {{{ vim-session
 let g:session_autoload = 'yes'
-let g:session_autosave = 'no'
+let g:session_autosave = 'yes'
 let g:session_autosave_periodic=1
 let g:session_directory="./"
 " }}}

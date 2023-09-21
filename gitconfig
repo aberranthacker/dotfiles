@@ -24,7 +24,11 @@
     sapply = "!f() { git stash apply stash^{/$*}; }; f"
 [rerere]
     enabled = true
+[push]
+    autoSetupRemote = true
 [pull]
     rebase = true
 [rebase]
     autoStash = true
+[init]
+	defaultBranch = master

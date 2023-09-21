@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo dnf install -y vim tmux emacs wmctrl xdotool xclip exa ripgrep direnv mc
+sudo dnf install -y vim vim-X11 vifm vimiv-qt tmux emacs wmctrl xdotool xclip xrandr exa fd-find ripgrep direnv mc
 sudo dnf install -y yakuake
 sudo dnf group install -y "Development Tools"
 sudo dnf install -y postgresql-devel
@@ -61,6 +61,9 @@ git submodule update --init
 
 ln -sf ~/dotfiles/colorschemes/gruvbox-contrib/konsole/Gruvbox_dark.colorscheme ~/.local/share/konsole/Gruvbox_dark.colorscheme
 ln -sf ~/dotfiles/colorschemes/gruvbox-contrib/xresources/gruvbox-dark.xresources ~/.Xresources
+
+rm -rf ~/.config/vifm/colors
+git clone https://github.com/vifm/vifm-colors ~/.config/vifm/color
 
 # git clone https://github.com/soimort/translate-shell
 # cd translate-shell/

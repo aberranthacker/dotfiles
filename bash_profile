@@ -1,6 +1,8 @@
 # .bash_profile is executed to configure your shell
 # before the initial command prompt.
 
+export STEAM_FORCE_DESKTOPUI_SCALING=2.5
+
 # User specific environment and startup programs
 export EDITOR='vim'
 export PATH=$PATH:$HOME/.bin:$HOME/bin:$HOME/.local/bin:/usr/local/heroku/bin

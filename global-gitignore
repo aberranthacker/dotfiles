@@ -20,6 +20,9 @@ tags.temp
 default.vim
 default.vim.lock
 
+# MattesGroeger/vim-bookmarks file
+.vim-bookmarks
+
 # IDA files
 *.idb
 *.id0
@@ -27,6 +30,9 @@ default.vim.lock
 *.nam
 *.til
 
+# run away if you hear "redmine"
 **/public/javascripts/redmine_extensions
 
 .gitattributes
+
+.kdev4

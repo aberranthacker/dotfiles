@@ -15,9 +15,9 @@ fi
 #------------------------------------------------------------
 if [ -d "$TPDEV" ]; then
     echo "Configuring Trackpoint"
-    echo -n 128     > $TPDEV/sensitivity     # Integer  128   Sensitivity
-    echo -n 97     > $TPDEV/speed           # Integer  97   Cursor speed
-    echo -n 6       > $TPDEV/inertia         # Integer  6   Negative intertia
+    echo -n 128 > $TPDEV/sensitivity     # Integer  128   Sensitivity
+    echo -n 97  > $TPDEV/speed           # Integer  97   Cursor speed
+    echo -n 6   > $TPDEV/inertia         # Integer  6   Negative intertia
 else
     echo "Couldn't find trackpoint device $TPDEV"
 fi

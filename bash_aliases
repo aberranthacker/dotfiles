@@ -1,10 +1,11 @@
 # Exa is an alternative for the ls command.
 alias ls='exa'
 # some more ls aliases
-# -a, --all -- do not ignore entries starting with .
-# -l -- use a long listing format
-# -F, --classify -- append indicator (one of */=>@|) to entries
-alias ll='ls -alF'
+# -a, --all       do not ignore entries starting with .
+# -l              use a long listing format
+# -F, --classify  append indicator (one of */=>@|) to entries
+# -b, --binary    list file sizes with binary prefixes
+alias ll='ls -alFb'
 # -A, --almost-all -- do not list implied . and ..
 #alias la='ls -A'
 alias la='ls -a'
@@ -18,16 +19,19 @@ alias ts='tmuxinator start'
 alias tns='trans -pager more --'
 alias csd='cap staging deploy'
 alias csr='cap staging puma:restart'
-alias gpu='git push'
 alias g='git'
+alias gadd='git add'
+alias gpu='git push'
+alias gco='git co'
 alias please='sudo'
 
-if [[ "$TERM" == *"xterm"* ]]; then
-  alias vim='vimx'
-fi
+# if [ -n "$DISPLAY" ]; then
+#   alias vim='vimx'
+# fi
 # else
 #   # do nothing
 # fi
+alias vim='nvim'
 
 alias erb='erb -U'
 

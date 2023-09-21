@@ -48,10 +48,10 @@ values."
      git
      javascript
      markdown
-     (mu4e :variables
-           mu4e-installation-path "/usr/local/share/emacs/site-lisp/mu4e")
+     ; (mu4e :variables
+     ;       mu4e-installation-path "/usr/local/share/emacs/site-lisp/mu4e")
      org
-     pdf-tools
+     ; pdf-tools
      plantuml
      ; ruby
      ; ruby-on-rails
@@ -65,7 +65,7 @@ values."
      sql
      syntax-checking
      themes-megapack
-     twitter
+     ; twitter
      version-control
      )
    ;; List of additional packages that will be installed without being
@@ -352,9 +352,11 @@ you should place your code here."
 
   ;; auto-save each hour
   (run-at-time "00:59" 3600 'org-save-all-org-buffers)
-  (define-globalized-minor-mode global-fci-mode
-    fci-mode (lambda () (fci-mode 1)))
-  (global-fci-mode 1)
+
+  (define-globalized-minor-mode global-display-fill-column-indicator-mode
+    display-fill-column-indicator-mode (lambda () (display-fill-column-indicator-mode 1)))
+  (global-display-fill-column-indicator-mode 1)
+
   ;; Open org link in a same window
   (setq org-link-frame-setup '((file . find-file)))
   (setq org-file-apps
@@ -579,3 +581,103 @@ static char *gnus-pointer[] = {
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
+ '(company-quickhelp-color-background "#4F4F4F")
+ '(company-quickhelp-color-foreground "#DCDCCC")
+ '(custom-safe-themes
+   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "2b9dc43b786e36f68a9fd4b36dd050509a0e32fe3b0a803310661edb7402b8b6" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" "1436d643b98844555d56c59c74004eb158dc85fc55d2e7205f8d9b8c860e177f" "585942bb24cab2d4b2f74977ac3ba6ddbd888e3776b9d2f993c5704aa8bb4739" "f27c3fcfb19bf38892bc6e72d0046af7a1ded81f54435f9d4d09b3bff9c52fc1" "c856158cc996d52e2f48190b02f6b6f26b7a9abd5fea0c6ffca6740a1003b333" default))
+ '(diary-entry-marker 'font-lock-variable-name-face)
+ '(emms-mode-line-icon-image-cache
+   '(image :type xpm :ascent center :data "/* XPM */
+static char *note[] = {
+/* width height num_colors chars_per_pixel */
+\"    10   11        2            1\",
+/* colors */
+\". c #1ba1a1\",
+\"# c None s None\",
+/* pixels */
+\"###...####\",
+\"###.#...##\",
+\"###.###...\",
+\"###.#####.\",
+\"###.#####.\",
+\"#...#####.\",
+\"....#####.\",
+\"#..######.\",
+\"#######...\",
+\"######....\",
+\"#######..#\" };"))
+ '(evil-want-Y-yank-to-eol nil)
+ '(gnus-logo-colors '("#4c8383" "#bababa") t)
+ '(gnus-mode-line-image-cache
+   '(image :type xpm :ascent center :data "/* XPM */
+static char *gnus-pointer[] = {
+/* width height num_colors chars_per_pixel */
+\"    18    13        2            1\",
+/* colors */
+\". c #1ba1a1\",
+\"# c None s None\",
+/* pixels */
+\"##################\",
+\"######..##..######\",
+\"#####........#####\",
+\"#.##.##..##...####\",
+\"#...####.###...##.\",
+\"#..###.######.....\",
+\"#####.########...#\",
+\"###########.######\",
+\"####.###.#..######\",
+\"######..###.######\",
+\"###....####.######\",
+\"###..######.######\",
+\"###########.######\" };") t)
+ '(menu-bar-mode nil)
+ '(nrepl-message-colors
+   '("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3"))
+ '(org-agenda-files '("~/org/projects/domclick/index.org"))
+ '(package-selected-packages
+   '(zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme django-theme darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-theme afternoon-theme clj-refactor edn paredit cider sesman clojure-snippets peg cider-eval-sexp-fu queue parseedn clojure-mode parseclj a yaml-mode lv transient sql-indent autothemer pdf-tools tablist treepy graphql zoom winum sudoku org-category-capture org-mime fuzzy ghub let-alist obsidian-theme zenburn-theme niflheim-theme ample-zen-theme alect-themes cyberpunk-theme rainbow-mode rainbow-identifiers color-identifiers-mode gruvbox-dark-medium-theme origami plantuml-mode org-trello twittering-mode projectile-rails inflections feature-mode pomidor mu4e-maildirs-extension mu4e-alert ht typit mmt pacmacs 2048-game web-mode web-beautify tagedit smeargle slim-mode scss-mode sass-mode pug-mode orgit mmm-mode markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode simple-httpd less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor emmet-mode diff-hl company-web web-completion-data company-tern dash-functional tern company-statistics company coffee-mode auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete gruvbox-theme org-projectile org-present org org-pomodoro alert log4e gntp org-download htmlize gnuplot rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme))
+ '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
+ '(tool-bar-mode nil)
+ '(vc-annotate-background "#3b3b3b")
+ '(vc-annotate-color-map
+   '((20 . "#dd5542")
+     (40 . "#CC5542")
+     (60 . "#fb8512")
+     (80 . "#baba36")
+     (100 . "#bdbc61")
+     (120 . "#7d7c61")
+     (140 . "#6abd50")
+     (160 . "#6aaf50")
+     (180 . "#6aa350")
+     (200 . "#6a9550")
+     (220 . "#6a8550")
+     (240 . "#6a7550")
+     (260 . "#9b55c3")
+     (280 . "#6CA0A3")
+     (300 . "#528fd1")
+     (320 . "#5180b3")
+     (340 . "#6380b3")
+     (360 . "#DC8CC3")))
+ '(vc-annotate-very-old-color "#DC8CC3")
+ '(warning-suppress-log-types '((comp) (comp)))
+ '(warning-suppress-types '((comp))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:background nil))))
+ '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
+)
