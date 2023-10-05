@@ -1,14 +1,8 @@
 -- vim.opt instead of set, vim.g instead of let
 
+
 -- NOTE: You should make sure your terminal supports this
 vim.opt.termguicolors = true -- use 24-bit colors
-vim.opt.background = 'dark'
--- https://github.com/morhetz/gruvbox/wiki/Terminal-specific
-vim.cmd('colorscheme gruvbox')
-vim.g.gruvbox_contrast_dark = 'medium'
-vim.g.gruvbox_contrast_light = 'hard'
-vim.g.gruvbox_italic = 1
-
 -- Basic settings --------------------------------------------------------------
 vim.opt.encoding = 'utf-8'
 vim.opt.fileformats = 'unix,dos,mac'
@@ -84,49 +78,3 @@ vim.opt.pastetoggle = '<F2>'  -- toggle pasting unmodified text from system clip
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus' -- use system clipboard
---------------------------------------------------------------------------------
--- Custom autocmds
--- :help autocmd-events
-local augroup = vim.api.nvim_create_augroup('vimrcEx', {clear = true})
-
-vim.api.nvim_create_autocmd('BufRead', {
-  pattern = '*.s',
-  group = augroup,
-  command = 'set fileformat=unix filetype=gas tabstop=8 expandtab shiftwidth=4 autoindent'
-})
-
-vim.api.nvim_create_autocmd('BufReadPost', {
-  desc = "Jump to last cursor position unless it's invalid or in an event handler",
-  pattern = '*',
-  group = augroup,
-  command = [[
-    if line("'\"") > 0 && line("'\"") <= line("$")
-      exe "normal g`\""
-    endif
-  ]]
-})
-
-
-vim.g.ale_fixers = {
-  ruby = {'rubocop'},
-  javascript = {'eslint'},
-}
--- let g:ale_linters = {
---             \'elixir': ['credo'],
---             \}
--- let g:ale_lint_on_text_changed = 'never'
--- " don't run linters on opening a file
--- let g:ale_lint_on_enter = 0
--- " Enable completion where available.
--- " This setting must be set before ALE is loaded.
--- let g:ale_completion_enabled = 0
--- " Set this. Airline will handle the rest.
--- let g:airline#extensions#ale#enabled = 1
-
--- vim-ruby-heredoc-syntax
-vim.g.ruby_heredoc_syntax_filetypes = {
-  sql = { start = "SQL", },
-  pgsql = { start = "PGSQL", },
-  javascript = { start = "JS", },
-  json = { start = "JSON", }
-}

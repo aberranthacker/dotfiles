@@ -1,28 +1,28 @@
-function map(mode, shortcut, command)
+local function map(mode, shortcut, command)
   vim.keymap.set(mode, shortcut, command, { remap = false, silent = false })
 end
 
-function noremap(shortcut, command) -- map
+local function noremap(shortcut, command) -- map
   map({'n', 'v', 's', 'o'}, shortcut, command)
 end
 
-function nnoremap(shortcut, command) -- nmap
+local function nnoremap(shortcut, command) -- nmap
   map('n', shortcut, command)
 end
 
-function inoremap(shortcut, command) -- imap
+local function inoremap(shortcut, command) -- imap
   map('i', shortcut, command)
 end
 
-function vnoremap(shortcut, command) -- vmap
+local function vnoremap(shortcut, command) -- vmap
   map('v', shortcut, command)
 end
 
-function cnoremap(shortcut, command) -- cmap
+local function cnoremap(shortcut, command) -- cmap
   map('c', shortcut, command)
 end
 
-function tnoremap(shortcut, command) -- tmap
+local function tnoremap(shortcut, command) -- tmap
   map('t', shortcut, command)
 end
 
@@ -36,9 +36,8 @@ noremap('Y', 'y$')
 vim.cmd('noremap <Leader>Q :qa!<CR>')
 
 -- Quicksave commnd
-noremap('<C-Z>', ':update<CR>')
-vnoremap('<C-Z>', '<C-C>:update<CR>')
-inoremap('<C-Z>', '<C-O>:update<CR>')
+vim.keymap.set({'n', 'v', 's', 'o'}, '<C-Z>', ':update<CR>', { remap = false })
+vim.keymap.set('i', '<C-Z>', '<C-O>:update<CR>', { remap = false })
 -- bind Ctrl+<movement> keys to move aroud the windows
 nnoremap('<C-j>', '<C-w>j')
 nnoremap('<C-k>', '<C-w>k')
@@ -70,6 +69,3 @@ noremap('<leader>v', ':view %%')
 
 -- Quick quit command, delete current buffer without window closing
 noremap('<Leader>q', ':Bdelete<CR>')
--- nvim-tree
---noremap('<BS>', ':NvimTreeToggle<cr>')
-noremap('<BS>', ':NvimTreeFindFile<cr>')

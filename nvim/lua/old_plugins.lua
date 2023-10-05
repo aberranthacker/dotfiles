@@ -1,0 +1,60 @@
+-- NOTE: Here is where you install your plugins.
+--  You can configure plugins using the `config` key.
+--
+--  You can also configure plugins after the setup call,
+--    as they will be available in your neovim runtime.
+--require('lazy').setup({
+  -- NOTE: This is where your plugins related to LSP can be installed.
+  --  The configuration is done below. Search for lspconfig to find it below.
+  --{
+  --   'tzachar/cmp-tabnine',
+  --   build = './install.sh',
+  --   dependencies = 'hrsh7th/nvim-cmp',
+  --   config = function()
+  --     local tabnine = require('cmp_tabnine.config')
+  --     tabnine:setup({
+  --       max_lines = 1000,
+  --       max_num_results = 20,
+  --       sort = true,
+  --       run_on_every_keystroke = true,
+  --       snippet_placeholder = '..',
+  --       ignored_file_types = {
+  --         -- default is not to ignore
+  --         -- uncomment to ignore in lua:
+  --         -- lua = true
+  --       },
+  --       show_prediction_strength = false
+  --     })
+  --   end
+  -- },
+
+  --{
+  --  'codota/tabnine-nvim',
+  --  run = "./dl_binaries.sh",
+  --  config = function()
+  --    require('tabnine').setup({
+  --      disable_auto_comment=true,
+  --      accept_keymap="<Tab>",
+  --      dismiss_keymap = "<C-]>",
+  --      debounce_ms = 800,
+  --      suggestion_color = {gui = "#808080", cterm = 244},
+  --      exclude_filetypes = {"TelescopePrompt", "NvimTree"},
+  --      log_file_path = nil, -- absolute path to Tabnine log file
+  --    })
+  --  end
+  --},
+
+  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
+  --       These are some example plugins that I've included in the kickstart repository.
+  --       Uncomment any of the lines below to enable them.
+  -- require 'kickstart.plugins.autoformat',
+  -- require 'kickstart.plugins.debug',
+
+  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+  --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
+  --    up-to-date with whatever is in the kickstart repo.
+  --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+  --
+  --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
+  -- { import = 'custom.plugins' },
+--}, {})
