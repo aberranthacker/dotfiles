@@ -26,80 +26,72 @@ set hidden "
 set autoread " Autoread files modified outside of VIM
 
 let mapleader=" " "change the mapleader from \ to Spc
-" Vundle config {{{
-filetype off                  " Vundle required
+" Plugins config {{{
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Make sure you use single quotes
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
-" UltiSnips - The ultimate snippet solution for Vim.
-" Plugin 'SirVer/ultisnips'
-" vim-snipmate default snippets (Previously snipmate-snippets)
-" Plugin 'honza/vim-snippets'
+"if has('nvim')
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+"let g:deoplete#enable_at_startup = 1
+"
+"Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+"Plug 'codota/tabnine-nvim', { 'do': './dl_binaries.sh' }
 
 " Extended session management for Vim (:mksession on steroids)
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 
 " continuously updated session files
-Plugin 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'
 
 " Bbye allows you to do delete buffers (close files) without closing your
 " windows or messing up your layout.
-Plugin 'olegtc/vim-bbye'
+Plug 'olegtc/vim-bbye'
 
 " Colorschemes
 " Retro groove color scheme for Vim
-Plugin 'gruvbox-community/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 "
-Plugin 'rafi/awesome-vim-colorschemes'
+Plug 'rafi/awesome-vim-colorschemes'
 "
-Plugin 'xolox/vim-colorscheme-switcher'
+Plug 'xolox/vim-colorscheme-switcher'
 
 " lean & mean status/tabline for vim that's light as air
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Fuzzy file, buffer, mru, tag, etc finder.
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " A tree explorer plugin for vim.
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " combine with netrw to create a delicious salad dressing
-" Plugin 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 " a Git wrapper so awesome, it should be illegal
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " use CTRL-A/CTRL-X to increment dates, times, and more
-Plugin 'tpope/vim-speeddating'
+Plug 'tpope/vim-speeddating'
 
 " Run your tests at the speed of thought
-Plugin 'janko-m/vim-test'
+Plug 'janko-m/vim-test'
 
 " Vim sugar for the UNIX shell commands that need it the most.
-Plugin 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'
 
 " Abbreviation
 "
@@ -112,7 +104,7 @@ Plugin 'tpope/vim-eunuch'
 " dash-case (cr-), dot.case (cr.), space case (cr<space>),
 " and Title Case (crt) are all just 3 keystrokes away.
 " https://github.com/tpope/vim-abolish
-Plugin 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish'
 
 " If you've ever tried using the . command after a plugin map, you were likely
 " disappointed to discover it only repeated the last native command inside that
@@ -120,112 +112,110 @@ Plugin 'tpope/vim-abolish'
 " That disappointment ends today.
 " Repeat.vim remaps . in a way that plugins can tap into it.
 " https://github.com/tpope/vim-repeat
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " Seamless switching between VIM windows and Tmux panes
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 " Send command from vim to a running tmux session
-Plugin 'jgdavey/tslime.vim'
+Plug 'jgdavey/tslime.vim'
 
 " A Personal Wiki For Vim
-Plugin 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 
 " Text outlining and task management for Vim based on Emacs' Org-Mode
-Plugin 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode'
 
 " An ack.vim alternative mimics Ctrl-Shift-F on Sublime Text 2
 " https://github.com/dyng/ctrlsf.vim
-Plugin 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
 
 " Jump to any definition and references 👁 IDE madness without overhead 🚀
-Plugin 'pechorin/any-jump.vim'
+Plug 'pechorin/any-jump.vim'
 
 " Asynchronous Lint Engine
-Plugin 'w0rp/ale'
+Plug 'w0rp/ale'
 
 " A Vim plugin that manages your tag files bolt80.com/gutentags
-Plugin 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 " Arduino IDE intregation for vim.
-Plugin '4Evergreen4/vim-hardy'
+Plug '4Evergreen4/vim-hardy'
 
 " Syntax highlighting for GNU Octave
-Plugin 'jvirtanen/vim-octave'
+Plug 'jvirtanen/vim-octave'
 
 " Vim/Ruby Configuration Files
-Plugin 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby'
 
 " Ruby on Rails power tools
-Plugin 'tpope/vim-rails'
+Plug 'tpope/vim-rails'
 
 " vim plugin for highliting code in ruby here document
-Plugin 'joker1007/vim-ruby-heredoc-syntax'
+Plug 'joker1007/vim-ruby-heredoc-syntax'
 
 " Syntax Highlight for Vue.js components
-Plugin 'posva/vim-vue'
+Plug 'posva/vim-vue'
 
 " CoffeeScript support for vim
-Plugin 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 
 " Slim syntax highlighting for vim.
-Plugin 'slim-template/vim-slim'
+Plug 'slim-template/vim-slim'
 
 " Vastly improved Javascript indentation and syntax support in Vim.
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
 " React JSX syntax highlighting and indenting for vim.
-Plugin 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx'
 
 " List of JavaScript ES6 snippets and syntax highlighting for vim.
-Plugin 'isRuslan/vim-es6'
+Plug 'isRuslan/vim-es6'
 
 " Superior Lisp Interaction Mode for Vim ("SLIME for Vim")
-Plugin 'kovisoft/slimv'
+Plug 'kovisoft/slimv'
 
 " Improved nginx vim plugin (incl. syntax highlighting)
-Plugin 'chr4/nginx.vim'
+Plug 'chr4/nginx.vim'
 
 " Syntax for PDP11-40 assembly
-Plugin 'olegtc/asmpdp11'
+Plug 'olegtc/asmpdp11'
 
 " PDP11 syntax for GNU assembler
-Plugin 'aberranth/vim-gas-pdp11'
+Plug 'aberranth/vim-gas-pdp11'
 
 " Syntax for Z80 assembly
-Plugin 'cpcsdk/vim-z80-democoding'
+Plug 'cpcsdk/vim-z80-democoding'
 
 " The best PostgreSQL plugin for Vim!
-Plugin 'lifepillar/pgsql.vim'
+Plug 'lifepillar/pgsql.vim'
 
 " Vim configuration files for Elixir
-"Plugin 'elixir-editors/vim-elixir'
+"Plug 'elixir-editors/vim-elixir'
 
 " rails.vim inspired tools for Phoenix
-Plugin 'c-brenn/phoenix.vim'
+Plug 'c-brenn/phoenix.vim'
 
 " Projectionist provides granular project configuration using "projections".
-Plugin 'tpope/vim-projectionist'
+Plug 'tpope/vim-projectionist'
 
 " A vim plugin that simplifies the transition between multiline and single-line
 " code
-Plugin 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 " Change an HTML(ish) opening tag and take the closing one along as well
-" Plugin 'AndrewRadev/tagalong.vim'
+" Plug 'AndrewRadev/tagalong.vim'
 " A simple Vim plugin to switch segments of text with predefined replacements
-" Plugin 'AndrewRadev/switch.vim'
+" Plug 'AndrewRadev/switch.vim'
 " A Vim plugin to move function arguments (and other delimited-by-something
 " items) left and right
-" Plugin 'AndrewRadev/sideways.vim'
+" Plug 'AndrewRadev/sideways.vim'
 
 " Visualize your undo tree
-Plugin 'mbbill/undotree'
-
-"Plugin 'tabnine/YouCompleteMe'
+Plug 'mbbill/undotree'
 
 " Dadbod is a Vim plugin for interacting with databases.
 " It's a more modern take on dbext.vim, improving on it.
-Plugin 'tpope/vim-dadbod'
+Plug 'tpope/vim-dadbod'
 
 " This vim plugin allows toggling bookmarks per line.
 " A quickfix window gives access to all bookmarks.
@@ -233,7 +223,7 @@ Plugin 'tpope/vim-dadbod'
 " They are useful for preparing code reviews.
 " All bookmarks will be restored on the next startup.
 " https://github.com/MattesGroeger/vim-bookmarks
-Plugin 'MattesGroeger/vim-bookmarks' 
+Plug 'MattesGroeger/vim-bookmarks' 
 let g:bookmark_no_default_key_mappings = 1
 let g:bookmark_save_per_working_dir = 1
 function! BookmarkMapKeys()
@@ -261,8 +251,8 @@ endfunction
 autocmd BufEnter * :call BookmarkMapKeys()
 autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 
-" Plugin for the Pomodoro time management technique.
-Plugin 'tricktux/pomodoro.vim'
+" Plug for the Pomodoro time management technique.
+Plug 'tricktux/pomodoro.vim'
 " Duration of a pomodoro in minutes (default: 25)
 let g:pomodoro_time_work = 25
 " Duration of a break in minutes (default: 5)
@@ -274,18 +264,19 @@ let g:pomodoro_log_file = "/home/random/pomodoro.log"
 let g:pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
 
 " Maximizes and restores the current window in Vim.
-Plugin  'szw/vim-maximizer'
+Plug  'szw/vim-maximizer'
 
 " Many people follow the convention of writing SQL keywords in upper case.
 " Few people enjoy using shift or caps lock to do it.
 " This plugin fixes that.
-Plugin 'jsborjesson/vim-uppercase-sql'
+Plug 'jsborjesson/vim-uppercase-sql'
 " ------------------------------------------------------------------------------
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
+" You can revert the settings after the call like so:
+"   filetype indent off   " Disable file-type-specific indentation
+"   syntax off            " Disable syntax highlighting
 " }}}
 
 " detect OS {{{
@@ -830,6 +821,7 @@ elseif executable('rg')
     let g:ackprg = 'rg --vimgrep'
 endif
 " }}}
+"
 " tslime {{{
 let g:tslime_always_current_session = 1
 let g:tslime_always_current_window = 1
@@ -906,9 +898,6 @@ map <Leader>a :TestSuite<CR>
 let g:vue_disable_pre_processors=0
 autocmd FileType vue syntax sync fromstart
 " }}}
-" vim-xkbdswitch {{{
-" let g:XkbSwitchLib = '/usr/local/lib/libInputSourceSwitcher.dylib'
-" }}}
 "{{{ VimWiki
 autocmd FileType vimwiki setlocal nowrap spell
 let wiki = {}
@@ -931,14 +920,6 @@ let g:vimwiki_dir_link = 'index'
 " 'list'   Folding based on expression (folds list subitems; much slower).
 let g:vimwiki_folding = 'list'
 "}}}
-" ultisnips {{{
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-" }}}
 
 set history=1000    " remember more commands and search history
 set undolevels=1000 " use many muchos levels of undo
