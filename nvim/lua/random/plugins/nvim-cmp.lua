@@ -2,37 +2,40 @@ return {
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     dependencies = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
+      'hrsh7th/cmp-buffer', -- completion source for text in buffer
+      'hrsh7th/cmp-path', -- completions source for file system paths
+      'L3MON4D3/LuaSnip', -- Snippet Engine & its associated nvim-cmp source
+      'saadparwaiz1/cmp_luasnip', -- completion source for the snippets
+      'rafamadriz/friendly-snippets', -- Adds a number of user-friendly snippets
+      'delphinus/cmp-ctags', -- Universal Ctags source
     },
     config = function()
       -- [[ Configure nvim-cmp ]]
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
       require('luasnip.loaders.from_vscode').lazy_load()
       luasnip.config.setup {}
 
       cmp.setup {
-        snippet = {
+        completion = {
+          completeops = 'menu,menuone,preview,noselect', -- :h completeops
+        },
+        snippet = { -- configure how nvim-cmp interacts with snippet engine
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
         mapping = cmp.mapping.preset.insert {
-          ['<C-n>'] = cmp.mapping.select_next_item(),
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
-          ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-k>'] = cmp.mapping.select_prev_item(), -- previous suggestion
+          ['<C-j>'] = cmp.mapping.select_next_item(), -- next suggestion
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete {},
+          ['<C-Space>'] = cmp.mapping.complete {}, -- show completion suggestions
+          ['<C-e>'] = cmp.mapping.abort(), -- close completion window
           ['<CR>'] = cmp.mapping.confirm {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
@@ -56,10 +59,28 @@ return {
             end
           end, { 'i', 's' }),
         },
-        sources = {
+        sources = { -- sources for autocompletion
+          -- suggestions will be shown in the order below
+          {
+            name = 'ctags',
+            options = {
+              trigger_characters = { '.' },
+              trigger_characters_ft = {
+                ruby = { '.', '::' }
+              }
+            }
+          },
           { name = 'nvim_lsp' }, -- LSP
           { name = 'luasnip' }, -- snippets
-          { name = 'buffer' }, -- text within current buffer
+          {
+            name = 'buffer',
+            option = {
+              get_bufnrs = function()
+                -- return vim.api.nvim_get_current_buf() -- default, current buffer as source
+                return vim.api.nvim_list_bufs() -- but we want all buffers as source
+              end
+            }
+          },
           { name = 'path' }, -- file system paths
         },
       }

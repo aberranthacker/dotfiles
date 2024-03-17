@@ -11,7 +11,6 @@ vim.opt.spelllang = 'en,ru'
 vim.opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖЭБЮ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:"<>,' ..
                   "фисвуапршолдьтщзйкыегмцчняхъжэбю;abcdefghijklmnopqrstuvwxyz[];'\\,."
 vim.opt.backspace = 'indent,eol,start' -- backspace works on every char in insert mode
-vim.opt.completeopt = 'menuone,noselect' -- Set completeopt to have a better completion experience
 vim.opt.history = 1000
 vim.opt.undolevels = 1000 -- use many muchos levels of undo
 --vim.opt.dictionary = '/usr/share/dict/words'
@@ -78,3 +77,8 @@ vim.opt.pastetoggle = '<F2>'  -- toggle pasting unmodified text from system clip
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus' -- use system clipboard
+
+-- Disable backup and swap files
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.swapfile = false

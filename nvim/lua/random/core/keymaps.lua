@@ -1,5 +1,16 @@
+-- n Normal
+-- i Insert
+-- c Command-line
+-- v Visual
+-- s Select
+-- o Operator-pending
+-- t Terminal
+-- l Lang-Arg
+-- :h map-table
+local keymap = vim.keymap
+
 local function map(mode, shortcut, command)
-  vim.keymap.set(mode, shortcut, command, { remap = false, silent = false })
+  keymap.set(mode, shortcut, command, { remap = false, silent = false })
 end
 
 local function noremap(shortcut, command) -- map
@@ -36,8 +47,9 @@ noremap('Y', 'y$')
 vim.cmd('noremap <Leader>Q :qa!<CR>')
 
 -- Quicksave commnd
-vim.keymap.set({'n', 'v', 's', 'o'}, '<C-Z>', ':update<CR>', { remap = false })
-vim.keymap.set('i', '<C-Z>', '<C-O>:update<CR>', { remap = false })
+keymap.set({'n', 'v', 's', 'o'}, '<C-Z>', ':update<CR>', { remap = false })
+keymap.set('i', '<C-Z>', '<C-O>:update<CR>', { remap = false })
+
 -- bind Ctrl+<movement> keys to move aroud the windows
 nnoremap('<C-j>', '<C-w>j')
 nnoremap('<C-k>', '<C-w>k')
@@ -56,8 +68,8 @@ nnoremap('gf', 'gF')
 nnoremap('gF', 'gf')
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Open files in directory of current file
 --vim.keymap.set('c', '%%', "<C-R>=expand('%:h').'/'<cr>", { remap = false, silent = false })
@@ -65,7 +77,20 @@ cnoremap('%%', "<C-R>=expand('%:h').'/'<cr>")
 noremap('<leader>e', ':edit %%')
 noremap('<leader>v', ':view %%')
 
+-- easier moving between tabs
+noremap('<Leader>n', '<esc>:tabprevious<CR>')
+noremap('<Leader>m', '<esc>:tabnext<CR>')
+
+-- make F1 to act as Esc
+vim.keymap.set({'n', 'v', 's', 'o', 'i'}, '<F1>', '<Esc>', { remap = false })
+
+-- F9 toggles showing non-printable characters
+noremap('<F9>', ':set list!<CR>')
+inoremap('<F9>', '<Esc>:set list!<CR>a')
+
 -- PLUGINS
 
 -- Quick quit command, delete current buffer without window closing
 noremap('<Leader>q', ':Bdelete<CR>')
+
+noremap('<leader>p', ':%DB postgresql://redmine@localhost/redmine_mii<CR>')

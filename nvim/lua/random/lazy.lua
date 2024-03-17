@@ -17,6 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup(
   {
     { import = 'random.plugins' },
+    { import = 'random.plugins.lsp' },
   },
   {
     checker = {

@@ -173,11 +173,6 @@ augroup END " }}}
 
 " Keymaps {{{
 "
-" Resize windows using arrow keys
-nnoremap <Up>    :resize +2<CR>
-nnoremap <Down>  :resize -2<CR>
-nnoremap <Left>  :vertical resize +2<CR>
-nnoremap <Right> :vertical resize -2<CR>
 " Show next matched string at the center of screen
 nnoremap n nzz
 nnoremap N Nzz
@@ -186,11 +181,6 @@ nnoremap gf gF
 nnoremap gF gf
 
 map <leader>w :%s/\v\s+$//g<CR>
-" " we want very magic regexp by default, but we don't want to break plugings by
-" " 'set nomagic'
-" nnoremap / /\v
-" " cnoremap %s/ %s/\v
-" cnoremap %s %s/\v
 
 if g:os == "Darwin"
   map <leader>c :w !pbcopy<CR><CR>
@@ -207,21 +197,7 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 
-" make F1 to act as Esc
-noremap <F1> <Esc>
-vnoremap <F1> <Esc>
-inoremap <F1> <Esc>
-
 nnoremap <F5> :UndotreeToggle<CR>
-
-" F8 toggles showing non-printable characters
-noremap <F9> :set list!<CR>
-inoremap <F9> <Esc>:set list!<CR>a
-
-
-" easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
 
 " For local replace
 nnoremap gr gd[{V%:s/<C-R>///gc<left><left><left>
@@ -232,12 +208,6 @@ nnoremap gR gD:%s/<C-R>///gc<left><left><left>
 "open .vimrc using \v
 map \v :next $MYVIMRC<CR>
 "}}}
-
-" Disable backup and swap files {{{
-set nobackup
-set nowritebackup
-set noswapfile
-" }}}
 
 " autocompletion {{{
 " use Tab key for autocompletion

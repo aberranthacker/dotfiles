@@ -63,6 +63,8 @@ return   {
               ['ia'] = '@parameter.inner',
               ['af'] = '@function.outer',
               ['if'] = '@function.inner',
+              ['am'] = '@function.outer',
+              ['im'] = '@function.inner',
               ['ac'] = '@class.outer',
               ['ic'] = '@class.inner',
             },

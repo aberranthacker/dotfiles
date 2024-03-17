@@ -4,6 +4,7 @@ return {
   'nvim-telescope/telescope.nvim',
   branch = '0.1.x',
   dependencies = {
+    'nvim-tree/nvim-web-devicons',
     'nvim-lua/plenary.nvim',
     -- Fuzzy Finder Algorithm which requires local dependencies to be built.
     -- Only load if `make` is available. Make sure you have the system
@@ -16,40 +17,57 @@ return {
       cond = function()
         return vim.fn.executable 'make' == 1
       end,
-      config = function()
-        require('telescope').setup {
-          defaults = {
-            mappings = {
-              i = {
-                ['<C-u>'] = false,
-                ['<C-d>'] = false,
-              },
-            },
-          },
-        }
-
-        -- Enable telescope fzf native, if installed
-        pcall(require('telescope').load_extension, 'fzf')
-
-        -- See `:help telescope.builtin`
-        vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-        vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-        vim.keymap.set('n', '<leader>/', function()
-          -- You can pass additional configuration to telescope to change theme, layout, etc.
-          require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-            winblend = 10,
-            previewer = false,
-          })
-        end, { desc = '[/] Fuzzily search in current buffer' })
-
-        vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-        vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-        vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-        vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-        vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-        vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-        vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-      end
     },
   },
+  config = function()
+    local telescope = require('telescope')
+    local actions = require('telescope.actions')
+
+    telescope.setup({
+      defaults = {
+        mappings = {
+          -- insert mode
+          i = {
+            -- move to prev result
+            ['<C-k>'] = actions.move_selection_previous,
+            -- move to next result
+            ['<C-j>'] = actions.move_selection_next,
+            -- send selected result to quick-fix list
+            ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
+            ['<C-u>'] = false,
+            ['<C-d>'] = false,
+          }
+        },
+        path_display = { -- :h telescope.defaults.path_display
+          -- truncates the start of the path when the whole path will
+          truncate = true,
+        }
+      }
+    })
+
+    -- Enable telescope fzf native
+    telescope.load_extension('fzf')
+
+    local builtin = require 'telescope.builtin'
+
+    -- See `:help telescope.builtin`
+    vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Search [F]iles' })
+    vim.keymap.set('n', '<leader>r', builtin.oldfiles, { desc = 'Find [R]ecently opened files' })
+    vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Find existing [B]uffers' })
+    vim.keymap.set('n', '<leader>/', function()
+      -- You can pass additional configuration to telescope to change theme, layout, etc.
+      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+        winblend = 10,
+        previewer = false,
+      })
+    end, { desc = '[/] Fuzzily search in current buffer' })
+
+    vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [G]it [F]iles' })
+    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+    -- Opens the previous picker in the identical state (incl. multi selections)
+    vim.keymap.set('n', '<leader>sp', builtin.resume, { desc = '[S]earch [P]revious' })
+  end
 }

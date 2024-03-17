@@ -1,6 +1,6 @@
 ---- Custom autocmds
 -- :help autocmd-events
-local augroup = vim.api.nvim_create_augroup('vimrcEx', {clear = true})
+local augroup = vim.api.nvim_create_augroup('vimrcEx', { clear = true })
 
 vim.api.nvim_create_autocmd('BufRead', {
   pattern = '*.s',

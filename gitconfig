@@ -4,8 +4,9 @@
 [color]
     ui = auto
 [core]
-    editor = /usr/bin/vim
+    editor = vim
     excludesfile = ~/.gitignore
+	pager = delta
 [alias]
     yolo = !(git add -A && git commit -m \"$(curl -s whatthecommit.com/index.txt)\")
     y = !(git add -A && git commit -m \"🚧 state at $(date '+%Y-%m-%d %H:%M:%S')\" && git pull --rebase && git push && echo "" && git log -1 --stat) || git pull --rebase && git push
