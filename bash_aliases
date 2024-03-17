@@ -1,5 +1,5 @@
-# Exa is an alternative for the ls command.
-alias ls='exa'
+# Eza is an alternative for the ls command.
+alias ls='eza'
 # some more ls aliases
 # -a, --all       do not ignore entries starting with .
 # -l              use a long listing format
@@ -13,7 +13,7 @@ alias la='ls -a'
 # -F, --classify -- append indicator (one of */=>@|) to entries
 alias l='ls -CF'
 
-alias rg='rg --smart-case'
+alias rg='clear; rg --smart-case'
 alias spotify='spotify --force-device-scale-factor=2'
 alias ts='tmuxinator start'
 alias tns='trans -pager more --'
