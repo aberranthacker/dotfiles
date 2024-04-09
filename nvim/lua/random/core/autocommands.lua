@@ -8,6 +8,15 @@ vim.api.nvim_create_autocmd('BufRead', {
   command = 'set fileformat=unix filetype=gas tabstop=8 expandtab shiftwidth=4 autoindent'
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.expandtab = false -- Use actual tab characters
+    vim.opt_local.tabstop = 4       -- Tab character width
+    vim.opt_local.shiftwidth = 4    -- Indentation level width
+  end
+})
+
 vim.api.nvim_create_autocmd('BufReadPost', {
   desc = "Jump to last cursor position unless it's invalid or in an event handler",
   pattern = '*',

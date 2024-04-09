@@ -78,8 +78,8 @@ noremap('<leader>e', ':edit %%')
 noremap('<leader>v', ':view %%')
 
 -- easier moving between tabs
-noremap('<Leader>n', '<esc>:tabprevious<CR>')
-noremap('<Leader>m', '<esc>:tabnext<CR>')
+-- noremap('<Leader>n', '<esc>:tabprevious<CR>')
+-- noremap('<Leader>m', '<esc>:tabnext<CR>')
 
 -- make F1 to act as Esc
 vim.keymap.set({'n', 'v', 's', 'o', 'i'}, '<F1>', '<Esc>', { remap = false })

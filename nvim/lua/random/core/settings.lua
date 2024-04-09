@@ -1,5 +1,6 @@
--- vim.opt instead of set, vim.g instead of let
-
+--------------------------------------------------------------------------------
+-- use vim.opt instead of set, vim.g instead of let
+--------------------------------------------------------------------------------
 
 -- NOTE: You should make sure your terminal supports this
 vim.opt.termguicolors = true -- use 24-bit colors

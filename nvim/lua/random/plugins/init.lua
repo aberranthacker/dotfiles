@@ -78,6 +78,14 @@ return {
   -- provides extended matching for the % operator
   'adelarsq/vim-matchit' ,
 
+  -- This plugin is meant to simplify a task I've found too common in my workflow:
+  -- switching between a single-line statement and a multi-line one.
+  -- It offers the following default keybindings, which can be customized:
+  --   - gS to split a one-liner into multiple lines
+  --   - gJ (with the cursor on the first line of a block) to join a block into a
+  --        single-line statement.
+  'AndrewRadev/splitjoin.vim',
+
   -- ruby
   { 'vim-ruby/vim-ruby', ft = 'ruby' },
   { 'ecomba/vim-ruby-refactoring', ft = 'ruby', dependencies = { 'adelarsq/vim-matchit' } },
