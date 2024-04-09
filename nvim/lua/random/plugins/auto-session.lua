@@ -1,19 +1,22 @@
 return  {
   'rmagatti/auto-session',
-  opts = {
-    log_level = 'error', -- default: info, options: 'debug', 'info', 'error'
-    auto_session_suppress_dirs = {'~/', '~/Downloads', '/'},
-  },
   config = function()
-    local auto_session = require 'auto-session'
+    local auto_session = require('auto-session')
+    local minutes = 60000
 
-    -- Save session every 5 minutes
-    local function save_session_periodically()
-      auto_session.AutoSaveSession()
-    end
+    auto_session.setup {
+      log_level = 'error', -- default: info, options: 'debug', 'info', 'error'
+      auto_session_suppress_dirs = {'~/', '~/Downloads', '/'},
+    }
 
     vim.defer_fn(function()
-      vim.fn.timer_start(5 * 60 * 1000, save_session_periodically, {['repeat'] = -1})
-    end, 0)
+      vim.fn.timer_start(
+        1 * minutes,
+        function()
+          auto_session.SaveSession()
+        end,
+        {['repeat'] = -1}
+      )
+    end, 1000)
   end
 }
