@@ -15,6 +15,6 @@ vim.g.loaded_perl_provider = 0
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-require 'random.core.settings'
-require 'random.core.keymaps'
-require 'random.core.autocommands'
+require('random.core.settings')
+require('random.core.keymaps')
+require('random.core.autocommands')

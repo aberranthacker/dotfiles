@@ -14,13 +14,13 @@ return {
     config = function()
       -- [[ Configure nvim-cmp ]]
       -- See `:help cmp`
-      local cmp = require 'cmp'
-      local luasnip = require 'luasnip'
+      local cmp = require('cmp')
+      local luasnip = require('luasnip')
       -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
       require('luasnip.loaders.from_vscode').lazy_load()
-      luasnip.config.setup {}
+      luasnip.config.setup({})
 
-      cmp.setup {
+      cmp.setup({
         completion = {
           completeops = 'menu,menuone,preview,noselect', -- :h completeops
         },
@@ -29,17 +29,17 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
-        mapping = cmp.mapping.preset.insert {
+        mapping = cmp.mapping.preset.insert({
           ['<C-k>'] = cmp.mapping.select_prev_item(), -- previous suggestion
           ['<C-j>'] = cmp.mapping.select_next_item(), -- next suggestion
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete {}, -- show completion suggestions
+          ['<C-Space>'] = cmp.mapping.complete({}), -- show completion suggestions
           ['<C-e>'] = cmp.mapping.abort(), -- close completion window
-          ['<CR>'] = cmp.mapping.confirm {
+          ['<CR>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
-          },
+          }),
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -58,7 +58,7 @@ return {
               fallback()
             end
           end, { 'i', 's' }),
-        },
+        }),
         sources = { -- sources for autocompletion
           -- suggestions will be shown in the order below
           {
@@ -66,9 +66,9 @@ return {
             options = {
               trigger_characters = { '.' },
               trigger_characters_ft = {
-                ruby = { '.', '::' }
-              }
-            }
+                ruby = { '.', '::' },
+              },
+            },
           },
           { name = 'nvim_lsp' }, -- LSP
           { name = 'luasnip' }, -- snippets
@@ -78,12 +78,12 @@ return {
               get_bufnrs = function()
                 -- return vim.api.nvim_get_current_buf() -- default, current buffer as source
                 return vim.api.nvim_list_bufs() -- but we want all buffers as source
-              end
-            }
+              end,
+            },
           },
           { name = 'path' }, -- file system paths
         },
-      }
-    end
+      })
+    end,
   },
 }

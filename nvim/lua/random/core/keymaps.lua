@@ -14,7 +14,7 @@ local function map(mode, shortcut, command)
 end
 
 local function noremap(shortcut, command) -- map
-  map({'n', 'v', 's', 'o'}, shortcut, command)
+  map({ 'n', 'v', 's', 'o' }, shortcut, command)
 end
 
 local function nnoremap(shortcut, command) -- nmap
@@ -47,10 +47,10 @@ noremap('Y', 'y$')
 vim.cmd('noremap <Leader>Q :qa!<CR>')
 
 -- Quicksave commnd
-keymap.set({'n', 'v', 's', 'o'}, '<C-Z>', ':update<CR>', { remap = false })
+keymap.set({ 'n', 'v', 's', 'o' }, '<C-Z>', ':update<CR>', { remap = false })
 keymap.set('i', '<C-Z>', '<C-O>:update<CR>', { remap = false })
 
-keymap.set({'n', 'v', 's', 'o'}, '<C-S>', ':update<CR>', { remap = false })
+keymap.set({ 'n', 'v', 's', 'o' }, '<C-S>', ':update<CR>', { remap = false })
 keymap.set('i', '<C-S>', '<C-O>:update<CR>', { remap = false })
 
 -- bind Ctrl+<movement> keys to move aroud the windows
@@ -59,9 +59,9 @@ nnoremap('<C-k>', '<C-w>k')
 nnoremap('<C-l>', '<C-w>l')
 nnoremap('<C-h>', '<C-w>h')
 -- Resize windows using arrow keys
-nnoremap('<Up>',    ':resize +2<CR>')
-nnoremap('<Down>',  ':resize -2<CR>')
-nnoremap('<Left>',  ':vertical resize +2<CR>')
+nnoremap('<Up>', ':resize +2<CR>')
+nnoremap('<Down>', ':resize -2<CR>')
+nnoremap('<Left>', ':vertical resize +2<CR>')
 nnoremap('<Right>', ':vertical resize -2<CR>')
 -- Show next matched string at the center of screen
 nnoremap('n', 'nzz')
@@ -83,9 +83,6 @@ noremap('<leader>v', ':view %%')
 -- easier moving between tabs
 -- noremap('<Leader>n', '<esc>:tabprevious<CR>')
 -- noremap('<Leader>m', '<esc>:tabnext<CR>')
-
--- make F1 to act as Esc
-vim.keymap.set({'n', 'v', 's', 'o', 'i'}, '<F1>', '<Esc>', { remap = false })
 
 -- F9 toggles showing non-printable characters
 noremap('<F9>', ':set list!<CR>')

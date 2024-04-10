@@ -1,8 +1,9 @@
-return   {
+return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    'windwp/nvim-ts-autotag',
   },
   build = ':TSUpdate',
   config = function()
@@ -10,7 +11,7 @@ return   {
     -- See `:help nvim-treesitter`
     -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
     vim.defer_fn(function()
-      require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter.configs').setup({
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = {
           'bash',
@@ -40,17 +41,18 @@ return   {
         },
 
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-        auto_install = false,
+        auto_install = true,
 
         highlight = { enable = true },
         indent = { enable = true },
+        autotag = { enable = true }, -- enable autotagging (with nvim-ts-autotag plugin)
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = '<c-space>',
-            node_incremental = '<c-space>',
-            scope_incremental = '<c-s>',
-            node_decremental = '<M-space>',
+            init_selection = '<C-Space>',
+            node_incremental = '<C-Space>',
+            scope_incremental = false,
+            node_decremental = '<C-S-space>',
           },
         },
         textobjects = {
@@ -99,7 +101,7 @@ return   {
             },
           },
         },
-      }
+      })
     end, 0)
-  end
+  end,
 }

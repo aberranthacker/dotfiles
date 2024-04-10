@@ -5,7 +5,7 @@ return {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      local nvimtree = require 'nvim-tree'
+      local nvimtree = require('nvim-tree')
 
       -- recommended setting from nvim-tree documentation
       vim.g.loaded_netrw = 1
@@ -15,7 +15,7 @@ return {
       vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
 
       local function on_attach(bufnr)
-        local api = require 'nvim-tree.api'
+        local api = require('nvim-tree.api')
         -- use all default keymappings
         api.config.mappings.default_on_attach(bufnr)
         -- then remove some of the nvim-tree default keymappings
@@ -40,28 +40,28 @@ return {
               bookmarks = true,
             },
             glyphs = {
-              default = "",
-              symlink = "",
-              bookmark = "󰆤",
-              modified = "●",
+              default = '',
+              symlink = '',
+              bookmark = '󰆤',
+              modified = '●',
               folder = {
-                arrow_closed = "▸",
-                arrow_open = "▾",
-                default = "",
-                open = "",
-                empty = "",
-                empty_open = "",
-                symlink = "",
-                symlink_open = "",
+                arrow_closed = '▸',
+                arrow_open = '▾',
+                default = '',
+                open = '',
+                empty = '',
+                empty_open = '',
+                symlink = '',
+                symlink_open = '',
               },
               git = {
-                unstaged = "✗",
-                staged = "✓",
-                unmerged = "",
-                renamed = "➜",
-                untracked = "★",
-                deleted = "-",
-                ignored = "◌",
+                unstaged = '✗',
+                staged = '✓',
+                unmerged = '',
+                renamed = '➜',
+                untracked = '★',
+                deleted = '-',
+                ignored = '◌',
               },
             },
           },
@@ -92,6 +92,6 @@ return {
       })
       -- set keymaps
       vim.keymap.set('n', '<BS>', '<cmd>NvimTreeFocus<cr>')
-    end
+    end,
   },
 }

@@ -1,9 +1,9 @@
 --------------------------------------------------------------------------------
 -- use vim.opt instead of set, vim.g instead of let
 --------------------------------------------------------------------------------
-
 -- NOTE: You should make sure your terminal supports this
 vim.opt.termguicolors = true -- use 24-bit colors
+-- stylua: ignore start
 -- Basic settings --------------------------------------------------------------
 vim.opt.encoding = 'utf-8'
 vim.opt.fileformats = 'unix,dos,mac'
@@ -17,7 +17,7 @@ vim.opt.undolevels = 1000 -- use many muchos levels of undo
 --vim.opt.dictionary = '/usr/share/dict/words'
 vim.opt.startofline = true
 -- characters to show for non-printable characters
-vim.opt.listchars='eol:$,tab:>-,trail:.,nbsp:_,extends:+,precedes:+'
+vim.opt.listchars = 'eol:$,tab:>-,trail:.,nbsp:_,extends:+,precedes:+'
 --------------------------------------------------------------------------------
 -- Search ----------------------------------------------------------------------
 vim.opt.ignorecase = true -- ignore case when searching UNLESS \C or capital in search
@@ -33,7 +33,7 @@ vim.opt.synmaxcol = 300  -- stop syntax highlight after x lines for performance
 vim.opt.foldmethod = 'marker' -- use language syntax to generate folds
 vim.opt.foldlevel = 4  -- limit folding to 4 levels
 vim.opt.wrap = false   -- do not wrap lines even if very long
-vim.opt.showbreak= '↪' -- character to show when line is broken
+vim.opt.showbreak = '↪' -- character to show when line is broken
 --vim.opt.cpoptions+='$' -- display $ at end of change motion
 --------------------------------------------------------------------------------
 -- UI --------------------------------------------------------------------------
@@ -83,3 +83,9 @@ vim.opt.clipboard = 'unnamedplus' -- use system clipboard
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
+-- stylua: ignore end
+
+vim.cmd([[
+  autocmd BufWinEnter • match ExtraWhitespace /\s\+$/
+  autocmd BufWinEnter • highlight ExtraWhitespace ctermbg=red guibg=red
+]])

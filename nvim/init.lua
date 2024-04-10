@@ -1,2 +1,2 @@
-require 'random.core'
-require 'random.lazy'
+require('random.core')
+require('random.lazy')

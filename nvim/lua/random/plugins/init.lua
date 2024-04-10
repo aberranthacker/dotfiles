@@ -10,10 +10,10 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
--- Useful plugin to show you pending keybinds.
+  -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
-   -- "gc" to comment visual regions/lines
+  -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
   -- Visualize your undo tree
@@ -76,7 +76,7 @@ return {
   'jceb/vim-orgmode',
 
   -- provides extended matching for the % operator
-  'adelarsq/vim-matchit' ,
+  'adelarsq/vim-matchit',
 
   -- This plugin is meant to simplify a task I've found too common in my workflow:
   -- switching between a single-line statement and a multi-line one.
@@ -94,7 +94,7 @@ return {
 
   -- Improved nginx vim plugin (incl. syntax highlighting)
   'chr4/nginx.vim',
-    -- Syntax highlighting for GNU Octave
+  -- Syntax highlighting for GNU Octave
   'jvirtanen/vim-octave',
   -- CoffeeScript support for vim
   'kchmck/vim-coffee-script',

@@ -11,5 +11,5 @@ return {
     -- Path to the pomodoro log file (default: /tmp/pomodoro.log)
     vim.g.pomodoro_log_file = '/home/random/pomodoro.log'
     vim.g.pomodoro_notification_cmd = 'zenity --notification --text="Pomodoro finished"'
-  end
+  end,
 }

@@ -15,7 +15,7 @@ return {
       --       refer to the README for telescope-fzf-native for more instructions.
       build = 'make',
       cond = function()
-        return vim.fn.executable 'make' == 1
+        return vim.fn.executable('make') == 1
       end,
     },
   },
@@ -36,19 +36,19 @@ return {
             ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
             ['<C-u>'] = false,
             ['<C-d>'] = false,
-          }
+          },
         },
         path_display = { -- :h telescope.defaults.path_display
           -- truncates the start of the path when the whole path will
           truncate = true,
-        }
-      }
+        },
+      },
     })
 
     -- Enable telescope fzf native
     telescope.load_extension('fzf')
 
-    local builtin = require 'telescope.builtin'
+    local builtin = require('telescope.builtin')
 
     -- See `:help telescope.builtin`
     vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = 'Search [F]iles' })
@@ -56,10 +56,10 @@ return {
     vim.keymap.set('n', '<leader>b', builtin.buffers, { desc = 'Find existing [B]uffers' })
     vim.keymap.set('n', '<leader>/', function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
         winblend = 10,
         previewer = false,
-      })
+      }))
     end, { desc = '[/] Fuzzily search in current buffer' })
 
     vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [G]it [F]iles' })
@@ -69,5 +69,5 @@ return {
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     -- Opens the previous picker in the identical state (incl. multi selections)
     vim.keymap.set('n', '<leader>sp', builtin.resume, { desc = '[S]earch [P]revious' })
-  end
+  end,
 }

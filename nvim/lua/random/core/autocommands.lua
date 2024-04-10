@@ -5,16 +5,16 @@ local augroup = vim.api.nvim_create_augroup('vimrcEx', { clear = true })
 vim.api.nvim_create_autocmd('BufRead', {
   pattern = '*.s',
   group = augroup,
-  command = 'set fileformat=unix filetype=gas tabstop=8 expandtab shiftwidth=4 autoindent'
+  command = 'set fileformat=unix filetype=gas tabstop=8 expandtab shiftwidth=4 autoindent',
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "go",
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'go',
   callback = function()
     vim.opt_local.expandtab = false -- Use actual tab characters
-    vim.opt_local.tabstop = 4       -- Tab character width
-    vim.opt_local.shiftwidth = 4    -- Indentation level width
-  end
+    vim.opt_local.tabstop = 4 -- Tab character width
+    vim.opt_local.shiftwidth = 4 -- Indentation level width
+  end,
 })
 
 vim.api.nvim_create_autocmd('BufReadPost', {
@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     if line("'\"") > 0 && line("'\"") <= line("$")
       exe "normal g`\""
     endif
-  ]]
+  ]],
 })
 
 -- [[ Highlight on yank ]]

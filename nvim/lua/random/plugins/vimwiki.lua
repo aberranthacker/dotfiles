@@ -2,7 +2,7 @@ return {
   -- A Personal Wiki For Vim
   'vimwiki/vimwiki',
   config = function()
-    vim.cmd [[
+    vim.cmd([[
       autocmd FileType vimwiki setlocal nowrap spell
       let wiki = {}
       let wiki.path =  '~/Dropbox/vimwiki'
@@ -23,6 +23,6 @@ return {
       " 'syntax' Folding based on syntax (folds sections; slower than 'expr').
       " 'list'   Folding based on expression (folds list subitems; much slower).
       let g:vimwiki_folding = 'list'
-    ]]
-  end
+    ]])
+  end,
 }

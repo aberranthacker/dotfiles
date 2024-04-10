@@ -98,7 +98,7 @@ return {
             -- make the language server aware of runtime files
             [vim.fn.expand('$VIMRUNTIME/lua')] = true,
             [vim.fn.stdpath('config') .. '/lua'] = true,
-            checkThirdParty = false
+            checkThirdParty = false,
           },
           telemetry = { enable = false },
           diagnostics = {
@@ -107,8 +107,8 @@ return {
             },
             disable = {
               'missing-fields',
-            }
-          }
+            },
+          },
         },
       },
     })
@@ -122,5 +122,5 @@ return {
       capabilities = capabilities,
       on_attach = on_attach,
     })
-  end
+  end,
 }

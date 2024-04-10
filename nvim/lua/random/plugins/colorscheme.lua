@@ -9,7 +9,7 @@ return {
       vim.g.gruvbox_contrast_dark = 'medium'
       vim.g.gruvbox_contrast_light = 'hard'
       vim.g.gruvbox_italic = 1
-    end
+    end,
   },
   'rafi/awesome-vim-colorschemes',
   --{'xolox/vim-colorscheme-switcher', requires = {'xolox/vim-misc'}},
