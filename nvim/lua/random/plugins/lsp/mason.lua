@@ -29,11 +29,12 @@ return {
       ensure_installed = {
         'prettier', -- an opinionated code formatter
         'stylua', -- an opinionated Lua code formatter
-        'rubocop',
+        'rubocop', -- a Ruby static code analyzer (a.k.a. linter) and code formatter
         'gofumpt', -- a stricter formatter than gofmt
         'goimports-reviser', -- sorts goimports by 3-4 groups
         'golines', -- a golang formatter that fixes long lines
         'delve', -- a debugger for the Go programming language
+        'eslint_d', -- makes eslint the fastest linter on the planet.
       },
     })
   end,
