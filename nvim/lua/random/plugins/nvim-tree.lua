@@ -11,21 +11,34 @@ return {
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
 
-      -- change color for arrows in tree
-      vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
-
       local function on_attach(bufnr)
         local api = require('nvim-tree.api')
+
+        local function opts(desc)
+          return {
+            desc = 'nvim-tree: ' .. desc,
+            buffer = bufnr,
+            noremap = true,
+            silent = true,
+            nowait = true,
+          }
+        end
+
         -- use all default keymappings
         api.config.mappings.default_on_attach(bufnr)
+
         -- then remove some of the nvim-tree default keymappings
         vim.keymap.del('n', '<C-e>', { buffer = bufnr })
+        vim.keymap.del('n', '<BS>', { buffer = bufnr })
+
+        vim.keymap.set('n', 'w', api.node.navigate.parent_close, opts('Collapse Parent'))
       end
 
       nvimtree.setup({
         on_attach = on_attach,
         view = {
-          width = 40, -- default width is 30
+          -- the option is useless, overriden by autocommand in ../core/settings.lua:47
+          -- width = 40, -- default width is 30
         },
         renderer = {
           icons = {
@@ -90,8 +103,14 @@ return {
           end
         end,
       })
+
       -- set keymaps
-      vim.keymap.set('n', '<BS>', '<cmd>NvimTreeFocus<cr>')
+      vim.keymap.set('n', '<BS>', '<cmd>NvimTreeToggle<cr>', {
+        desc = 'nvim-tree: Toggle',
+        noremap = true,
+        silent = true,
+        nowait = true,
+      })
     end,
   },
 }

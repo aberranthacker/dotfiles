@@ -3,49 +3,60 @@
 --------------------------------------------------------------------------------
 -- NOTE: You should make sure your terminal supports this
 vim.opt.termguicolors = true -- use 24-bit colors
--- stylua: ignore start
 -- Basic settings --------------------------------------------------------------
 vim.opt.encoding = 'utf-8'
 vim.opt.fileformats = 'unix,dos,mac'
 vim.opt.fileencodings = 'utf-8,cp1251,koi8-r,cp866'
 vim.opt.spelllang = 'en,ru'
+-- stylua: ignore start
 vim.opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖЭБЮ;ABCDEFGHIJKLMNOPQRSTUVWXYZ{}:"<>,' ..
                   "фисвуапршолдьтщзйкыегмцчняхъжэбю;abcdefghijklmnopqrstuvwxyz[];'\\,."
+-- stylua: ignore end
 vim.opt.backspace = 'indent,eol,start' -- backspace works on every char in insert mode
 vim.opt.history = 1000
 vim.opt.undolevels = 1000 -- use many muchos levels of undo
---vim.opt.dictionary = '/usr/share/dict/words'
 vim.opt.startofline = true
 -- characters to show for non-printable characters
 vim.opt.listchars = 'eol:$,tab:>-,trail:.,nbsp:_,extends:+,precedes:+'
 --------------------------------------------------------------------------------
 -- Search ----------------------------------------------------------------------
 vim.opt.ignorecase = true -- ignore case when searching UNLESS \C or capital in search
-vim.opt.smartcase  = true -- ignore case if search pattern is all lowercase,
-                          -- case-sensitive otherwise
-vim.opt.hlsearch   = true -- highlight search terms
-vim.opt.incsearch  = true -- show search matches as you type
+vim.opt.smartcase = true -- ignore case if search pattern is all lowercase
+vim.opt.hlsearch = true -- highlight search terms
+vim.opt.incsearch = true -- show search matches as you type
 --------------------------------------------------------------------------------
 -- Display ---------------------------------------------------------------------
 vim.opt.showmatch = true -- show matching brackets
-vim.opt.synmaxcol = 300  -- stop syntax highlight after x lines for performance
+vim.opt.synmaxcol = 300 -- stop syntax highlight after x lines for performance
 
 vim.opt.foldmethod = 'marker' -- use language syntax to generate folds
-vim.opt.foldlevel = 4  -- limit folding to 4 levels
-vim.opt.wrap = false   -- do not wrap lines even if very long
+vim.opt.foldlevel = 4 -- limit folding to 4 levels
+vim.opt.wrap = false -- do not wrap lines even if very long
 vim.opt.showbreak = '↪' -- character to show when line is broken
---vim.opt.cpoptions+='$' -- display $ at end of change motion
+--vim.opt.cpoptions+='$'        -- display $ at end of change motion
 --------------------------------------------------------------------------------
 -- UI --------------------------------------------------------------------------
-vim.opt.mouse = nil           -- disable  mouse support
+vim.opt.mouse = nil -- disable  mouse support
 vim.opt.relativenumber = true -- always show line numbers
-vim.opt.number = true         -- show absolute line number for current line
+vim.opt.number = true -- show absolute line number for current line
 --vim.opt.textwidth = 79        -- width of document (used by gd)
-vim.opt.wrap = false          -- don't wrap lines on load
-vim.opt.linebreak = true      -- wrap only at a character in the breakat option
+vim.opt.wrap = false -- don't wrap lines on load
+vim.opt.linebreak = true -- wrap only at a character in the breakat option
 
 -- Make the current window big, but leave others context
-vim.opt.winwidth = 106
+-- Autocommand to adjust window settings based on buffer type
+vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
+  pattern = '*',
+  callback = function()
+    -- Check if the current buffer is nvim-tree
+    if vim.bo.filetype == 'NvimTree' then
+      vim.opt.winwidth = 40 -- width for NvimTree
+    else
+      vim.opt.winwidth = 106 -- Default winwidth for other buffers
+    end
+  end,
+})
+
 ---- We have to have a winheight bigger than we want to set winminheight.
 ---- But if we set winheight to be huge before winminheight,
 ---- the winminheight set will fail.
@@ -53,6 +64,7 @@ vim.opt.winwidth = 106
 -- vim.opt.winminheight=5
 -- vim.opt.winheight=60 --999
 
+-- stylua: ignore start
 -- Spaces, TABs and Indentation
 -- Real programmers don't use TABs but spaces
 vim.opt.tabstop = 8       -- a tab is eight spaces
@@ -68,22 +80,22 @@ vim.opt.copyindent = true -- copy the previous indentation on autoindenting
 
 -- Commands mode
 vim.opt.wildmenu = true -- on TAB, complete options for system command
-vim.opt.wildignore = 'deps,.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,'..
-                     '*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,'..
+vim.opt.wildignore = 'deps,.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,' ..
+                     '*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,' ..
                      '*.out,*.toc'
+-- stylua: ignore end
 
 -- Better copy & paste
-vim.opt.pastetoggle = '<F2>'  -- toggle pasting unmodified text from system clipboard
+vim.opt.pastetoggle = '<F2>' -- toggle pasting unmodified text from system clipboard
 -- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
+-- Remove this option if you want your OS clipboard to remain independent.
+-- See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus' -- use system clipboard
 
 -- Disable backup and swap files
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
--- stylua: ignore end
 
 vim.cmd([[
   autocmd BufWinEnter • match ExtraWhitespace /\s\+$/
