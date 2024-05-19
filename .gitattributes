@@ -1,2 +1,8 @@
 spacemacs/* linguist-vendored
+bin/256colors2.pl linguist-vendored
+bin/run_scaled linguist-vendored
+bin/whatthecommit linguist-vendored
+bin/tmux-select-each.sh linguist-vendored
+nvim/lua/lib/inspect.lua linguist-vendored
+
 _spacemacs linguist-generated
