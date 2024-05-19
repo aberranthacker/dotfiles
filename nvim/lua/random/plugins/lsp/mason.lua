@@ -15,6 +15,7 @@ return {
     mason.setup()
     mason_lspconfig.setup({
       ensure_installed = {
+        'clangd', -- understands your C++ code and adds smart features to your editor
         'cssls',
         'html',
         'gopls', -- official Go language server developed by the Go team

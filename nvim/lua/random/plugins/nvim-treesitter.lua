@@ -3,6 +3,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/playground', --  Treesitter playground integrated into Neovim
     'windwp/nvim-ts-autotag',
   },
   build = ':TSUpdate',
@@ -26,6 +27,7 @@ return {
           'go',
           'lua',
           'python',
+          'query',
           'ruby',
           'rust',
           'ssh_config',
@@ -102,6 +104,28 @@ return {
           },
         },
       })
+
+      vim.keymap.set('n', '<Leader>tu', ':TSUpdate<CR>', { desc = 'Treesitter: [u]pdate' })
+      vim.keymap.set('n', '<Leader>tt', ':TSPlaygroundToggle<CR>', { desc = 'Treesitter: [t]oggle playground' })
+      vim.keymap.set('n', '<Leader>tn', ':TSNodeUnderCursor<CR>', { desc = 'Treesitter: Show [n]ode' })
+      vim.keymap.set(
+        'n',
+        '<Leader>th',
+        ':TSHighlightCapturesUnderCursor<CR>',
+        { desc = 'Treesitter: Show [h]ighlight group' }
+      )
+
+      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+      parser_config.vm2 = {
+        install_info = {
+          url = '~/retrodev/tree-sitter-vm2', -- local path or git repo
+          files = { 'src/parser.c' }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+          -- optional entries:
+          generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+          requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+        },
+        -- filetype = 'gas', -- if filetype does not match the parser name
+      }
     end, 0)
   end,
 }

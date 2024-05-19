@@ -153,7 +153,7 @@ It should only modify the values of Spacemacs settings."
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    ;;dotspacemacs-default-font '("Source Code Pro for Powerline"
    dotspacemacs-default-font '("Fira Code"
-                               :size 14
+                               :size 16
                                :weight medium
                                :width medium
                                :powerline-scale 1.0)

@@ -16,9 +16,6 @@ return {
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  -- Visualize your undo tree
-  'mbbill/undotree',
-
   -- continuously updated session files
   'tpope/vim-obsession',
 

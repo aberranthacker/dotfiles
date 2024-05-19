@@ -5,7 +5,15 @@ local augroup = vim.api.nvim_create_augroup('vimrcEx', { clear = true })
 vim.api.nvim_create_autocmd('BufRead', {
   pattern = '*.s',
   group = augroup,
-  command = 'set fileformat=unix filetype=gas tabstop=8 expandtab shiftwidth=4 autoindent',
+  callback = function()
+    vim.opt_local.fileformat = 'unix'
+    vim.opt_local.filetype = 'vm2'
+    vim.opt_local.tabstop = 8
+    vim.opt_local.expandtab = true
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.autoindent = true
+    vim.opt.cursorline = true
+  end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {

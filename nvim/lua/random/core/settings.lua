@@ -13,7 +13,7 @@ vim.opt.langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯХЪЖЭ�
                   "фисвуапршолдьтщзйкыегмцчняхъжэбю;abcdefghijklmnopqrstuvwxyz[];'\\,."
 -- stylua: ignore end
 vim.opt.backspace = 'indent,eol,start' -- backspace works on every char in insert mode
-vim.opt.history = 1000
+vim.opt.history = 1000 -- remember last 1000 commands
 vim.opt.undolevels = 1000 -- use many muchos levels of undo
 vim.opt.startofline = true
 -- characters to show for non-printable characters
@@ -80,9 +80,9 @@ vim.opt.copyindent = true -- copy the previous indentation on autoindenting
 
 -- Commands mode
 vim.opt.wildmenu = true -- on TAB, complete options for system command
-vim.opt.wildignore = 'deps,.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,' ..
-                     '*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,' ..
-                     '*.out,*.toc'
+vim.opt.wildignore = 'deps,.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,'
+                   .. '*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,'
+                   .. '*.out,*.toc'
 -- stylua: ignore end
 
 -- Better copy & paste
@@ -96,8 +96,3 @@ vim.opt.clipboard = 'unnamedplus' -- use system clipboard
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
-
-vim.cmd([[
-  autocmd BufWinEnter • match ExtraWhitespace /\s\+$/
-  autocmd BufWinEnter • highlight ExtraWhitespace ctermbg=red guibg=red
-]])

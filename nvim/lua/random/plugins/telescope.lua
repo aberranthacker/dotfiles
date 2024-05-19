@@ -6,6 +6,7 @@ return {
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'nvim-lua/plenary.nvim',
+    'debugloop/telescope-undo',
     -- Fuzzy Finder Algorithm which requires local dependencies to be built.
     -- Only load if `make` is available. Make sure you have the system
     -- requirements installed.
@@ -48,6 +49,8 @@ return {
     -- Enable telescope fzf native
     telescope.load_extension('fzf')
 
+    telescope.load_extension('undo')
+
     local builtin = require('telescope.builtin')
 
     -- See `:help telescope.builtin`
@@ -69,5 +72,8 @@ return {
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     -- Opens the previous picker in the identical state (incl. multi selections)
     vim.keymap.set('n', '<leader>sp', builtin.resume, { desc = '[S]earch [P]revious' })
+    vim.keymap.set('n', '<F5>', '<cmd>Telescope undo<cr>', { desc = 'Invoke telescope-undo' })
+
+    vim.keymap.set('n', '<Leader>tc', '<cmd>Telescope colorscheme<CR>', { desc = 'Telescope: [c]oloroscheme' })
   end,
 }

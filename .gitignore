@@ -1,2 +1,4 @@
 # Ignore VIM undo files
 *.un~
+
+nvim/lazy-lock.json

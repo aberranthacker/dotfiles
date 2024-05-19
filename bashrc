@@ -11,16 +11,20 @@ esac
 export EDITOR='vi'
 export VISUAL='vi'
 export LIBVA_DRIVER_NAME=iHD
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
+# write history after each command
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000000
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
@@ -101,3 +105,4 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+. "$HOME/.cargo/env"

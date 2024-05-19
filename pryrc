@@ -4,6 +4,7 @@ begin
   require 'amazing_print'
   AmazingPrint.pry!
 rescue LoadError => _e
+  puts 'no amazing_print :('
   begin
     require 'awesome_print'
     AwesomePrint.pry!

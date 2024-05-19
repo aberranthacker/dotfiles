@@ -71,6 +71,11 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
+    lspconfig['clangd'].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
     lspconfig['cssls'].setup({
       capabilities = capabilities,
       on_attach = on_attach,

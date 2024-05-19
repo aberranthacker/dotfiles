@@ -34,7 +34,5 @@ default.vim.lock
 **/public/javascripts/redmine_extensions/*.js
 public/javascripts/redmine_extensions/blocking_namespace.js
 
-.gitattributes
-
 .kdev4
 .byebug_history
