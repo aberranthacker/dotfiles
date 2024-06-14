@@ -5,6 +5,9 @@
 " vimrc checklist
 " https://www.reddit.com/r/vim/wiki/vimrctips
 "------------------------------------------------------------------------------
+" How to organize your .vimrc and keep track what your vim is capable of.
+" https://www.youtube.com/watch?v=Jm0IjtDAWcs
+"------------------------------------------------------------------------------
 " This must be first, because it changes other options as side effect
 set nocompatible " be iMproved
 "------------------------------------------------------------------------------

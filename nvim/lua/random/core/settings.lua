@@ -18,6 +18,7 @@ vim.opt.undolevels = 1000 -- use many muchos levels of undo
 vim.opt.startofline = true
 -- characters to show for non-printable characters
 vim.opt.listchars = 'eol:$,tab:>-,trail:.,nbsp:_,extends:+,precedes:+'
+vim.opt.fillchars:append('vert: ')
 --------------------------------------------------------------------------------
 -- Search ----------------------------------------------------------------------
 vim.opt.ignorecase = true -- ignore case when searching UNLESS \C or capital in search
@@ -33,10 +34,10 @@ vim.opt.foldmethod = 'marker' -- use language syntax to generate folds
 vim.opt.foldlevel = 4 -- limit folding to 4 levels
 vim.opt.wrap = false -- do not wrap lines even if very long
 vim.opt.showbreak = '↪' -- character to show when line is broken
---vim.opt.cpoptions+='$'        -- display $ at end of change motion
+--vim.opt.cpoptions+='$' -- display $ at end of change motion
 --------------------------------------------------------------------------------
 -- UI --------------------------------------------------------------------------
-vim.opt.mouse = nil -- disable  mouse support
+vim.opt.mouse = '' -- disable  mouse support
 vim.opt.relativenumber = true -- always show line numbers
 vim.opt.number = true -- show absolute line number for current line
 --vim.opt.textwidth = 79        -- width of document (used by gd)
@@ -48,9 +49,10 @@ vim.opt.linebreak = true -- wrap only at a character in the breakat option
 vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
   pattern = '*',
   callback = function()
-    -- Check if the current buffer is nvim-tree
     if vim.bo.filetype == 'NvimTree' then
-      vim.opt.winwidth = 40 -- width for NvimTree
+      vim.opt.winwidth = 40 -- winwidth for NvimTree
+    elseif vim.bo.filetype == 'leetcode.nvim' then
+    elseif vim.bo.filetype == 'TelescopePrompt' then
     else
       vim.opt.winwidth = 106 -- Default winwidth for other buffers
     end
@@ -85,8 +87,11 @@ vim.opt.wildignore = 'deps,.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,'
                    .. '*.out,*.toc'
 -- stylua: ignore end
 
+-- 'paste' option is now deprecated and 'pastetoggle' is removed since Neovim 0.9.
+-- paste works automatically in GUI and terminal (TUI) Nvim. Just Paste It.™
 -- Better copy & paste
-vim.opt.pastetoggle = '<F2>' -- toggle pasting unmodified text from system clipboard
+-- vim.opt.pastetoggle = '<F2>' -- toggle pasting unmodified text from system clipboard
+
 -- Sync clipboard between OS and Neovim.
 -- Remove this option if you want your OS clipboard to remain independent.
 -- See `:help 'clipboard'`
@@ -96,3 +101,7 @@ vim.opt.clipboard = 'unnamedplus' -- use system clipboard
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
+
+-- Concealed text is completely hidden unless it has a custom replacement
+-- character defined (see |:syn-cchar|).
+vim.opt.conceallevel = 2

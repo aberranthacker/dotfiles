@@ -13,6 +13,7 @@ alias la='ls -a'
 # -F, --classify -- append indicator (one of */=>@|) to entries
 alias l='ls -CF'
 
+alias ms='mux start'
 alias rg='clear; rg --smart-case'
 alias spotify='spotify --force-device-scale-factor=2'
 alias ts='tmuxinator start'

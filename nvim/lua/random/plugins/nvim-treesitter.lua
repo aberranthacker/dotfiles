@@ -26,6 +26,8 @@ return {
           'gitignore',
           'go',
           'lua',
+          'markdown',
+          'markdown_inline',
           'python',
           'query',
           'ruby',
