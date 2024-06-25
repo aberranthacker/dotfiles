@@ -10,14 +10,8 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
-
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-
-  -- continuously updated session files
-  'tpope/vim-obsession',
 
   -- use CTRL-A/CTRL-X to increment dates, times, and more
   'tpope/vim-speeddating',
@@ -27,10 +21,6 @@ return {
 
   -- Vim sugar for the UNIX shell commands that need it the most.
   'tpope/vim-eunuch',
-
-  -- Dadbod is a Vim plugin for interacting with databases.
-  -- It's a more modern take on dbext.vim, improving on it.
-  'tpope/vim-dadbod',
 
   -- Abbreviation
   --
@@ -69,9 +59,6 @@ return {
   -- Jump to any definition and references 👁 IDE madness without overhead 🚀
   'pechorin/any-jump.vim',
 
-  -- Text outlining and task management for Vim based on Emacs' Org-Mode
-  'jceb/vim-orgmode',
-
   -- provides extended matching for the % operator
   'adelarsq/vim-matchit',
 
@@ -87,7 +74,7 @@ return {
   { 'vim-ruby/vim-ruby', ft = 'ruby' },
   { 'ecomba/vim-ruby-refactoring', ft = 'ruby', dependencies = { 'adelarsq/vim-matchit' } },
   -- Ruby on Rails power tools
-  'tpope/vim-rails',
+  { 'tpope/vim-rails', ft = 'ruby' },
 
   -- Improved nginx vim plugin (incl. syntax highlighting)
   'chr4/nginx.vim',

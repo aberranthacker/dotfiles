@@ -34,7 +34,7 @@ return {
       conform.format({
         lsp_fallback = true,
         async = false,
-        timeout = 3000,
+        timeout = 10000,
       })
     end, { desc = 'Format file or range ([m]ake [p]rettier)' })
   end,

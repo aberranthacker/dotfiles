@@ -57,9 +57,9 @@ return {
     end
 
     -- See `:help telescope.builtin`
-    nmap('<leader>f', builtin.find_files, 'Search [F]iles')
-    nmap('<leader>r', builtin.oldfiles, 'Find [R]ecently opened files')
-    nmap('<leader>b', builtin.buffers, 'Find existing [B]uffers')
+    nmap('<leader>f', builtin.find_files, 'Search [f]iles')
+    nmap('<leader>r', builtin.oldfiles, 'Find [r]ecently opened files')
+    nmap('<leader>b', builtin.buffers, 'Find existing [b]uffers')
     nmap('<leader>/', function()
       -- You can pass additional configuration to telescope to change theme, layout, etc.
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
@@ -67,14 +67,17 @@ return {
         previewer = false,
       }))
     end, '[/] Fuzzily search in current buffer')
-    nmap('<leader>gf', builtin.git_files, 'Telescope: Search [g]it [f]iles')
-    nmap('<leader>sh', builtin.help_tags, 'Telescope: [s]earch [h]elp')
-    nmap('<leader>sw', builtin.grep_string, 'Telescope: [s]earch current [w]ord')
-    nmap('<leader>sg', builtin.live_grep, 'Telescope: [s]earch by [g]rep')
-    nmap('<leader>sd', builtin.diagnostics, 'Telescope: [s]earch [d]iagnostics')
+
+    nmap('<leader>gf', builtin.git_files, 'Telescope: Search (g)it [f]iles')
+
+    nmap('<leader>sh', builtin.help_tags, 'Telescope: (s)earch [h]elp')
+    nmap('<leader>sw', builtin.grep_string, 'Telescope: (s)earch current [w]ord')
+    nmap('<leader>sg', builtin.live_grep, 'Telescope: (s)earch by [g]rep')
+    nmap('<leader>sd', builtin.diagnostics, 'Telescope: (s)earch [d]iagnostics')
     -- Opens the previous picker in the identical state (incl. multi selections)
-    nmap('<leader>sp', builtin.resume, 'Telescope: [s]earch [p]revious')
-    nmap('<F5>', '<CMD>Telescope undo<CR>', 'Telescope: [u]ndo')
+    nmap('<leader>sp', builtin.resume, 'Telescope: (s)earch [p]revious')
+
+    nmap('<F5>', '<CMD>Telescope undo<CR>', 'Telescope: undo')
 
     nmap('<Leader>tc', builtin.colorscheme, 'Telescope: [c]oloroscheme')
     nmap('<Leader>tk', builtin.keymaps, 'Telescope: [k]eymaps')

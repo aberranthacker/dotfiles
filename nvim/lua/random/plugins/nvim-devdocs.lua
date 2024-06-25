@@ -1,12 +1,13 @@
-vim.keymap.set(
-  'n',
-  '<Leader>dd',
-  '<cmd>DevdocsOpenCurrentFloat<CR>',
-  { desc = 'Devdocs open float for current filetype' }
-)
 return {
   'luckasRanarison/nvim-devdocs',
   lazy = true,
+  keys = {
+    {
+      '<Leader>dd',
+      '<cmd>DevdocsOpenCurrentFloat<CR>',
+      desc = 'Devdocs open float for current filetype',
+    },
+  },
   cmd = {
     'DevdocsFetch',
     'DevdocsInstall',

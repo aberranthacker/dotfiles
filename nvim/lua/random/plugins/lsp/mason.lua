@@ -20,6 +20,8 @@ return {
         'html',
         'gopls', -- official Go language server developed by the Go team
         'lua_ls',
+        'rust_analyzer', -- consider using https://github.com/mrcjkb/rustaceanvim
+        'solargraph',
         'sqlls',
         'tsserver',
       },

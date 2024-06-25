@@ -1,6 +1,6 @@
 return {
   'nvim-orgmode/orgmode',
-  event = 'VeryLazy',
+  --event = 'VeryLazy',
   ft = { 'org' },
   config = function()
     -- Setup orgmode

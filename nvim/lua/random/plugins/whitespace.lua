@@ -30,6 +30,11 @@ return {
     })
 
     -- remove trailing whitespace with a keybinding
-    vim.keymap.set('n', '<Leader>tr', require('whitespace-nvim').trim, { desc = '[r]emove trailing whitespaces' })
+    vim.keymap.set(
+      'n',
+      '<Leader>tr',
+      require('whitespace-nvim').trim,
+      { desc = '[r]emove trailing whitespaces' }
+    )
   end,
 }

@@ -1,10 +1,22 @@
 return {
   -- Highlight, edit, and navigate code
   'nvim-treesitter/nvim-treesitter',
+  lazy = false,
+  keys = {
+    { '<Leader>tu', ':TSUpdate<CR>', desc = 'Treesitter: [u]pdate' },
+    { '<Leader>tt', ':TSPlaygroundToggle<CR>', desc = 'Treesitter: [t]oggle playground' },
+    { '<Leader>tn', ':TSNodeUnderCursor<CR>', desc = 'Treesitter: Show [n]ode' },
+    {
+      '<Leader>th',
+      ':TSHighlightCapturesUnderCursor<CR>',
+      desc = 'Treesitter: Show [h]ighlight group',
+    },
+  },
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/playground', --  Treesitter playground integrated into Neovim
     'windwp/nvim-ts-autotag',
+    'RRethy/nvim-treesitter-endwise', -- wisely add "end" in Ruby, Lua, Vimscript, etc.
   },
   build = ':TSUpdate',
   config = function()
@@ -48,8 +60,12 @@ return {
         auto_install = true,
 
         highlight = { enable = true },
-        indent = { enable = true },
+        indent = {
+          enable = true,
+          disable = { 'ruby' },
+        },
         autotag = { enable = true }, -- enable autotagging (with nvim-ts-autotag plugin)
+        endwise = { enable = true }, -- enable wise addition of end (with 'nvim-treesitter-endwise')
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -106,16 +122,6 @@ return {
           },
         },
       })
-
-      vim.keymap.set('n', '<Leader>tu', ':TSUpdate<CR>', { desc = 'Treesitter: [u]pdate' })
-      vim.keymap.set('n', '<Leader>tt', ':TSPlaygroundToggle<CR>', { desc = 'Treesitter: [t]oggle playground' })
-      vim.keymap.set('n', '<Leader>tn', ':TSNodeUnderCursor<CR>', { desc = 'Treesitter: Show [n]ode' })
-      vim.keymap.set(
-        'n',
-        '<Leader>th',
-        ':TSHighlightCapturesUnderCursor<CR>',
-        { desc = 'Treesitter: Show [h]ighlight group' }
-      )
 
       local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
       parser_config.vm2 = {

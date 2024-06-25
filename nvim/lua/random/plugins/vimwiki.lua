@@ -1,6 +1,7 @@
 return {
   -- A Personal Wiki For Vim
   'vimwiki/vimwiki',
+  enabled = false,
   config = function()
     vim.cmd([[
       autocmd FileType vimwiki setlocal nowrap spell

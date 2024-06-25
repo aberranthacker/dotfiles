@@ -1,17 +1,21 @@
-vim.keymap.set('n', '<Leader>on', '<cmd>ObsidianNew<CR>', { desc = 'Obsidian[N]ew' })
-vim.keymap.set('n', '<leader>oo', '<cmd>ObsidianSearch<cr>', { desc = 'Obsidian[S]earch' })
-vim.keymap.set('n', '<leader>os', '<cmd>ObsidianQuickSwitch<cr>', { desc = 'ObsidianQuick[S]witch' })
-vim.keymap.set('n', '<leader>ob', '<cmd>ObsidianBacklinks<cr>', { desc = 'Obsidian[B]acklinks' })
-vim.keymap.set('n', '<leader>ot', '<cmd>ObsidianTemplate<cr>', { desc = 'Obsidian[T]emplate' })
-vim.keymap.set('n', '<leader>of', '<cmd>ObsidianFollowLink<cr>', { desc = 'Obsidian[F]ollowLink' })
-vim.keymap.set('n', '<leader>od', '<cmd>ObsidianDailies<cr>', { desc = 'Obsidian[D]ailies' })
-
 -- https://www.youtube.com/watch?v=5ht8NYkU9wQ
 -- https://github.com/omerxx/dotfiles/blob/master/nvim/lua/plugins/obsidian.lua
 return {
   'epwalsh/obsidian.nvim',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+  },
   version = '*', -- recommended, use latest release instead of latest commit
   lazy = true,
+  keys = {
+    { '<Leader>on', '<cmd>ObsidianNew<CR>', desc = 'Obsidian: [n]ew' },
+    { '<leader>oo', '<cmd>ObsidianSearch<cr>', desc = 'Obsidian: [s]earch' },
+    { '<leader>os', '<cmd>ObsidianQuickSwitch<cr>', desc = 'Obsidian: quick [s]witch' },
+    { '<leader>ob', '<cmd>ObsidianBacklinks<cr>', desc = 'Obsidian: [b]acklinks' },
+    { '<leader>ot', '<cmd>ObsidianTemplate<cr>', desc = 'Obsidian: [t]emplate' },
+    { '<leader>of', '<cmd>ObsidianFollowLink<cr>', desc = 'Obsidian: [f]ollow Link' },
+    { '<leader>od', '<cmd>ObsidianDailies<cr>', desc = 'Obsidian: [d]ailies' },
+  },
   cmd = {
     'ObsidianBacklinks',
     'ObsidianCheck',
@@ -44,9 +48,6 @@ return {
   --   "BufReadPre path/to/my-vault/**.md",
   --   "BufNewFile path/to/my-vault/**.md",
   -- },
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-  },
   opts = {
     workspaces = {
       {
