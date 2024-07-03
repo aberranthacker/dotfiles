@@ -1,3 +1,5 @@
+# vi: ft=bash
+
 if [ -f /bin/eza ]; then
     # A modern, maintained replacement for ls.
     # https://github.com/eza-community/eza

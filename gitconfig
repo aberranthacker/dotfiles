@@ -6,13 +6,14 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore
-	pager = delta
+    pager = delta
+[delta]
+    side-by-side = true
 [alias]
     yolo = !(git add -A && git commit -m \"$(curl -s whatthecommit.com/index.txt)\")
     y = !(git add -A && git commit -m \"🚧 state at $(date '+%Y-%m-%d %H:%M:%S')\" && git pull --rebase && git push && echo "" && git log -1 --stat) || git pull --rebase && git push
     st = status --short --branch
     co = checkout
-    pr = pull --rebase
     au = update-index --assume-unchanged
     # list 'assumed-unchanged' files
     ignored = !git ls-files -v | grep "^[[:lower:]]"
@@ -32,4 +33,4 @@
 [rebase]
     autoStash = true
 [init]
-	defaultBranch = master
+    defaultBranch = master

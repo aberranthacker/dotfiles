@@ -10,7 +10,7 @@ return {
 
       vim.keymap.set({ 'n' }, '<leader>db', function()
         vim.cmd('DapToggleBreakpoint')
-      end, { desc = '[D]AP: add [b]reakpoint' })
+      end, { desc = '(D)AP: add [b]reakpoint' })
 
       vim.keymap.set({ 'n' }, '<leader>dus', function()
         local widgets = require('dap.ui.widgets')

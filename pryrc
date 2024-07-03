@@ -1,5 +1,6 @@
+# vi: ft=ruby
 # frozen_string_literal: true
-#
+
 begin
   require 'amazing_print'
   AmazingPrint.pry!
@@ -22,7 +23,7 @@ end
 
 # Hit Enter to repeat last command
 Pry::Commands.command(/^$/, 'repeat last command') do
-  _pry_.run_command Pry.history.to_a.last
+  pry_instance.run_command Pry.history.to_a.last
 end
 
 Pry.config.editor = 'vim'
