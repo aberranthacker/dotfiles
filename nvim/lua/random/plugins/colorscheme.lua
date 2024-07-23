@@ -16,10 +16,8 @@ return {
       vim.g.gruvbox_italicize_comments = 0
       vim.g.gruvbox_improved_strings = 0
       vim.g.gruvbox_improved_warnings = 0
-      vim.g.gruvbox_legacy_language_groups = false
-      vim.g.gruvbox_number_column = 'dark0_hard'
-      vim.g.gruvbox_sign_column = 'dark0_hard'
-      --vim.g.gruvbox_color_column = 'dark0_hard'
+      vim.g.gruvbox_number_column = 'bg0'
+      vim.g.gruvbox_sign_column = 'bg0'
       vim.cmd('colorscheme gruvbox')
     end,
   },

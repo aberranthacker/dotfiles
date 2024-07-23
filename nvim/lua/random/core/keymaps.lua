@@ -93,8 +93,6 @@ inoremap('<F9>', '<Esc>:set list!<CR>a')
 -- Quick quit command, delete current buffer without window closing
 noremap('<Leader>q', ':Bdelete<CR>')
 
-noremap('<leader>p', ':%DB postgresql://username@localhost/db_name<CR>')
-
 keymap.set('n', '<F1>', vim.diagnostic.open_float, { desc = '[d]iagnosic [s]how' })
 keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Goto Previous [d]iagnosic' })
 keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Goto Next [d]iagnosic' })

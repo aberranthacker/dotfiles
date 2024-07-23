@@ -52,12 +52,16 @@ return {
     telescope.load_extension('undo')
 
     local builtin = require('telescope.builtin')
+    local utils = require('telescope.utils')
     local nmap = function(keys, action, desc)
       vim.keymap.set('n', keys, action, { desc = desc })
     end
 
     -- See `:help telescope.builtin`
     nmap('<leader>f', builtin.find_files, 'Search [f]iles')
+    nmap('<leader>F', function()
+      builtin.find_files({ cwd = utils.buffer_dir() })
+    end, 'Search [F]iles relative to open buffer')
     nmap('<leader>r', builtin.oldfiles, 'Find [r]ecently opened files')
     nmap('<leader>b', builtin.buffers, 'Find existing [b]uffers')
     nmap('<leader>/', function()
@@ -70,16 +74,27 @@ return {
 
     nmap('<leader>gf', builtin.git_files, 'Telescope: Search (g)it [f]iles')
 
+    nmap('<leader>sc', function()
+      builtin.find_files({ search_dirs = { 'app/controllers' } })
+    end, 'Telescope: (s)earch [c]ontrollers')
+    nmap('<leader>sm', function()
+      builtin.find_files({ search_dirs = { 'app/models' } })
+    end, 'Telescope: (s)earch [m]odels')
+    nmap('<leader>sv', function()
+      builtin.find_files({ search_dirs = { 'app/views' } })
+    end, 'Telescope: (s)earch [v]iews')
+
+    nmap('<leader>sd', builtin.diagnostics, 'Telescope: (s)earch [d]iagnostics')
+    nmap('<leader>sg', builtin.live_grep, 'Telescope: (s)earch by [g]rep')
     nmap('<leader>sh', builtin.help_tags, 'Telescope: (s)earch [h]elp')
     nmap('<leader>sw', builtin.grep_string, 'Telescope: (s)earch current [w]ord')
-    nmap('<leader>sg', builtin.live_grep, 'Telescope: (s)earch by [g]rep')
-    nmap('<leader>sd', builtin.diagnostics, 'Telescope: (s)earch [d]iagnostics')
+
+    nmap('<Leader>tc', builtin.colorscheme, 'Telescope: (s)earch [c]oloroschemes')
+    nmap('<Leader>tk', builtin.keymaps, 'Telescope: (s)earch [k]eymaps')
+
     -- Opens the previous picker in the identical state (incl. multi selections)
     nmap('<leader>sp', builtin.resume, 'Telescope: (s)earch [p]revious')
 
     nmap('<F5>', '<CMD>Telescope undo<CR>', 'Telescope: undo')
-
-    nmap('<Leader>tc', builtin.colorscheme, 'Telescope: [c]oloroscheme')
-    nmap('<Leader>tk', builtin.keymaps, 'Telescope: [k]eymaps')
   end,
 }

@@ -13,10 +13,12 @@ return {
       ignored_filetypes = {
         'TelescopePrompt',
         'Trouble',
+        'checkhealth',
         'glowpreview',
         'help',
         'lazy',
         'leetcode.nvim',
+        'lspinfo',
         'mason',
         'markdown',
       },

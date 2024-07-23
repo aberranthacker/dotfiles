@@ -31,6 +31,7 @@ alias gpu='git push'
 alias gco='git co'
 alias gb='git branch'
 alias please='sudo'
+alias kf='kill -9 firefox'
 
 # if [ -n "$DISPLAY" ]; then
 #   alias vim='vimx'
