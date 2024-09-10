@@ -16,29 +16,10 @@ return {
       vim.g.gruvbox_italicize_comments = 0
       vim.g.gruvbox_improved_strings = 0
       vim.g.gruvbox_improved_warnings = 0
-      vim.g.gruvbox_number_column = 'bg0'
-      vim.g.gruvbox_sign_column = 'bg0'
+      -- vim.g.gruvbox_number_column = 'bg0'
+      -- vim.g.gruvbox_sign_column = 'bg0'
       vim.cmd('colorscheme gruvbox')
     end,
   },
-  {
-    'https://gitlab.com/bartekjaszczak/distinct-nvim',
-    priority = 1000,
-    config = function()
-      require('distinct').setup({
-        doc_comments_different_color = true, -- Use different colour for documentation comments
-      })
-    end,
-  },
-  {
-    'sekke276/dark_flat.nvim',
-    -- config = function()
-    --   require('dark_flat').setup({
-    --     transparent = true, -- enable transparent window
-    --   })
-    -- end,
-  },
   'NLKNguyen/papercolor-theme',
-  'cpea2506/one_monokai.nvim',
-  -- 'ray-x/starry.nvim',
 }

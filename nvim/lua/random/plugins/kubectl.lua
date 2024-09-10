@@ -1,4 +1,5 @@
 return {
+  enabled = false,
   'ramilito/kubectl.nvim',
   event = 'VeryLazy',
   keys = {
