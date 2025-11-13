@@ -18,27 +18,21 @@ fi
 # -F, --classify  append indicator (one of */=>@|) to entries
 alias ll='ls -albF'
 
-alias ms='mux start'
-alias rg='clear; rg --smart-case'
-alias spotify='spotify --force-device-scale-factor=2'
-alias ts='tmuxinator start'
-alias tns='trans -pager more --'
-alias csd='cap staging deploy'
-alias csr='cap staging puma:restart'
+alias lg='lazygit'
+
 alias g='git'
 alias ga='git add'
-alias gpu='git push'
-alias gco='git co'
 alias gb='git branch'
+alias gco='git co'
+alias gpu='git push'
+alias gst='git st'
+alias gr='git rebase'
+alias kf='killall -9 firefox'
 alias please='sudo'
-alias kf='kill -9 firefox'
+alias rg='clear; rg --smart-case'
+alias spotify='spotify --force-device-scale-factor=2'
+alias tns='trans -pager more --'
 
-# if [ -n "$DISPLAY" ]; then
-#   alias vim='vimx'
-# fi
-# else
-#   # do nothing
-# fi
 alias vim='nvim'
 
 alias erb='erb -U'

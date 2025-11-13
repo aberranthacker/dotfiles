@@ -1,19 +1,8 @@
 return {
-  -- Portable package manager for Neovim that runs everywhere Neovim runs.
-  -- Easily install and manage LSP servers, DAP servers, linters, and formatters.
-  'williamboman/mason.nvim',
-  dependencies = {
+  {
     'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-  },
-  config = function()
-    local mason = require('mason')
-    local mason_lspconfig = require('mason-lspconfig') -- import mason_lspconfig
-
-    local mason_tool_installer = require('mason-tool-installer')
-
-    mason.setup()
-    mason_lspconfig.setup({
+    opts = {
+      -- list of servers for mason to install
       ensure_installed = {
         'bashls', -- brings an IDE-like experience for bash scripts
         'clangd', -- understands your C++ code and adds smart features to your editor
@@ -24,12 +13,29 @@ return {
         'rust_analyzer', -- consider using https://github.com/mrcjkb/rustaceanvim
         'solargraph', -- a language server for Ruby
         'sqlls', -- SQL language server
-        'tsserver', -- typescript language server
+        'ts_ls', -- typescript language server
       },
       automatic_installation = false,
-    })
-
-    mason_tool_installer.setup({
+    },
+    dependencies = {
+      {
+        'williamboman/mason.nvim',
+        opts = {
+          ui = {
+            icons = {
+              package_installed = '✓',
+              package_pending = '➜',
+              package_uninstalled = '✗',
+            },
+          },
+        },
+      },
+      'neovim/nvim-lspconfig',
+    },
+  },
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    opts = {
       ensure_installed = {
         'delve', -- a debugger for the Go programming language
         'eslint_d', -- makes eslint the fastest linter on the planet.
@@ -42,6 +48,9 @@ return {
         'shfmt', -- a shell formatter
         'stylua', -- an opinionated Lua code formatter
       },
-    })
-  end,
+    },
+    dependencies = {
+      'williamboman/mason.nvim',
+    },
+  },
 }

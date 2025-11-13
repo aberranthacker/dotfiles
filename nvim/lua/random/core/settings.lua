@@ -105,3 +105,13 @@ vim.opt.swapfile = false
 -- Concealed text is completely hidden unless it has a custom replacement
 -- character defined (see |:syn-cchar|).
 vim.opt.conceallevel = 2
+
+vim.diagnostic.config({
+  virtual_lines = true, -- новые "строки" с сообщениями под проблемной строкой
+  virtual_text = false, -- по желанию: убрать короткий текст справа от строки
+  -- прочие стандартные опции:
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+})

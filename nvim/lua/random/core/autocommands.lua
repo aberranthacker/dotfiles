@@ -2,7 +2,7 @@
 -- :help autocmd-events
 local augroup = vim.api.nvim_create_augroup('vimrcEx', { clear = true })
 
-vim.api.nvim_create_autocmd('BufRead', {
+vim.api.nvim_create_autocmd('BufReadPost', {
   pattern = '*.s',
   group = augroup,
   callback = function()
@@ -12,6 +12,16 @@ vim.api.nvim_create_autocmd('BufRead', {
     vim.opt_local.expandtab = true
     vim.opt_local.shiftwidth = 4
     vim.opt_local.autoindent = true
+    vim.opt_local.commentstring = ';%s'
+    vim.opt.cursorline = true
+  end,
+})
+
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = 'c,cpp',
+  group = augroup,
+  callback = function()
+    vim.opt_local.tabstop = 4
     vim.opt.cursorline = true
   end,
 })

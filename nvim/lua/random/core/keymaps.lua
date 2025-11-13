@@ -47,11 +47,11 @@ noremap('Y', 'y$')
 vim.cmd('noremap <Leader>Q :qa!<CR>')
 
 -- Quicksave commnd
-keymap.set({ 'n', 'v', 's', 'o' }, '<C-Z>', ':update<CR>', { remap = false })
-keymap.set('i', '<C-Z>', '<C-O>:update<CR>', { remap = false })
+-- keymap.set({ 'n', 'v', 's', 'o' }, '<C-Z>', ':update<CR>', { remap = false })
+-- keymap.set('i', '<C-Z>', '<C-O>:update<CR>', { remap = false })
 
-keymap.set({ 'n', 'v', 's', 'o' }, '<C-S>', ':update<CR>', { remap = false })
-keymap.set('i', '<C-S>', '<C-O>:update<CR>', { remap = false })
+keymap.set({ 'n', 'v', 's', 'o' }, '<C-s>', ':update<CR>', { remap = false })
+keymap.set('i', '<C-s>', '<C-O>:update<CR>', { remap = false })
 
 -- bind Ctrl+<movement> keys to move aroud the windows
 nnoremap('<C-j>', '<C-w>j')

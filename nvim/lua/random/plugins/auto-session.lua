@@ -11,7 +11,7 @@ return {
 
     vim.defer_fn(function()
       vim.fn.timer_start(1 * minute, function()
-        auto_session.SaveSession()
+        auto_session.save_session(nil, { show_message = false })
       end, { ['repeat'] = -1 })
     end, 1000)
   end,

@@ -33,8 +33,6 @@ return {
             ['<C-k>'] = actions.move_selection_previous,
             -- move to next result
             ['<C-j>'] = actions.move_selection_next,
-            -- send selected result to quick-fix list
-            ['<C-q>'] = actions.send_selected_to_qflist + actions.open_qflist,
             ['<C-u>'] = false,
             ['<C-d>'] = false,
           },
