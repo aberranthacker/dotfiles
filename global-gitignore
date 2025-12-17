@@ -37,3 +37,7 @@ public/javascripts/redmine_extensions/blocking_namespace.js
 
 .kdev4
 .byebug_history
+
+.llm
+docs
+scratchpad.md

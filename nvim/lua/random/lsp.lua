@@ -49,6 +49,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     opts.desc = 'Restart LSP'
     keymap.set('n', '<leader>rs', ':LspRestart<CR>', opts) -- mapping to restart lsp if necessary
+
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client and client:supports_method('textDocument/formatting') then
+      opts.desc = 'Format via LSP'
+      keymap.set('n', '<leader>lf', vim.lsp.buf.format, opts)
+    end
   end,
 })
 

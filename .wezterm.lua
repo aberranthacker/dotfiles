@@ -20,7 +20,7 @@ local config = wezterm.config_builder()
 --          The result is probably unpleasant if the glyph is rendered in non-monochrome modes.
 -- "HorizontalLcd" - A subpixel-rendering variant of Normal optimized for horizontally decimated LCD displays.
 config.freetype_load_target = 'HorizontalLcd'
-config.font = wezterm.font('Cascadia Code')
+config.font = wezterm.font_with_fallback({ 'Cascadia Code NF', 'FiraCode Nerd Font' })
 -- config.font = wezterm.font('Terminess Powerline', { weight = 'Bold' })
 -- config.font = wezterm.font('UnifontExMono')
 -- config.font = wezterm.font('Unifont')

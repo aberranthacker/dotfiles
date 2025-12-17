@@ -16,7 +16,7 @@ return {
   },
   settings = {
     solargraph = {
-      diagnostics = false, -- отключить диагностику LSP
+      diagnostics = false, -- disable LSP diagnostics
     },
   },
 }

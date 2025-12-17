@@ -53,6 +53,8 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'WinEnter' }, {
       vim.opt.winwidth = 40 -- winwidth for NvimTree
     elseif vim.bo.filetype == 'leetcode.nvim' then
     elseif vim.bo.filetype == 'TelescopePrompt' then
+    elseif vim.bo.filetype == 'ruby' then
+      vim.opt.winwidth = 126
     else
       vim.opt.winwidth = 106 -- Default winwidth for other buffers
     end
@@ -107,7 +109,7 @@ vim.opt.swapfile = false
 vim.opt.conceallevel = 2
 
 vim.diagnostic.config({
-  virtual_lines = true, -- новые "строки" с сообщениями под проблемной строкой
+  virtual_lines = false, -- новые "строки" с сообщениями под проблемной строкой
   virtual_text = false, -- по желанию: убрать короткий текст справа от строки
   -- прочие стандартные опции:
   signs = true,
