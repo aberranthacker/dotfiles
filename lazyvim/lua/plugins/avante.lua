@@ -9,7 +9,7 @@ return {
         api_key = vim.env.OPENAI_API_KEY,
         endpoint = vim.env.OPENAI_API_BASE or 'https://bothub.chat/api/v2/openai/v1',
         base_url = vim.env.OPENAI_API_BASE or 'https://bothub.chat/api/v2/openai/v1',
-        model = 'gpt-5.2',
+        model = 'gpt-5.1-codex',
         extra_request_body = {
           temperature = 0.2,
           max_tokens = 20480,

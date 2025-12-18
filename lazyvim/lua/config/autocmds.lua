@@ -46,12 +46,6 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
     local ft = vim.bo[buf].filetype
     local bt = vim.bo[buf].buftype
 
-    -- Start from the safe baseline.
-    -- Important: we *always* set winwidth (global), even for special windows.
-    -- If we "return early", the previous value would remain and still affect
-    -- the picker/special window.
-    local width = default_width
-
     -- Only apply per-filetype widths to "normal editing" buffers in normal windows.
     --
     -- Why these checks exist:
@@ -61,9 +55,19 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
     --     global winwidth can make Neovim aggressively resize regular splits,
     --     which breaks those UIs.
     if bt == '' and not is_floating(win) then
-      width = ft_width[ft] or default_width
+      vim.opt_global.winwidth = ft_width[ft] or default_width
+    else
+      vim.opt_global.winwidth = default_width
     end
+  end,
+})
 
-    vim.opt_global.winwidth = width
+-- Auto-restore session when starting nvim without file arguments
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    -- Only restore if nvim was started without args and not in a special buffer
+    if vim.fn.argc() == 0 and vim.bo.buftype == '' then
+      require('persistence').load()
+    end
   end,
 })
